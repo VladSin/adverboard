@@ -1,7 +1,9 @@
 package org.example.vladsin.adverboard.dao.config;
 
+import org.example.vladsin.adverboard.dao.repository.AuthUserDao;
 import org.example.vladsin.adverboard.dao.repository.BaseDao;
 import org.example.vladsin.adverboard.dao.repository.UserDao;
+import org.example.vladsin.adverboard.dao.repository.impl.AuthUserDaoImpl;
 import org.example.vladsin.adverboard.dao.repository.impl.BaseDaoImpl;
 import org.example.vladsin.adverboard.dao.repository.impl.UserDaoImpl;
 import org.springframework.context.annotation.Bean;
@@ -28,7 +30,12 @@ public class DaoConfig {
     }
 
     @Bean
-    public UserDao personDao(){
+    public UserDao userDao(){
         return new UserDaoImpl();
+    }
+
+    @Bean
+    public AuthUserDao authUserDaoDao(){
+        return new AuthUserDaoImpl();
     }
 }

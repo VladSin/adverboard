@@ -15,15 +15,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "username")
     @Pattern(regexp="^[A-Z]+[a-z]+[А-Я]+[а-я]+$",
             message="Username must be alphanumeric with no spaces and first capital")
-    private String name;
-
-    @Column(name = "surname")
-    @Pattern(regexp="^[A-Z]+[a-z]+[А-Я]+[а-я]+$",
-            message="Username must be alphanumeric with no spaces and first capital")
-    private String surname;
+    private String username;
 
     @Column(name = "email")
     @Pattern(regexp="(\\w+)@.*",
@@ -32,10 +27,10 @@ public class User {
 
     public User() {
     }
-    public User(Long id, String name, String surname, String email){
+
+    public User(Long id, String username, String email){
         this.id = id;
-        this.name = name;
-        this.surname = surname;
+        this.username = username;
         this.email = email;
     }
 
@@ -47,17 +42,10 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return username;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setName(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
