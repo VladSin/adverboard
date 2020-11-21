@@ -35,7 +35,7 @@ public class DaoConfig {
     }
 
     @Bean
-    public AuthUserDao authUserDaoDao(){
+    public AuthUserDao authUserDao(){
         return new AuthUserDaoImpl();
     }
 }
