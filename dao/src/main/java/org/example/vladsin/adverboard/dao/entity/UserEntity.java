@@ -8,29 +8,29 @@ import javax.validation.constraints.Pattern;
 @Data
 @Entity
 @Table(name = "user")
-public class User {
+public class UserEntity {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username")
+    @Column(name = "name")
     @Pattern(regexp="^[A-Z]+[a-z]+[А-Я]+[а-я]+$",
             message="Username must be alphanumeric with no spaces and first capital")
-    private String username;
+    private String name;
 
     @Column(name = "email")
     @Pattern(regexp="(\\w+)@.*",
             message="Key character not entered")
     private String email;
 
-    public User() {
+    public UserEntity() {
     }
 
-    public User(Long id, String username, String email){
+    public UserEntity(Long id, String name, String email){
         this.id = id;
-        this.username = username;
+        this.name = name;
         this.email = email;
     }
 
@@ -42,10 +42,10 @@ public class User {
     }
 
     public String getName() {
-        return username;
+        return name;
     }
-    public void setName(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "authuser")
-public class AuthUser {
+public class AuthUserEntity {
 
     @Id
     @Column(name = "id")
@@ -20,10 +20,10 @@ public class AuthUser {
     @Column(name="password")
     private String password;
 
-    public AuthUser() {
+    public AuthUserEntity() {
     }
 
-    public AuthUser(Long id, String login, String password) {
+    public AuthUserEntity(Long id, String login, String password) {
         this.id = id;
         this.login = login;
         this.password = password;

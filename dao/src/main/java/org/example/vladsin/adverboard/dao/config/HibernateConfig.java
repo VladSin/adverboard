@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
 
@@ -38,7 +39,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean sessionFactoryBean() {
         final LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource());
-        sessionFactoryBean.setPackagesToScan("org.example.airplane.sin.dao.entities");
+        sessionFactoryBean.setPackagesToScan("org.example.vladsin.adverboard.dao.entity");
         sessionFactoryBean.setHibernateProperties(settingsConfig.hibernateProperties());
 
         return sessionFactoryBean;
@@ -50,5 +51,10 @@ public class HibernateConfig {
         transactionManager.setSessionFactory(sessionFactoryBean().getObject());
 
         return transactionManager;
+    }
+
+    @Bean
+    public TransactionTemplate transactionTemplate(){
+        return new TransactionTemplate(transactionManager());
     }
 }

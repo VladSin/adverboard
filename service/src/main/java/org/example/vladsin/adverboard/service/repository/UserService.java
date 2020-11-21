@@ -1,10 +1,17 @@
 package org.example.vladsin.adverboard.service.repository;
 
-import org.example.vladsin.adverboard.dao.entity.User;
+import org.example.vladsin.adverboard.model.User;
 
-public interface UserService extends BaseService<User>{
+import java.util.List;
 
-    User create(User user);
+public interface UserService {
 
-    void delete(User user);
+    User saveUser(User user);
+
+    boolean updateUser(User user);
+    boolean deleteUser(long id);
+
+    User getUser(long id);
+
+    List<User> getUsers();
 }

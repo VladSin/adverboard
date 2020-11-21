@@ -1,34 +1,50 @@
 package org.example.vladsin.adverboard.service.repository.impl;
 
-import org.example.vladsin.adverboard.dao.entity.User;
 import org.example.vladsin.adverboard.dao.repository.UserDao;
+import org.example.vladsin.adverboard.model.User;
 import org.example.vladsin.adverboard.service.repository.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
-public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
+public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
 
-    @Autowired
-    public UserServiceImpl(UserDao userDao){
-        super(userDao);
+    public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
 
-    public User create(User user) {
-        if(user != null){
-            return userDao.add(user);
-        }
-        return null;
+    @Override
+    @Transactional
+    public User saveUser(User user) {
+        return userDao.saveUser(user);
     }
 
-    public void delete(User user) {
-        if(user != null){
-            userDao.delete(user.getId());
-        }
+    @Override
+    @Transactional
+    public boolean deleteUser(long id) {
+        return userDao.deleteUser(id);
+    }
+
+    @Override
+    @Transactional
+    public boolean updateUser(User user) {
+        return userDao.updateUser(user);
+    }
+
+    @Override
+    @Transactional
+    public User getUser(long id) {
+        return userDao.getUser(id);
+    }
+
+    @Override
+    @Transactional
+    public List<User> getUsers() {
+        return userDao.getUsers();
     }
 }
