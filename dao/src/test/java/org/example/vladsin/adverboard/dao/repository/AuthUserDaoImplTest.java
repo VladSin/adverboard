@@ -1,8 +1,8 @@
 package org.example.vladsin.adverboard.dao.repository;
 
 import org.example.vladsin.adverboard.dao.config.DaoConfig;
-import org.example.vladsin.adverboard.dao.repository.AuthUserDao;
 import org.example.vladsin.adverboard.model.AuthUser;
+import org.example.vladsin.adverboard.model.Role;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,15 +27,16 @@ class AuthUserDaoImplTest {
 
     @Test
     void saveAuthUser() {
-        final AuthUser authUserToSave = new AuthUser(null, "login", "password");
+        final AuthUser authUserToSave = new AuthUser(null, "login", "password", Role.User, 1L);
         final AuthUser savedAuthUser = authUserDao.saveAuthUser(authUserToSave);
         assertEquals(authUserToSave.getLogin(), savedAuthUser.getLogin());
         assertEquals(authUserToSave.getPassword(), savedAuthUser.getPassword());
+        assertEquals(authUserToSave.getRole(), savedAuthUser.getRole());
     }
 
     @Test
     void deleteAuthUser() {
-        final AuthUser authUserToSave = new AuthUser(null, "login", "password");
+        final AuthUser authUserToSave = new AuthUser(null, "login", "password", Role.User, 1L);
         final AuthUser savedAuthUser = authUserDao.saveAuthUser(authUserToSave);
         final Long id = savedAuthUser.getId();
         final AuthUser authorizationUser = authUserDao.getAuthUser(id);
@@ -51,12 +52,12 @@ class AuthUserDaoImplTest {
 
     @Test
     void updateAuthUser() {
-        final AuthUser authUserToSave = new AuthUser(null, "login", "password");
+        final AuthUser authUserToSave = new AuthUser(null, "login", "password", Role.User, 1L);
         final AuthUser savedAuthUser = authUserDao.saveAuthUser(authUserToSave);
         final Long id = savedAuthUser.getId();
         sessionFactory.getCurrentSession().clear();
 
-        final AuthUser toUpdate = new AuthUser(id, "login2", "password2");
+        final AuthUser toUpdate = new AuthUser(id, "login2", "password2", Role.User, 1L);
         final boolean updated = authUserDao.updateAuthUser(toUpdate);
         assertTrue(updated);
 
@@ -64,11 +65,13 @@ class AuthUserDaoImplTest {
         assertEquals(toUpdate.getId(), afterUpdate.getId());
         assertEquals(toUpdate.getLogin(), afterUpdate.getLogin());
         assertEquals(toUpdate.getPassword(), afterUpdate.getPassword());
+        assertEquals(toUpdate.getRole(), afterUpdate.getRole());
+        assertEquals(toUpdate.getId(), afterUpdate.getId());
     }
 
     @Test
     void getById() {
-        final AuthUser authUserToSave = new AuthUser(null, "login", "password");
+        final AuthUser authUserToSave = new AuthUser(null, "login", "password", Role.User, 1L);
         final AuthUser savedAuthUser = authUserDao.saveAuthUser(authUserToSave);
         final Long id = savedAuthUser.getId();
 
@@ -77,6 +80,7 @@ class AuthUserDaoImplTest {
 
         assertEquals(authUserToSave.getLogin(), authorizationUser.getLogin());
         assertEquals(authUserToSave.getPassword(), authorizationUser.getPassword());
+        assertEquals(authUserToSave.getRole(), authorizationUser.getRole());
         assertEquals(id, authorizationUser.getId());
     }
 }

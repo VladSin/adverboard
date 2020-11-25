@@ -1,7 +1,6 @@
 package org.example.vladsin.adverboard.dao.repository;
 
 import org.example.vladsin.adverboard.dao.config.DaoConfig;
-import org.example.vladsin.adverboard.dao.repository.UserDao;
 import org.example.vladsin.adverboard.model.User;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;

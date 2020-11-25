@@ -12,7 +12,9 @@ public class AuthUserConverter {
         return new AuthUser(
                 authUserEntity.getId(),
                 authUserEntity.getLogin(),
-                authUserEntity.getPassword()
+                authUserEntity.getPassword(),
+                authUserEntity.getRole(),
+                authUserEntity.getUserId()
         );
     }
 
@@ -24,6 +26,8 @@ public class AuthUserConverter {
         authorizationUserEntity.setId(authUser.getId());
         authorizationUserEntity.setLogin(authUser.getLogin());
         authorizationUserEntity.setPassword(authUser.getPassword());
+        authorizationUserEntity.setRole(authUser.getRole());
+        authorizationUserEntity.setUserId(authUser.getUserId());
         return authorizationUserEntity;
     }
 }
