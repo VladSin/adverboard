@@ -3,6 +3,7 @@ package org.example.vladsin.adverboard.dao.repository.impl;
 import org.example.vladsin.adverboard.dao.converter.AuthUserConverter;
 import org.example.vladsin.adverboard.dao.entity.AuthUserEntity;
 import org.example.vladsin.adverboard.dao.repository.AuthUserDao;
+import org.example.vladsin.adverboard.dao.repository.SecurityDao;
 import org.example.vladsin.adverboard.model.AuthUser;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,8 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
+
 @Repository
-public class AuthUserDaoImpl  implements AuthUserDao {
+public class AuthUserDaoImpl  implements AuthUserDao, SecurityDao {
 
     private static final Logger log = LoggerFactory.getLogger(AuthUserDaoImpl.class);
     private final SessionFactory factory;
@@ -58,5 +61,35 @@ public class AuthUserDaoImpl  implements AuthUserDao {
             log.info("authUser not found by id{}", id);
             return null;
         }
+    }
+
+    @Override
+    public AuthUser getByUserId(Long userId) {
+        AuthUserEntity authUser;
+        try {
+            authUser = (AuthUserEntity) factory.getCurrentSession()
+                    .createQuery("from AuthUserEntity au where au.userId = :userId")
+                    .setParameter("userId", userId)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            log.info("user not found by userId{}", userId);
+            authUser = null;
+        }
+        return AuthUserConverter.fromEntity(authUser);
+    }
+
+    @Override
+    public AuthUser getByLogin(String login) {
+        AuthUserEntity authUser;
+        try {
+            authUser = (AuthUserEntity) factory.getCurrentSession()
+                    .createQuery("from AuthUserEntity au where au.login = :login")
+                    .setParameter("login", login)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            log.info("user not found by login{}", login);
+            authUser = null;
+        }
+        return AuthUserConverter.fromEntity(authUser);
     }
 }

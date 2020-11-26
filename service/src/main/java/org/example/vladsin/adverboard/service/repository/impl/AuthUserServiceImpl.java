@@ -27,6 +27,7 @@ public class AuthUserServiceImpl implements AuthUserService {
     public boolean updateAuthUser(AuthUser authUser) {
         return authUserDao.updateAuthUser(authUser);
     }
+
     @Override
     @Transactional
     public boolean deleteAuthUser(long id) {

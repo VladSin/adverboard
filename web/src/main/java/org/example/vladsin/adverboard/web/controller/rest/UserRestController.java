@@ -1,4 +1,4 @@
-package org.example.vladsin.adverboard.web.controller;
+package org.example.vladsin.adverboard.web.controller.rest;
 
 import org.example.vladsin.adverboard.model.User;
 import org.example.vladsin.adverboard.service.repository.UserService;
@@ -13,8 +13,12 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserRestController {
 
+
+    private final UserService userService;
     @Autowired
-    private UserService userService;
+    public UserRestController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping(value = "")
     @ResponseStatus(HttpStatus.CREATED)
@@ -24,7 +28,7 @@ public class UserRestController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> getPerson(@PathVariable("id") Long id) {
+    public ResponseEntity<User> getUser(@PathVariable("id") Long id) {
         User user = userService.getUser(id);
 
         if (user == null)
@@ -34,7 +38,7 @@ public class UserRestController {
     }
 
     @GetMapping(value = "")
-    public ResponseEntity<List<User>> getPersons() {
+    public ResponseEntity<List<User>> getUsers() {
         List<User> users = userService.getUsers();
 
         if (users.isEmpty())
@@ -82,7 +86,6 @@ public class UserRestController {
 
         user.setEmail(email);
         userService.updateUser(user);
-        user = userService.getUser(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

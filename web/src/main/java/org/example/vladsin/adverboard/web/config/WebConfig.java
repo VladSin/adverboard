@@ -2,6 +2,9 @@ package org.example.vladsin.adverboard.web.config;
 
 import org.example.vladsin.adverboard.service.config.ServiceConfig;
 import org.example.vladsin.adverboard.web.controller.LoginController;
+import org.example.vladsin.adverboard.web.controller.RegistrationController;
+import org.example.vladsin.adverboard.web.controller.rest.AuthUserRestController;
+import org.example.vladsin.adverboard.web.controller.rest.UserRestController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -20,8 +23,30 @@ public class WebConfig {
     }
 
     @Bean
+    public RegistrationController registrationController(){
+        return new RegistrationController(
+                serviceConfig.userService(),
+                serviceConfig.authUserService()
+        );
+    }
+
+    @Bean
     public LoginController loginController(){
         return new LoginController(
+                serviceConfig.securityService()
+        );
+    }
+
+    @Bean
+    public UserRestController userRestController(){
+        return new UserRestController(
+                serviceConfig.userService()
+        );
+    }
+
+    @Bean
+    public AuthUserRestController authUserRestController(){
+        return new AuthUserRestController(
                 serviceConfig.authUserService()
         );
     }

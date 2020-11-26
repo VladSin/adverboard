@@ -1,6 +1,7 @@
 package org.example.vladsin.adverboard.dao.config;
 
 import org.example.vladsin.adverboard.dao.repository.AuthUserDao;
+import org.example.vladsin.adverboard.dao.repository.SecurityDao;
 import org.example.vladsin.adverboard.dao.repository.UserDao;
 import org.example.vladsin.adverboard.dao.repository.impl.AuthUserDaoImpl;
 import org.example.vladsin.adverboard.dao.repository.impl.UserDaoImpl;
@@ -28,6 +29,11 @@ public class DaoConfig {
 
     @Bean
     public AuthUserDao authUserDao(){
+        return new AuthUserDaoImpl(sessionFactory);
+    }
+
+    @Bean
+    public SecurityDao securityDao(){
         return new AuthUserDaoImpl(sessionFactory);
     }
 }

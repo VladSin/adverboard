@@ -23,6 +23,9 @@ class AuthUserDaoImplTest {
     private AuthUserDao authUserDao;
 
     @Autowired
+    private SecurityDao securityDao;
+
+    @Autowired
     SessionFactory sessionFactory;
 
     @Test
@@ -82,5 +85,31 @@ class AuthUserDaoImplTest {
         assertEquals(authUserToSave.getPassword(), authorizationUser.getPassword());
         assertEquals(authUserToSave.getRole(), authorizationUser.getRole());
         assertEquals(id, authorizationUser.getId());
+    }
+
+    @Test
+    void getByUserId() {
+        final AuthUser authUserToSave = new AuthUser(null, "login", "password", Role.User, 1L);
+        final AuthUser savedAuthUser = authUserDao.saveAuthUser(authUserToSave);
+
+        final AuthUser authorizationUser = securityDao.getByUserId(savedAuthUser.getUserId());
+        assertNotNull(authorizationUser);
+
+        assertEquals(authUserToSave.getLogin(), authorizationUser.getLogin());
+        assertEquals(authUserToSave.getPassword(), authorizationUser.getPassword());
+        assertEquals(authUserToSave.getRole(), authorizationUser.getRole());
+    }
+
+    @Test
+    void getByLogin() {
+        final AuthUser authUserToSave = new AuthUser(null, "login", "password", Role.User, 1L);
+        final AuthUser savedAuthUser = authUserDao.saveAuthUser(authUserToSave);
+
+        final AuthUser authorizationUser = securityDao.getByLogin(savedAuthUser.getLogin());
+        assertNotNull(authorizationUser);
+
+        assertEquals(authUserToSave.getLogin(), authorizationUser.getLogin());
+        assertEquals(authUserToSave.getPassword(), authorizationUser.getPassword());
+        assertEquals(authUserToSave.getRole(), authorizationUser.getRole());
     }
 }
