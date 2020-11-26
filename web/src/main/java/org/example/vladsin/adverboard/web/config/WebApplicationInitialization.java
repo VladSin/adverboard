@@ -27,7 +27,7 @@ public class WebApplicationInitialization extends AbstractAnnotationConfigDispat
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/registration"};
+        return new String[]{"/"};
     }
 
     @Override

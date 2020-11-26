@@ -1,6 +1,7 @@
 package org.example.vladsin.adverboard.web.config;
 
 import org.example.vladsin.adverboard.service.config.ServiceConfig;
+import org.example.vladsin.adverboard.web.controller.FirstPageController;
 import org.example.vladsin.adverboard.web.controller.LoginController;
 import org.example.vladsin.adverboard.web.controller.RegistrationController;
 import org.example.vladsin.adverboard.web.controller.rest.AuthUserRestController;
@@ -20,6 +21,11 @@ public class WebConfig {
 
     public WebConfig(ServiceConfig serviceConfig) {
         this.serviceConfig = serviceConfig;
+    }
+
+    @Bean
+    public FirstPageController firstPageController(){
+        return new FirstPageController();
     }
 
     @Bean
