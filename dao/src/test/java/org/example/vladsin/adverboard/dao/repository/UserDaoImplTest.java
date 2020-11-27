@@ -97,7 +97,7 @@ class UserDaoImplTest {
             assertEquals(userList.get(i).getEmail(), users.get(i).getEmail());
         }
 
-        users = userDao.getUsers();
-        assertNotNull(users);
+        userList = userDao.getUsers();
+        assertNotNull(userList);
     }
 }

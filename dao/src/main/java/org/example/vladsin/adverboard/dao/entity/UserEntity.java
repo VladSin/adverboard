@@ -25,6 +25,10 @@ public class UserEntity {
             message="Key character not entered")
     private String email;
 
+    @OneToOne(mappedBy = "userEntity", fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    private GroupBillboardsEntity groupBillboardsEntity;
+
     public UserEntity() {
     }
 
@@ -32,6 +36,18 @@ public class UserEntity {
         this.id = id;
         this.name = name;
         this.email = email;
+    }
+
+    public UserEntity(Long id,
+                      @Pattern(regexp = "^[A-Z]+[a-z]+[А-Я]+[а-я]+$",
+            message = "Username must be alphanumeric with no spaces and first capital") String name,
+                      @Pattern(regexp = "(\\w+)@.*",
+            message = "Key character not entered") String email,
+                      GroupBillboardsEntity groupBillboardsEntity) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.groupBillboardsEntity = groupBillboardsEntity;
     }
 
     public Long getId() {
@@ -53,5 +69,12 @@ public class UserEntity {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public GroupBillboardsEntity getGroupBillboardsEntity() {
+        return groupBillboardsEntity;
+    }
+    public void setGroupBillboardsEntity(GroupBillboardsEntity groupBillboardsEntity) {
+        this.groupBillboardsEntity = groupBillboardsEntity;
     }
 }
