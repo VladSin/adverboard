@@ -27,6 +27,11 @@
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -41,7 +46,7 @@
     </dependencies>
 
     <build>
-        <finalName>web</finalName>
+        <finalName>adverboard</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -57,8 +62,11 @@
                 <version>2.2</version>
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
-                    <path>/tomcat</path>
+                    <path>/adverboard</path>
                     <server>tomcat</server>
+                    <update>true</update>
+                    <username>Vladsin</username>
+                    <password>8080</password>
                 </configuration>
             </plugin>
             <plugin>

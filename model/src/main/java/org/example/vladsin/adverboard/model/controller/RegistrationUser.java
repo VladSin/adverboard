@@ -1,4 +1,4 @@
-package org.example.vladsin.adverboard.model;
+package org.example.vladsin.adverboard.model.controller;
 
 public class RegistrationUser {
 

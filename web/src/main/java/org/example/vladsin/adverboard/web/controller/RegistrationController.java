@@ -1,7 +1,7 @@
 package org.example.vladsin.adverboard.web.controller;
 
 import org.example.vladsin.adverboard.model.AuthUser;
-import org.example.vladsin.adverboard.model.RegistrationUser;
+import org.example.vladsin.adverboard.model.controller.RegistrationUser;
 import org.example.vladsin.adverboard.model.Role;
 import org.example.vladsin.adverboard.model.User;
 import org.example.vladsin.adverboard.service.repository.AuthUserService;

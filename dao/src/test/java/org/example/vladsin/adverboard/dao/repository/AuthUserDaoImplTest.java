@@ -89,7 +89,7 @@ class AuthUserDaoImplTest {
 
     @Test
     void getByUserId() {
-        final AuthUser authUserToSave = new AuthUser(null, "login", "password", Role.User, 1L);
+        final AuthUser authUserToSave = new AuthUser(null, "login", "password", Role.User, 9L);
         final AuthUser savedAuthUser = authUserDao.saveAuthUser(authUserToSave);
 
         final AuthUser authorizationUser = securityDao.getByUserId(savedAuthUser.getUserId());
@@ -102,7 +102,7 @@ class AuthUserDaoImplTest {
 
     @Test
     void getByLogin() {
-        final AuthUser authUserToSave = new AuthUser(null, "login", "password", Role.User, 1L);
+        final AuthUser authUserToSave = new AuthUser(null, "login9", "password9", Role.User, 1L);
         final AuthUser savedAuthUser = authUserDao.saveAuthUser(authUserToSave);
 
         final AuthUser authorizationUser = securityDao.getByLogin(savedAuthUser.getLogin());

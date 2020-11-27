@@ -1,8 +1,8 @@
 package org.example.vladsin.adverboard.web.controller;
 
 import org.example.vladsin.adverboard.model.AuthUser;
-import org.example.vladsin.adverboard.model.LoginUser;
-import org.example.vladsin.adverboard.model.UpdatePass;
+import org.example.vladsin.adverboard.model.controller.LoginUser;
+import org.example.vladsin.adverboard.model.controller.UpdatePass;
 import org.example.vladsin.adverboard.service.repository.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

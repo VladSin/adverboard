@@ -7,20 +7,32 @@ import org.example.vladsin.adverboard.web.controller.RegistrationController;
 import org.example.vladsin.adverboard.web.controller.rest.AuthUserRestController;
 import org.example.vladsin.adverboard.web.controller.rest.UserRestController;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.Locale;
 
 @Configuration
 @EnableWebMvc
+@ComponentScan(basePackages = "org.example.vladsin.adverboard.web")
 public class WebConfig {
 
     private ServiceConfig serviceConfig;
 
     public WebConfig(ServiceConfig serviceConfig) {
         this.serviceConfig = serviceConfig;
+    }
+
+    @Bean
+    ViewResolver viewResolver(){
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("/WEB-INF/");
+        resolver.setSuffix(".jsp");
+        return resolver;
     }
 
     @Bean
