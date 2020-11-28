@@ -37,6 +37,7 @@ public class UserDaoImpl implements UserDao {
         UserEntity userEntity = UserConverter.toEntity(user);
         final Session session = factory.getCurrentSession();
         session.update(userEntity);
+        log.info("user updated:{}", user);
         return true;
     }
 
@@ -46,6 +47,7 @@ public class UserDaoImpl implements UserDao {
         session.createQuery("delete from UserEntity as a where a.id = :id")
                 .setParameter("id", id)
                 .executeUpdate();
+        log.info("user deleted:{}", id);
         return true;
     }
 
@@ -54,8 +56,7 @@ public class UserDaoImpl implements UserDao {
         final Session session = factory.getCurrentSession();
         UserEntity userEntity = session.get(UserEntity.class, id);
         try {
-            User user = UserConverter.fromEntity(userEntity);
-            return user;
+            return UserConverter.fromEntity(userEntity);
         } catch (RuntimeException e){
             log.info("user not found by id{}", id);
             return null;

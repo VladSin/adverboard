@@ -1,6 +1,8 @@
-package org.example.vladsin.adverboard.dao.repository;
+package org.example.vladsin.adverboard.dao.repository.impl;
 
 import org.example.vladsin.adverboard.dao.config.DaoConfig;
+import org.example.vladsin.adverboard.dao.repository.AuthUserDao;
+import org.example.vladsin.adverboard.dao.repository.SecurityDao;
 import org.example.vladsin.adverboard.model.AuthUser;
 import org.example.vladsin.adverboard.model.Role;
 import org.hibernate.SessionFactory;

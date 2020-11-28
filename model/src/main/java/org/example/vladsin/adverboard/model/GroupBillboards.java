@@ -5,13 +5,13 @@ import java.util.List;
 public class GroupBillboards {
 
     private Long id;
-    private String name;
+    private String groupName;
     private Long userId;
     private List<Billboard> billboards;
 
-    public GroupBillboards(Long id, String name, Long userId, List<Billboard> billboards) {
+    public GroupBillboards(Long id, String groupName, Long userId, List<Billboard> billboards) {
         this.id = id;
-        this.name = name;
+        this.groupName = groupName;
         this.userId = userId;
         this.billboards = billboards;
     }
@@ -23,11 +23,11 @@ public class GroupBillboards {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getGroupName() {
+        return groupName;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     public Long getUserId() {

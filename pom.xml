@@ -152,23 +152,6 @@
                     <password>8080</password>
                 </configuration>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupid>com.heroku.sdk</groupid>-->
-<!--                <artifactid>heroku-maven-plugin</artifactid>-->
-<!--                <version>3.0.4</version>-->
-<!--                <configuration>-->
-<!--                    <appname>heroku-demo-stackabuse</appname>-->
-<!--                    <includetarget>false</includetarget>-->
-<!--                    <includes>-->
-<!--                        <include>${project.build.directory}/${project.build.finalName}.jar</include>-->
-<!--                    </includes>-->
-<!--                    <jdkversion>1.8</jdkversion>-->
-<!--                    <processtypes>-->
-<!--                        <web>java $JAVA_OPTS -jar-->
-<!--                            ${project.build.directory}/${project.build.finalName}.jar</web>-->
-<!--                    </processtypes>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
         </plugins>
     </build>
 </project>

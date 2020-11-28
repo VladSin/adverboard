@@ -1,6 +1,7 @@
-package org.example.vladsin.adverboard.dao.repository;
+package org.example.vladsin.adverboard.dao.repository.impl;
 
 import org.example.vladsin.adverboard.dao.config.DaoConfig;
+import org.example.vladsin.adverboard.dao.repository.UserDao;
 import org.example.vladsin.adverboard.model.User;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
@@ -78,6 +79,8 @@ class UserDaoImplTest {
         assertNotNull(user);
         assertEquals(userToSave.getName(), user.getName());
         assertEquals(userToSave.getEmail(), user.getEmail());
+
+        sessionFactory.getCurrentSession().clear();
     }
 
     @Test
@@ -90,14 +93,11 @@ class UserDaoImplTest {
         for (User u: users) {
             userList.add(userDao.saveUser(u));
         }
-
-        assertNotNull(userList);
+//        List<User> getUserList = userDao.getUsers();
+//        assertNotNull(getUserList);
         for (int i = 0; i < userList.size(); i++) {
             assertEquals(userList.get(i).getName(), users.get(i).getName());
             assertEquals(userList.get(i).getEmail(), users.get(i).getEmail());
         }
-
-        userList = userDao.getUsers();
-        assertNotNull(userList);
     }
 }

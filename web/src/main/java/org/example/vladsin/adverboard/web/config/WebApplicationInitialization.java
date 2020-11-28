@@ -30,11 +30,11 @@ public class WebApplicationInitialization extends AbstractAnnotationConfigDispat
         return new String[]{"/"};
     }
 
-//    @Override
-//    protected Filter[] getServletFilters() {
-////        DelegatingFilterProxy delegateFilterProxy = new DelegatingFilterProxy();
-////        delegateFilterProxy.setTargetBeanName("springSecurityFilterChain");
-////        return new Filter[]{delegateFilterProxy};
-//        return super.getServletFilters();
-//    }
+    @Override
+    protected Filter[] getServletFilters() {
+//        DelegatingFilterProxy delegateFilterProxy = new DelegatingFilterProxy();
+//        delegateFilterProxy.setTargetBeanName("springSecurityFilterChain");
+//        return new Filter[]{delegateFilterProxy};
+        return super.getServletFilters();
+    }
 }

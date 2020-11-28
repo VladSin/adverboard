@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "group")
+@Table(name = "group_billboard")
 public class GroupBillboardsEntity {
 
     @Id
@@ -16,35 +16,23 @@ public class GroupBillboardsEntity {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "group_name")
+    private String groupName;
 
-    @Column(name = "user_id", updatable = false, insertable = false)
+    @Column(name = "user_id")
     private Long userId;
 
     @OneToMany(mappedBy = "groupBillboardsEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BillboardEntity> billboards = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private UserEntity userEntity;
-
     public GroupBillboardsEntity() {
     }
 
-    public GroupBillboardsEntity(Long id, String name, Long userId, List<BillboardEntity> billboards) {
+    public GroupBillboardsEntity(Long id, String groupName, Long userId, List<BillboardEntity> billboards) {
         this.id = id;
-        this.name = name;
+        this.groupName = groupName;
         this.userId = userId;
         this.billboards = billboards;
-    }
-
-    public GroupBillboardsEntity(Long id, String name, Long userId, List<BillboardEntity> billboards, UserEntity userEntity) {
-        this.id = id;
-        this.name = name;
-        this.userId = userId;
-        this.billboards = billboards;
-        this.userEntity = userEntity;
     }
 
     public Long getId() {
@@ -54,11 +42,11 @@ public class GroupBillboardsEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getGroupName() {
+        return groupName;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     public Long getUserId() {
@@ -73,12 +61,5 @@ public class GroupBillboardsEntity {
     }
     public void setBillboards(List<BillboardEntity> billboards) {
         this.billboards = billboards;
-    }
-
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
     }
 }

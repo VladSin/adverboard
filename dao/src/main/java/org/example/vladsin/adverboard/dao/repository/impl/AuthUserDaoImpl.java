@@ -39,6 +39,7 @@ public class AuthUserDaoImpl  implements AuthUserDao, SecurityDao {
         session.createQuery("delete from AuthUserEntity as a where a.id = :id")
                 .setParameter("id", id)
                 .executeUpdate();
+        log.info("authUser deleted by id:{}", id);
         return true;
     }
 
@@ -47,6 +48,7 @@ public class AuthUserDaoImpl  implements AuthUserDao, SecurityDao {
         AuthUserEntity authUserEntity = AuthUserConverter.toEntity(authUser);
         final Session session = factory.getCurrentSession();
         session.update(authUserEntity);
+        log.info("authUser updated:{}", authUser);
         return true;
     }
 
@@ -55,8 +57,7 @@ public class AuthUserDaoImpl  implements AuthUserDao, SecurityDao {
         final Session session = factory.getCurrentSession();
         AuthUserEntity authUserEntity = session.get(AuthUserEntity.class, id);
         try {
-            AuthUser authUser = AuthUserConverter.fromEntity(authUserEntity);
-            return authUser;
+            return AuthUserConverter.fromEntity(authUserEntity);
         } catch (RuntimeException e){
             log.info("authUser not found by id{}", id);
             return null;
