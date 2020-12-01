@@ -15,7 +15,7 @@ class AuthUserConverterTest {
         authUserEntity.setId(null);
         authUserEntity.setLogin("login");
         authUserEntity.setPassword("pass");
-        authUserEntity.setRole(Role.User);
+        authUserEntity.setRole(Role.USER);
         authUserEntity.setUserId(1L);
 
         AuthUser authorizationUser = AuthUserConverter.fromEntity(authUserEntity);
@@ -28,7 +28,7 @@ class AuthUserConverterTest {
 
     @Test
     void toEntity(){
-        AuthUser authUser = new AuthUser(null, "login", "pass", Role.User, 1L);
+        AuthUser authUser = new AuthUser(null, "login", "pass", Role.USER, 1L);
         AuthUserEntity authUserEntity = AuthUserConverter.toEntity(authUser);
         assertNotNull(authUserEntity);
         assertEquals(authUser.getLogin(), authUserEntity.getLogin());

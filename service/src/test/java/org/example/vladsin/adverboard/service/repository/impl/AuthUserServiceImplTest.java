@@ -23,7 +23,7 @@ class AuthUserServiceImplTest {
 
     @Test
     void saveAuthUser() {
-        when(dao.getAuthUser(1)).thenReturn(new AuthUser(1L,"login", "password", Role.User, 1L));
+        when(dao.getAuthUser(1)).thenReturn(new AuthUser(1L,"login", "password", Role.USER, 1L));
         final AuthUser userFromDb = service.getAuthUser(1);
         assertNotNull(userFromDb);
 
@@ -40,7 +40,7 @@ class AuthUserServiceImplTest {
 
     @Test
     void getAuthUser() {
-        when(dao.getAuthUser(1)).thenReturn(new AuthUser(1L,"login", "password", Role.User, 1L));
+        when(dao.getAuthUser(1)).thenReturn(new AuthUser(1L,"login", "password", Role.USER, 1L));
         final AuthUser userFromDb = service.getAuthUser(1);
         assertNotNull(userFromDb);
 
@@ -54,7 +54,7 @@ class AuthUserServiceImplTest {
     }
     @Test
     void updateAuthUser() {
-        when(dao.getAuthUser(1)).thenReturn(new AuthUser(1L,"login", "password", Role.User, 1L));
+        when(dao.getAuthUser(1)).thenReturn(new AuthUser(1L,"login", "password", Role.USER, 1L));
         final AuthUser userFromDb = service.getAuthUser(1);
         assertNotNull(userFromDb);
 
@@ -65,7 +65,7 @@ class AuthUserServiceImplTest {
 
     @Test
     void deleteAuthUser() {
-        when(dao.getAuthUser(1)).thenReturn(new AuthUser(1L,"login", "password", Role.User, 1L));
+        when(dao.getAuthUser(1)).thenReturn(new AuthUser(1L,"login", "password", Role.USER, 1L));
         final AuthUser userFromDb = service.getAuthUser(1);
         assertNotNull(userFromDb);
 

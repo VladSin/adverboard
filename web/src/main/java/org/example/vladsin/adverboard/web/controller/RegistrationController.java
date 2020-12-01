@@ -33,7 +33,7 @@ public class RegistrationController {
         if (securityService.checkUniqLogin(user.getUsername())){
             User newUser = new User(null, user.getUsername(), user.getEmail());
             newUser = userService.saveUser(newUser);
-            AuthUser newAuth = new AuthUser(null, user.getUsername(), user.getPassword(), Role.User, newUser.getId());
+            AuthUser newAuth = new AuthUser(null, user.getUsername(), user.getPassword(), Role.USER, newUser.getId());
             authUserService.saveAuthUser(newAuth);
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         } else {
