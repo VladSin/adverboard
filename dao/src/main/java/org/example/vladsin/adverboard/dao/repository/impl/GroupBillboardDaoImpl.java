@@ -11,6 +11,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class GroupBillboardDaoImpl implements GroupBillboardDao {
@@ -78,5 +84,22 @@ public class GroupBillboardDaoImpl implements GroupBillboardDao {
             groupEntity = null;
         }
         return GroupBillboardsConverter.fromEntity(groupEntity);
+    }
+
+    @Override
+    public List<GroupBillboards> getGroupsByUserId(long userId) {
+        final Session session = factory.getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<GroupBillboardsEntity> criteria = cb.createQuery(GroupBillboardsEntity.class);
+        Root<GroupBillboardsEntity> entityRoot = criteria.from(GroupBillboardsEntity.class);
+        Predicate predicate = cb.and(
+                cb.equal(entityRoot.get("userId"),  userId)
+        );
+        criteria.select(entityRoot).where(predicate);
+
+        List<GroupBillboardsEntity> groupEntities = session.createQuery(criteria).getResultList();
+        return groupEntities.stream()
+                .map(GroupBillboardsConverter::fromEntity)
+                .collect(Collectors.toList());
     }
 }

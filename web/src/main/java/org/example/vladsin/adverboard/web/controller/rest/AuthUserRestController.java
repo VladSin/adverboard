@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthUserRestController {
 
     private final AuthUserService authUserService;
+
     @Autowired
     public AuthUserRestController(AuthUserService authUserService) {
         this.authUserService = authUserService;
@@ -19,7 +20,7 @@ public class AuthUserRestController {
 
     @PostMapping(value = "")
     @ResponseStatus(HttpStatus.CREATED)
-    public String addAuthUser(@RequestBody AuthUser authUser){
+    public String addAuthUser(@RequestBody AuthUser authUser) {
         AuthUser newUser = authUserService.saveAuthUser(authUser);
         return newUser.getLogin();
     }
@@ -38,10 +39,10 @@ public class AuthUserRestController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<AuthUser> updateAuthUser(
             @PathVariable("id") Long id,
-            @RequestBody AuthUser newUser){
+            @RequestBody AuthUser newUser) {
         AuthUser authUser = authUserService.getAuthUser(id);
 
-        if(authUser == null)
+        if (authUser == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         authUser.setLogin(newUser.getLogin());
@@ -79,7 +80,7 @@ public class AuthUserRestController {
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public String deleteAuthUser(@PathVariable("id") Long id){
+    public String deleteAuthUser(@PathVariable("id") Long id) {
         authUserService.deleteAuthUser(id);
         return "OK";
     }

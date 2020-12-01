@@ -2,21 +2,21 @@ package org.example.vladsin.adverboard.model.controller;
 
 public class RegistrationUser {
 
-    private String name;
+    private String username;
     private String email;
     private String password;
 
-    public RegistrationUser(String name, String email, String password) {
-        this.name = name;
+    public RegistrationUser(String username, String email, String password) {
+        this.username = username;
         this.email = email;
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

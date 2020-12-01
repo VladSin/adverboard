@@ -40,6 +40,11 @@ public class DaoConfig {
     }
 
     @Bean
+    public LocationDao locationDao(){
+        return new LocationDaoImpl(sessionFactory);
+    }
+
+    @Bean
     public BillboardDao billboardDao(){
         return new BillboardDaoImpl(sessionFactory);
     }

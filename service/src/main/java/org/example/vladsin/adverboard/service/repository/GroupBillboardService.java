@@ -1,11 +1,10 @@
-package org.example.vladsin.adverboard.dao.repository;
+package org.example.vladsin.adverboard.service.repository;
 
 import org.example.vladsin.adverboard.model.GroupBillboards;
 
 import java.util.List;
 
-
-public interface GroupBillboardDao {
+public interface GroupBillboardService {
 
     GroupBillboards saveGroup(GroupBillboards group);
 

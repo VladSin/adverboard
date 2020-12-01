@@ -7,4 +7,6 @@ public interface SecurityService {
     AuthUser login(String login, String password);
 
     void updatePassword(Long userId, String newPassword);
+
+    boolean checkUniqLogin(String login);
 }

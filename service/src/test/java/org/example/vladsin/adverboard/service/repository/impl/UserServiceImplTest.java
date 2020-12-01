@@ -17,7 +17,6 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
 
-
     @Mock
     UserDao dao;
 
@@ -81,7 +80,7 @@ class UserServiceImplTest {
         users.add(new User(2L, "User2", "user2@mail.ru"));
         when(dao.getUsers()).thenReturn(users);
 
-        List<User> userDao = dao.getUsers();
+        List<User> userDao = service.getUsers();
         assertNotNull(userDao);
         for (int i = 0; i < userDao.size(); i++) {
             assertEquals(userDao.get(i).getId(), users.get(i).getId());

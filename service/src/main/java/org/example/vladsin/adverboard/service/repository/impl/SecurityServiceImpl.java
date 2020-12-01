@@ -38,4 +38,14 @@ public class SecurityServiceImpl implements SecurityService {
         user.setPassword(newPassword);
         authUserDao.updateAuthUser(user);
     }
+
+    @Override
+    public boolean checkUniqLogin(String login) {
+        AuthUser user = securityDao.getByLogin(login);
+        if (user == null){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

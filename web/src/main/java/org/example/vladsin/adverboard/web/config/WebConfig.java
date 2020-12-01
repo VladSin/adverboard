@@ -4,7 +4,10 @@ import org.example.vladsin.adverboard.service.config.ServiceConfig;
 import org.example.vladsin.adverboard.web.controller.FirstPageController;
 import org.example.vladsin.adverboard.web.controller.LoginController;
 import org.example.vladsin.adverboard.web.controller.RegistrationController;
+import org.example.vladsin.adverboard.web.controller.UserOperatingController;
 import org.example.vladsin.adverboard.web.controller.rest.AuthUserRestController;
+import org.example.vladsin.adverboard.web.controller.rest.BillboardRestController;
+import org.example.vladsin.adverboard.web.controller.rest.GroupBillboardsRestController;
 import org.example.vladsin.adverboard.web.controller.rest.UserRestController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -44,14 +47,16 @@ public class WebConfig {
     public RegistrationController registrationController(){
         return new RegistrationController(
                 serviceConfig.userService(),
-                serviceConfig.authUserService()
+                serviceConfig.authUserService(),
+                serviceConfig.securityService()
         );
     }
 
     @Bean
     public LoginController loginController(){
         return new LoginController(
-                serviceConfig.securityService()
+                serviceConfig.securityService(),
+                serviceConfig.userService()
         );
     }
 
@@ -66,6 +71,31 @@ public class WebConfig {
     public AuthUserRestController authUserRestController(){
         return new AuthUserRestController(
                 serviceConfig.authUserService()
+        );
+    }
+
+    @Bean
+    public BillboardRestController billboardRestController(){
+        return new BillboardRestController(
+                serviceConfig.billboardService()
+        );
+    }
+
+    @Bean
+    public GroupBillboardsRestController groupBillboardsRestController(){
+        return new GroupBillboardsRestController(
+                serviceConfig.groupBillboardService(),
+                serviceConfig.billboardService()
+        );
+    }
+
+    @Bean
+    public UserOperatingController userOperatingController(){
+        return new UserOperatingController(
+                serviceConfig.userService(),
+                serviceConfig.billboardService(),
+                serviceConfig.groupBillboardService(),
+                serviceConfig.locationService()
         );
     }
 
