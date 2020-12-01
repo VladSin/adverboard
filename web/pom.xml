@@ -56,6 +56,7 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
@@ -64,11 +65,11 @@
                     <url>http://localhost:8080/manager/text</url>
                     <path>/adverboard</path>
                     <server>tomcat</server>
-                    <update>true</update>
                     <username>Vladsin</username>
                     <password>8080</password>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -77,6 +78,7 @@
                     <target>7</target>
                 </configuration>
             </plugin>
+            
         </plugins>
     </build>
 

@@ -12,7 +12,7 @@ public class AdConverter {
             return null;
         }
         return new Ad(
-                adEntity.getId(),
+                adEntity.getAdId(),
                 adEntity.getLink(),
                 adEntity.getBillboards().stream()
                         .map(BillboardConverter::fromEntity)
@@ -25,7 +25,7 @@ public class AdConverter {
             return null;
         }
         final AdEntity adEntity = new AdEntity();
-        adEntity.setId(ad.getId());
+        adEntity.setAdId(ad.getId());
         adEntity.setLink(ad.getLink());
         adEntity.setBillboards(ad.getBillboards().stream()
                 .map(BillboardConverter::toEntity)

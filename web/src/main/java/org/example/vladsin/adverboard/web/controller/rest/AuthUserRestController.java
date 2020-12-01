@@ -52,7 +52,7 @@ public class AuthUserRestController {
         return new ResponseEntity<>(newUser, HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/{id}")
+    @PatchMapping(value = "/login/{id}")
     public ResponseEntity<AuthUser> updateLogin(
             @PathVariable("id") Long id,
             @RequestBody String login) {
@@ -65,7 +65,7 @@ public class AuthUserRestController {
         return new ResponseEntity<>(authUser, HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/{id}")
+    @PatchMapping(value = "/pass/{id}")
     public ResponseEntity<AuthUser> updatePassword(
             @PathVariable("id") Long id,
             @RequestBody String password) {

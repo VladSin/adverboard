@@ -110,17 +110,6 @@
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>${log4j-slf4j-impl.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j-api.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.heroku.sdk</groupId>
-            <artifactId>heroku-maven-plugin</artifactId>
-            <version>3.0.4</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -139,6 +128,7 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
@@ -147,11 +137,11 @@
                     <url>http://localhost:8080/manager/text</url>
                     <path>/adverboard</path>
                     <server>tomcat</server>
-                    <update>true</update>
                     <username>Vladsin</username>
                     <password>8080</password>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 </project>

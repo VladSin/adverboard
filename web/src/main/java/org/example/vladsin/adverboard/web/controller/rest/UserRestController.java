@@ -61,7 +61,7 @@ public class UserRestController {
         return new ResponseEntity<>(newUser, HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/{id}")
+    @PatchMapping(value = "/name/{id}")
     public ResponseEntity<User> updateUserName(
             @PathVariable("id") Long id,
             @RequestBody String name) {
@@ -75,7 +75,7 @@ public class UserRestController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/{id}")
+    @PatchMapping(value = "/email/{id}")
     public ResponseEntity<User> updateUserEmail(
             @PathVariable("id") Long id,
             @RequestBody String email) {

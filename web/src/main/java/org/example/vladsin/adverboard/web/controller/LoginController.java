@@ -42,7 +42,7 @@ public class LoginController {
         return new ResponseEntity<>(userService.getUser(authUser.getUserId()), HttpStatus.OK);
     }
 
-    @PostMapping(value = "")
+    @PostMapping(value = "/update")
     public ResponseEntity<Long> updatePassword(@RequestBody UpdatePass updatePass) {
         securityService.updatePassword(updatePass.getUserId(), updatePass.getPassword());
 

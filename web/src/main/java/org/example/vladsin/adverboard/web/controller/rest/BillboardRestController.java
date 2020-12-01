@@ -84,7 +84,7 @@ public class BillboardRestController {
         return new ResponseEntity<>(newBillboard, HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/{id}")
+    @PatchMapping(value = "/user/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Billboard> updateUserId(
             @PathVariable("id") Long id,
@@ -98,7 +98,7 @@ public class BillboardRestController {
         return new ResponseEntity<>(billboard, HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/{id}")
+    @PatchMapping(value = "/ads/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Billboard> updateAds(
             @PathVariable("id") Long id,

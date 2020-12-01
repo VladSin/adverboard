@@ -12,9 +12,9 @@ import java.util.List;
 public class AdEntity {
 
     @Id
+    @Column(name = "ad_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ad_id", unique = true)
-    private Long id;
+    private Long adId;
 
     @Column(name = "link")
     private String link;
@@ -28,17 +28,17 @@ public class AdEntity {
     public AdEntity() {
     }
 
-    public AdEntity(Long id, String link, List<BillboardEntity> billboards) {
-        this.id = id;
+    public AdEntity(Long adId, String link, List<BillboardEntity> billboards) {
+        this.adId = adId;
         this.link = link;
         this.billboards = billboards;
     }
 
-    public Long getId() {
-        return id;
+    public Long getAdId() {
+        return adId;
     }
-    public void setId(Long id) {
-        this.id = id;
+    public void setAdId(Long id) {
+        this.adId = id;
     }
 
     public String getLink() {

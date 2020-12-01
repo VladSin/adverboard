@@ -1,7 +1,7 @@
 package org.example.vladsin.adverboard.web.controller;
 
+import org.example.vladsin.adverboard.model.Ad;
 import org.example.vladsin.adverboard.model.Billboard;
-import org.example.vladsin.adverboard.model.GroupBillboards;
 import org.example.vladsin.adverboard.model.Location;
 import org.example.vladsin.adverboard.service.repository.BillboardService;
 import org.example.vladsin.adverboard.service.repository.GroupBillboardService;
@@ -34,7 +34,7 @@ public class UserOperatingController {
         this.locationService = locationService;
     }
 
-    @GetMapping(value = "billboards")
+    @GetMapping(value = "/billboards")
     public ResponseEntity<List<Billboard>> getBillboardsByLocation(@RequestBody List<String> locations) {
         List<Billboard> billboards = billboardService.getListBillboardsByLocations(locations);
         if (billboards.isEmpty())
@@ -43,7 +43,7 @@ public class UserOperatingController {
         return new ResponseEntity<>(billboards, HttpStatus.OK);
     }
 
-    @GetMapping(value = "locations")
+    @GetMapping(value = "/locations")
     public ResponseEntity<List<Location>> getAllLocations() {
         List<Location> locations = locationService.getLocation();
         if (locations.isEmpty())
@@ -52,5 +52,19 @@ public class UserOperatingController {
         return new ResponseEntity<>(locations, HttpStatus.OK);
     }
 
+    @PatchMapping(value = "/buy/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Billboard> updateUserId(
+            @PathVariable("id") Long id,
+            @RequestBody Long userId,
+            @RequestBody List<Ad> ads) {
+        Billboard billboard = billboardService.getBillboardById(id);
+        if (billboard == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
+        billboard.setUserId(userId);
+        billboard.setAds(ads);
+        billboardService.updateBillboard(billboard);
+        return new ResponseEntity<>(billboard, HttpStatus.OK);
+    }
 }

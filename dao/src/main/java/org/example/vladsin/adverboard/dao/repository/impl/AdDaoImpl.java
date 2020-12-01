@@ -44,7 +44,7 @@ public class AdDaoImpl implements AdDao {
     @Override
     public boolean deleteAd(long id) {
         final Session session = factory.getCurrentSession();
-        session.createQuery("delete from AdEntity as a where a.id = :id")
+        session.createQuery("delete from AdEntity as a where a.adId = :id")
                 .setParameter("id", id)
                 .executeUpdate();
         log.info("ad deleted by id:{}", id);

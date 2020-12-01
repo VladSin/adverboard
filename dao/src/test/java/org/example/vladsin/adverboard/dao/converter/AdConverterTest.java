@@ -28,13 +28,13 @@ class AdConverterTest {
         billboardEntities.add(billboardEntity);
 
         AdEntity adEntity = new AdEntity();
-        adEntity.setId(null);
+        adEntity.setAdId(null);
         adEntity.setLink("link");
         adEntity.setBillboards(billboardEntities);
 
         Ad ad = AdConverter.fromEntity(adEntity);
         assertNotNull(ad);
-        assertEquals(ad.getId(), adEntity.getId());
+        assertEquals(ad.getId(), adEntity.getAdId());
         assertEquals(ad.getLink(), adEntity.getLink());
     }
 
