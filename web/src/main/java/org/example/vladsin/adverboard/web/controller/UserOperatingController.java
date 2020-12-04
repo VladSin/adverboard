@@ -43,6 +43,7 @@ public class UserOperatingController {
         return new ResponseEntity<>(billboards, HttpStatus.OK);
     }
 
+    //p
     @GetMapping(value = "/locations")
     public ResponseEntity<List<Location>> getAllLocations() {
         List<Location> locations = locationService.getLocation();

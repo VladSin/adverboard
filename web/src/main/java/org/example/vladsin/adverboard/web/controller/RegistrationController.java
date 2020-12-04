@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/register")
+@RequestMapping("/register/")
 public class RegistrationController {
 
     private final UserService userService;
@@ -28,7 +28,7 @@ public class RegistrationController {
         this.securityService = securityService;
     }
 
-    @PostMapping(value = "")
+    @PostMapping
     public ResponseEntity<User> registrationUser(@RequestBody RegistrationUser user){
         if (securityService.checkUniqLogin(user.getUsername())){
             User newUser = new User(null, user.getUsername(), user.getEmail());
