@@ -7,6 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import java.io.StringReader;
 import java.util.List;
 
 @RestController
@@ -21,7 +25,14 @@ public class UserRestController {
 
     @PostMapping(value = "")
     @ResponseStatus(HttpStatus.CREATED)
-    public Long addUser(@RequestBody User user){
+    public Long addUser(@RequestBody String jsonString){
+        JsonReader reader = Json.createReader(new StringReader(jsonString));
+        JsonObject jsonObject = reader.readObject();
+
+        User user = new User();
+        user.setName(jsonObject.getString("name"));
+        user.setEmail(jsonObject.getString("email"));
+
         User newUser = userService.saveUser(user);
         return newUser.getId();
     }

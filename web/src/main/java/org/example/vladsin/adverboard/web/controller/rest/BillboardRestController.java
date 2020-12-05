@@ -57,7 +57,7 @@ public class BillboardRestController {
         return new ResponseEntity<>(billboards, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{userId}")
+    @GetMapping(value = "/user/{userId}")
     public ResponseEntity<List<Billboard>> getBillboardsByUserId(@PathVariable("userId") Long userId) {
         List<Billboard> billboards = billboardService.getBillboardsByUserId(userId);
 

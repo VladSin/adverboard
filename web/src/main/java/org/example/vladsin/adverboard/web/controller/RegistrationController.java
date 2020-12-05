@@ -1,9 +1,9 @@
 package org.example.vladsin.adverboard.web.controller;
 
 import org.example.vladsin.adverboard.model.AuthUser;
-import org.example.vladsin.adverboard.model.controller.RegistrationUser;
 import org.example.vladsin.adverboard.model.Role;
 import org.example.vladsin.adverboard.model.User;
+import org.example.vladsin.adverboard.model.controller.RegistrationUser;
 import org.example.vladsin.adverboard.service.repository.AuthUserService;
 import org.example.vladsin.adverboard.service.repository.SecurityService;
 import org.example.vladsin.adverboard.service.repository.UserService;
@@ -11,10 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import java.io.StringReader;
 
 @Controller
-@RequestMapping("/register/")
+@RequestMapping("/register")
 public class RegistrationController {
 
     private final UserService userService;
@@ -28,9 +35,17 @@ public class RegistrationController {
         this.securityService = securityService;
     }
 
-    @PostMapping
-    public ResponseEntity<User> registrationUser(@RequestBody RegistrationUser user){
-        if (securityService.checkUniqLogin(user.getUsername())){
+    @PostMapping("/")
+    public ResponseEntity<User> registrationUser(@RequestBody String jsonString) {
+        JsonReader reader = Json.createReader(new StringReader(jsonString));
+        JsonObject jsonObject = reader.readObject();
+
+        RegistrationUser user = new RegistrationUser();
+        user.setUsername(jsonObject.getString("username"));
+        user.setPassword(jsonObject.getString("password"));
+        user.setEmail(jsonObject.getString("email"));
+
+        if (securityService.checkUniqLogin(user.getUsername())) {
             User newUser = new User(null, user.getUsername(), user.getEmail());
             newUser = userService.saveUser(newUser);
             AuthUser newAuth = new AuthUser(null, user.getUsername(), user.getPassword(), Role.USER, newUser.getId());

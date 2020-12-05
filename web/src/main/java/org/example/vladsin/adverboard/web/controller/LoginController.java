@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import java.io.StringReader;
+
 @Controller
 @RequestMapping("/login")
 public class LoginController {
@@ -33,19 +38,25 @@ public class LoginController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<User> login(@RequestBody LoginUser loginUser) {
-        AuthUser authUser = securityService.login(loginUser.getLogin(), loginUser.getPassword());
+    public ResponseEntity<User> login(@RequestBody String jsonString) {
+        JsonReader reader = Json.createReader(new StringReader(jsonString));
+        JsonObject jsonObject = reader.readObject();
 
+        LoginUser loginUser = new LoginUser();
+        loginUser.setLogin(jsonObject.getString("login"));
+        loginUser.setPassword(jsonObject.getString("password"));
+
+        AuthUser authUser = securityService.login(loginUser.getLogin(), loginUser.getPassword());
         if (authUser == null)
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-
         return new ResponseEntity<>(userService.getUser(authUser.getUserId()), HttpStatus.OK);
     }
 
+    // TODO прокастить userId (long) через стринг
     @PostMapping(value = "/update")
     public ResponseEntity<Long> updatePassword(@RequestBody UpdatePass updatePass) {
-        securityService.updatePassword(updatePass.getUserId(), updatePass.getPassword());
 
+        securityService.updatePassword(updatePass.getUserId(), updatePass.getPassword());
         return new ResponseEntity<>(updatePass.getUserId(), HttpStatus.OK);
     }
 }

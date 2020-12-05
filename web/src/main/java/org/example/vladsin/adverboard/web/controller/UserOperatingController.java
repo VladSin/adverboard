@@ -1,5 +1,7 @@
 package org.example.vladsin.adverboard.web.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.vladsin.adverboard.model.Ad;
 import org.example.vladsin.adverboard.model.Billboard;
 import org.example.vladsin.adverboard.model.Location;
@@ -12,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -35,15 +38,17 @@ public class UserOperatingController {
     }
 
     @GetMapping(value = "/billboards")
-    public ResponseEntity<List<Billboard>> getBillboardsByLocation(@RequestBody List<String> locations) {
+    public ResponseEntity<List<Billboard>> getBillboardsByLocation(@RequestBody String jsonString) throws IOException {
+        final ObjectMapper objectMapper = new ObjectMapper();
+        List<String> locations = objectMapper.readValue(jsonString, new TypeReference<List<String>>(){});
+
         List<Billboard> billboards = billboardService.getListBillboardsByLocations(locations);
         if (billboards.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         return new ResponseEntity<>(billboards, HttpStatus.OK);
     }
-
-    //p
+    
     @GetMapping(value = "/locations")
     public ResponseEntity<List<Location>> getAllLocations() {
         List<Location> locations = locationService.getLocation();
@@ -55,17 +60,32 @@ public class UserOperatingController {
 
     @PatchMapping(value = "/buy/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Billboard> updateUserId(
+    public ResponseEntity<Billboard> buyBillboard(
             @PathVariable("id") Long id,
-            @RequestBody Long userId,
-            @RequestBody List<Ad> ads) {
+            @RequestBody Long userId) {
         Billboard billboard = billboardService.getBillboardById(id);
         if (billboard == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         billboard.setUserId(userId);
+        billboardService.updateBillboard(billboard);
+        return new ResponseEntity<>(billboard, HttpStatus.OK);
+    }
+
+    // TODO парсить лист "String jsonString" (links) в лист Ad
+    @PatchMapping(value = "/set/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Billboard> setBillboardMedia(
+            @PathVariable("id") Long id,
+            @RequestBody List<Ad> ads) {
+        Billboard billboard = billboardService.getBillboardById(id);
+        if (billboard == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
         billboard.setAds(ads);
         billboardService.updateBillboard(billboard);
         return new ResponseEntity<>(billboard, HttpStatus.OK);
     }
+
+    // TODO verification
 }

@@ -144,7 +144,8 @@
         <configuration> 
           <failOnMissingWebXml>false</failOnMissingWebXml> 
         </configuration> 
-      </plugin>  
+      </plugin>
+
       <plugin> 
         <groupId>org.apache.tomcat.maven</groupId>  
         <artifactId>tomcat7-maven-plugin</artifactId>  
@@ -173,20 +174,37 @@
             <javaVersion>Java 8</javaVersion>  
             <webContainer>Tomcat 8.5</webContainer> 
           </runtime>  
-          <deployment> 
-            <resources> 
-              <resource> 
+          <deployment>
+            <resources>
+              <resource>
                 <directory>${project.basedir}/web/target</directory>
-                <directory>${project.basedir}/model/target</directory>
                 <includes>
                   <include>*.war</include>
+                </includes>
+              </resource>
+              <resource>
+                <directory>${project.basedir}/model/target</directory>
+                <includes>
                   <include>*.jar</include>
                 </includes>
-              </resource> 
-            </resources> 
-          </deployment> 
+              </resource>
+              <resource>
+                <directory>${project.basedir}/service/target</directory>
+                <includes>
+                  <include>*.jar</include>
+                </includes>
+              </resource>
+              <resource>
+                <directory>${project.basedir}/dao/target</directory>
+                <includes>
+                  <include>*.jar</include>
+                </includes>
+              </resource>
+            </resources>
+          </deployment>
         </configuration> 
-      </plugin> 
+      </plugin>
+
     </plugins> 
   </build> 
 </project>

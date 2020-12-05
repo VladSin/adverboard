@@ -1,6 +1,5 @@
 package org.example.vladsin.adverboard.web.controller.rest;
 
-import org.example.vladsin.adverboard.model.Billboard;
 import org.example.vladsin.adverboard.model.GroupBillboards;
 import org.example.vladsin.adverboard.service.repository.BillboardService;
 import org.example.vladsin.adverboard.service.repository.GroupBillboardService;
@@ -25,7 +24,8 @@ public class GroupBillboardsRestController {
         this.billboardService = billboardService;
     }
 
-    @PostMapping(value = "")
+    // TODO change RequestBody
+    @PostMapping(value = "/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Long addGroupBillboards(@RequestBody GroupBillboards groupBillboards) {
         GroupBillboards newGroup = groupBillboardService.saveGroup(groupBillboards);
@@ -42,7 +42,7 @@ public class GroupBillboardsRestController {
         return new ResponseEntity<>(group, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{userId}")
+    @GetMapping(value = "/user/{userId}")
     public ResponseEntity<GroupBillboards> getGroupByUserId(@PathVariable("userId") Long userId) {
         GroupBillboards group = groupBillboardService.getGroupByUserId(userId);
 
