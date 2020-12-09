@@ -1,7 +1,7 @@
 package org.example.vladsin.adverboard.dao.repository.impl;
 
 import org.example.vladsin.adverboard.dao.config.DaoConfig;
-import org.example.vladsin.adverboard.dao.repository.UserDao;
+import org.example.vladsin.adverboard.dao.repository.UserRepositoryDao;
 import org.example.vladsin.adverboard.model.User;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
@@ -21,10 +21,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @ContextConfiguration(classes = DaoConfig.class)
 @Transactional
 @Commit
-class UserDaoImplTest {
+class UserRepositoryDaoImplTest {
 
     @Autowired
-    private UserDao userDao;
+    private UserRepositoryDao userRepositoryDao;
 
     @Autowired
     SessionFactory sessionFactory;
@@ -32,7 +32,7 @@ class UserDaoImplTest {
     @Test
     void saveUser() {
         final User userToSave = new User(null, "name", "email");
-        final User savedUser = userDao.saveUser(userToSave);
+        final User savedUser = userRepositoryDao.saveUser(userToSave);
 
         assertEquals(userToSave.getName(), savedUser.getName());
         assertEquals(userToSave.getEmail(), savedUser.getEmail());
@@ -41,29 +41,29 @@ class UserDaoImplTest {
     @Test
     void deleteUser() {
         final User userToSave = new User(null, "name", "email");
-        final User savedUser = userDao.saveUser(userToSave);
+        final User savedUser = userRepositoryDao.saveUser(userToSave);
         final Long id = savedUser.getId();
         sessionFactory.getCurrentSession().clear();
 
-        final boolean deleted = userDao.deleteUser(id);
+        final boolean deleted = userRepositoryDao.deleteUser(id);
         assertTrue(deleted);
 
-        final User afterDeleted = userDao.getUser(id);
+        final User afterDeleted = userRepositoryDao.getUser(id);
         assertNull(afterDeleted);
     }
 
     @Test
     void updateUser() {
         final User userToSave = new User(null, "name", "email");
-        final User savedUser = userDao.saveUser(userToSave);
+        final User savedUser = userRepositoryDao.saveUser(userToSave);
         final Long id = savedUser.getId();
         sessionFactory.getCurrentSession().clear();
 
         final User toUpdate = new User(id, "name", "email");
-        final boolean update = userDao.updateUser(toUpdate);
+        final boolean update = userRepositoryDao.updateUser(toUpdate);
         assertTrue(update);
 
-        final User afterUpdate = userDao.getUser(id);
+        final User afterUpdate = userRepositoryDao.getUser(id);
 
         assertEquals(toUpdate.getName(), afterUpdate.getName());
         assertEquals(toUpdate.getEmail(), afterUpdate.getEmail());
@@ -72,10 +72,10 @@ class UserDaoImplTest {
     @Test
     void getUser() {
         final User userToSave = new User(null, "name",  "email");
-        final User savedUser = userDao.saveUser(userToSave);
+        final User savedUser = userRepositoryDao.saveUser(userToSave);
         final Long id = savedUser.getId();
 
-        final User user = userDao.getUser(id);
+        final User user = userRepositoryDao.getUser(id);
         assertNotNull(user);
         assertEquals(userToSave.getName(), user.getName());
         assertEquals(userToSave.getEmail(), user.getEmail());
@@ -91,7 +91,7 @@ class UserDaoImplTest {
 
         List<User> userList = new ArrayList<>();
         for (User u: users) {
-            userList.add(userDao.saveUser(u));
+            userList.add(userRepositoryDao.saveUser(u));
         }
 //        List<User> getUserList = userDao.getUsers();
 //        assertNotNull(getUserList);

@@ -2,7 +2,7 @@ package org.example.vladsin.adverboard.dao.repository.impl;
 
 import org.example.vladsin.adverboard.dao.converter.BillboardConverter;
 import org.example.vladsin.adverboard.dao.entity.BillboardEntity;
-import org.example.vladsin.adverboard.dao.repository.BillboardDao;
+import org.example.vladsin.adverboard.dao.repository.BillboardRepositoryDao;
 import org.example.vladsin.adverboard.model.Billboard;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,12 +19,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-public class BillboardDaoImpl implements BillboardDao {
+public class BillboardRepositoryDaoImpl implements BillboardRepositoryDao {
 
-    private static final Logger log = LoggerFactory.getLogger(BillboardDaoImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(BillboardRepositoryDaoImpl.class);
     private final SessionFactory factory;
 
-    public BillboardDaoImpl(SessionFactory factory) {
+    public BillboardRepositoryDaoImpl(SessionFactory factory) {
         this.factory = factory;
     }
 

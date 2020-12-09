@@ -1,7 +1,7 @@
 package org.example.vladsin.adverboard.dao.repository.impl;
 
 import org.example.vladsin.adverboard.dao.config.DaoConfig;
-import org.example.vladsin.adverboard.dao.repository.GroupBillboardDao;
+import org.example.vladsin.adverboard.dao.repository.GroupBillboardRepositoryDao;
 import org.example.vladsin.adverboard.model.Billboard;
 import org.example.vladsin.adverboard.model.GroupBillboards;
 import org.hibernate.SessionFactory;
@@ -22,10 +22,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @ContextConfiguration(classes = DaoConfig.class)
 @Transactional
 @Commit
-class GroupBillboardDaoImplTest {
+class GroupBillboardRepositoryDaoImplTest {
 
     @Autowired
-    private GroupBillboardDao groupDao;
+    private GroupBillboardRepositoryDao groupDao;
 
     @Autowired
     SessionFactory sessionFactory;

@@ -1,10 +1,7 @@
 package org.example.vladsin.adverboard.dao.repository.impl;
 
 import org.example.vladsin.adverboard.dao.config.DaoConfig;
-import org.example.vladsin.adverboard.dao.repository.AdDao;
-import org.example.vladsin.adverboard.dao.repository.LocationDao;
-import org.example.vladsin.adverboard.model.Ad;
-import org.example.vladsin.adverboard.model.Billboard;
+import org.example.vladsin.adverboard.dao.repository.LocationRepositoryDao;
 import org.example.vladsin.adverboard.model.Location;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
@@ -24,10 +21,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @ContextConfiguration(classes = DaoConfig.class)
 @Transactional
 @Commit
-class LocationDaoImplTest {
+class LocationRepositoryDaoImplTest {
 
     @Autowired
-    private LocationDao locationDao;
+    private LocationRepositoryDao locationRepositoryDao;
 
     @Autowired
     SessionFactory sessionFactory;
@@ -35,7 +32,7 @@ class LocationDaoImplTest {
     @Test
     void saveLocation() {
         final Location locationToSave = new Location(null, "location");
-        final Location savedLocation = locationDao.saveLocation(locationToSave);
+        final Location savedLocation = locationRepositoryDao.saveLocation(locationToSave);
 
         assertNotNull(savedLocation);
         assertEquals(locationToSave.getLocation(), savedLocation.getLocation());
@@ -44,15 +41,15 @@ class LocationDaoImplTest {
     @Test
     void updateLocation() {
         final Location locationToSave = new Location(null, "location");
-        final Location savedLocation = locationDao.saveLocation(locationToSave);
+        final Location savedLocation = locationRepositoryDao.saveLocation(locationToSave);
         final Long id = savedLocation.getId();
         sessionFactory.getCurrentSession().clear();
 
         final Location toUpdate = new Location(id, "location3");
-        final boolean update = locationDao.updateLocation(toUpdate);
+        final boolean update = locationRepositoryDao.updateLocation(toUpdate);
         assertTrue(update);
 
-        final Location afterUpdate = locationDao.getLocation(id);
+        final Location afterUpdate = locationRepositoryDao.getLocation(id);
 
         assertEquals(toUpdate.getLocation(), afterUpdate.getLocation());
     }
@@ -60,24 +57,24 @@ class LocationDaoImplTest {
     @Test
     void deleteLocation() {
         final Location locationToSave = new Location(null, "location");
-        final Location savedLocation = locationDao.saveLocation(locationToSave);
+        final Location savedLocation = locationRepositoryDao.saveLocation(locationToSave);
         final Long id = savedLocation.getId();
         sessionFactory.getCurrentSession().clear();
 
-        final boolean deleted = locationDao.deleteLocation(id);
+        final boolean deleted = locationRepositoryDao.deleteLocation(id);
         assertTrue(deleted);
 
-        final Location afterDeleted = locationDao.getLocation(id);
+        final Location afterDeleted = locationRepositoryDao.getLocation(id);
         assertNull(afterDeleted);
     }
 
     @Test
     void getLocation() {
         final Location locationToSave = new Location(null, "location");
-        final Location savedLocation = locationDao.saveLocation(locationToSave);
+        final Location savedLocation = locationRepositoryDao.saveLocation(locationToSave);
         final Long id = savedLocation.getId();
 
-        final Location location = locationDao.getLocation(id);
+        final Location location = locationRepositoryDao.getLocation(id);
         assertNotNull(location);
         assertEquals(locationToSave.getLocation(), savedLocation.getLocation());
     }
@@ -90,10 +87,10 @@ class LocationDaoImplTest {
 
         List<Location> locationList = new ArrayList<>();
         for (Location l: locations) {
-            locationList.add(locationDao.saveLocation(l));
+            locationList.add(locationRepositoryDao.saveLocation(l));
         }
 
-        List<Location> getLocationList = locationDao.getLocation();
+        List<Location> getLocationList = locationRepositoryDao.getLocation();
         assertNotNull(getLocationList);
     }
 }

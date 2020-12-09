@@ -1,6 +1,6 @@
 package org.example.vladsin.adverboard.service.repository.impl;
 
-import org.example.vladsin.adverboard.dao.repository.UserDao;
+import org.example.vladsin.adverboard.dao.repository.UserRepositoryDao;
 import org.example.vladsin.adverboard.model.User;
 import org.example.vladsin.adverboard.service.repository.UserService;
 import org.springframework.stereotype.Service;
@@ -12,39 +12,39 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    private final UserDao userDao;
+    private final UserRepositoryDao userRepositoryDao;
 
-    public UserServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
+    public UserServiceImpl(UserRepositoryDao userRepositoryDao) {
+        this.userRepositoryDao = userRepositoryDao;
     }
 
     @Override
     @Transactional
     public User saveUser(User user) {
-        return userDao.saveUser(user);
+        return userRepositoryDao.saveUser(user);
     }
 
     @Override
     @Transactional
     public boolean deleteUser(long id) {
-        return userDao.deleteUser(id);
+        return userRepositoryDao.deleteUser(id);
     }
 
     @Override
     @Transactional
     public boolean updateUser(User user) {
-        return userDao.updateUser(user);
+        return userRepositoryDao.updateUser(user);
     }
 
     @Override
     @Transactional
     public User getUser(long id) {
-        return userDao.getUser(id);
+        return userRepositoryDao.getUser(id);
     }
 
     @Override
     @Transactional
     public List<User> getUsers() {
-        return userDao.getUsers();
+        return userRepositoryDao.getUsers();
     }
 }

@@ -1,6 +1,6 @@
 package org.example.vladsin.adverboard.service.repository.impl;
 
-import org.example.vladsin.adverboard.dao.repository.AdDao;
+import org.example.vladsin.adverboard.dao.repository.AdRepositoryDao;
 
 import org.example.vladsin.adverboard.model.Ad;
 import org.example.vladsin.adverboard.service.repository.AdService;
@@ -13,39 +13,39 @@ import java.util.List;
 @Transactional
 public class AdServiceImpl implements AdService {
 
-    private final AdDao adDao;
+    private final AdRepositoryDao adRepositoryDao;
 
-    public AdServiceImpl(AdDao adDao) {
-        this.adDao = adDao;
+    public AdServiceImpl(AdRepositoryDao adRepositoryDao) {
+        this.adRepositoryDao = adRepositoryDao;
     }
 
     @Override
     @Transactional
     public Ad saveAd(Ad ad) {
-        return adDao.saveAd(ad);
+        return adRepositoryDao.saveAd(ad);
     }
 
     @Override
     @Transactional
     public boolean updateAd(Ad ad) {
-        return adDao.updateAd(ad);
+        return adRepositoryDao.updateAd(ad);
     }
 
     @Override
     @Transactional
     public boolean deleteAd(long id) {
-        return adDao.deleteAd(id);
+        return adRepositoryDao.deleteAd(id);
     }
 
     @Override
     @Transactional
     public Ad getAd(long id) {
-        return adDao.getAd(id);
+        return adRepositoryDao.getAd(id);
     }
 
     @Override
     @Transactional
     public List<Ad> getAd() {
-        return adDao.getAd();
+        return adRepositoryDao.getAd();
     }
 }

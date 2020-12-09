@@ -2,7 +2,7 @@ package org.example.vladsin.adverboard.dao.repository.impl;
 
 import org.example.vladsin.adverboard.dao.converter.UserConverter;
 import org.example.vladsin.adverboard.dao.entity.UserEntity;
-import org.example.vladsin.adverboard.dao.repository.UserDao;
+import org.example.vladsin.adverboard.dao.repository.UserRepositoryDao;
 import org.example.vladsin.adverboard.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserRepositoryDaoImpl implements UserRepositoryDao {
 
-    private static final Logger log = LoggerFactory.getLogger(UserDaoImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(UserRepositoryDaoImpl.class);
     private final SessionFactory factory;
 
-    public UserDaoImpl(SessionFactory factory) {
+    public UserRepositoryDaoImpl(SessionFactory factory) {
         this.factory = factory;
     }
 

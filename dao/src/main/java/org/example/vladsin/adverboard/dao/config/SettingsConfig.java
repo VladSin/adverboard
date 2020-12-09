@@ -11,7 +11,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:datasource.properties")
+@PropertySource("classpath:application.properties")
 public class SettingsConfig {
 
     @Bean

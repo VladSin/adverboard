@@ -1,6 +1,6 @@
 package org.example.vladsin.adverboard.service.repository.impl;
 
-import org.example.vladsin.adverboard.dao.repository.BillboardDao;
+import org.example.vladsin.adverboard.dao.repository.BillboardRepositoryDao;
 import org.example.vladsin.adverboard.model.Billboard;
 import org.example.vladsin.adverboard.service.repository.BillboardService;
 import org.springframework.stereotype.Service;
@@ -13,52 +13,52 @@ import java.util.List;
 @Transactional
 public class BillboardServiceImpl implements BillboardService{
 
-    private final BillboardDao billboardDao;
+    private final BillboardRepositoryDao billboardRepositoryDao;
 
-    public BillboardServiceImpl(BillboardDao billboardDao) {
-        this.billboardDao = billboardDao;
+    public BillboardServiceImpl(BillboardRepositoryDao billboardRepositoryDao) {
+        this.billboardRepositoryDao = billboardRepositoryDao;
     }
 
     @Override
     @Transactional
     public Billboard saveBillboard(Billboard billboard) {
-        return billboardDao.saveBillboard(billboard);
+        return billboardRepositoryDao.saveBillboard(billboard);
     }
 
     @Override
     @Transactional
     public boolean updateBillboard(Billboard billboard) {
-        return billboardDao.updateBillboard(billboard);
+        return billboardRepositoryDao.updateBillboard(billboard);
     }
 
     @Override
     @Transactional
     public boolean deleteBillboard(long id) {
-        return billboardDao.deleteBillboard(id);
+        return billboardRepositoryDao.deleteBillboard(id);
     }
 
     @Override
     @Transactional
     public Billboard getBillboardById(long id) {
-        return billboardDao.getBillboardById(id);
+        return billboardRepositoryDao.getBillboardById(id);
     }
 
     @Override
     @Transactional
     public Billboard getBillboardByLocation(String location) {
-        return billboardDao.getBillboardByLocation(location);
+        return billboardRepositoryDao.getBillboardByLocation(location);
     }
 
     @Override
     @Transactional
     public List<Billboard> getBillboards() {
-        return billboardDao.getBillboards();
+        return billboardRepositoryDao.getBillboards();
     }
 
     @Override
     @Transactional
     public List<Billboard> getBillboardsByUserId(long userId) {
-        return billboardDao.getBillboardsByUserId(userId);
+        return billboardRepositoryDao.getBillboardsByUserId(userId);
     }
 
 
@@ -67,7 +67,7 @@ public class BillboardServiceImpl implements BillboardService{
         List<Billboard> billboards = new ArrayList<>();
         try{
             for (String loc: locations) {
-                billboards.add(billboardDao.getBillboardByLocation(loc));
+                billboards.add(billboardRepositoryDao.getBillboardByLocation(loc));
             }
         } catch (RuntimeException e){
             return null;

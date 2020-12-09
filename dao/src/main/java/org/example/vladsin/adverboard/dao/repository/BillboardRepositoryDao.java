@@ -4,7 +4,7 @@ import org.example.vladsin.adverboard.model.Billboard;
 
 import java.util.List;
 
-public interface BillboardDao {
+public interface BillboardRepositoryDao {
 
     Billboard saveBillboard(Billboard billboard);
 

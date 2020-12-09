@@ -5,7 +5,7 @@ import org.example.vladsin.adverboard.model.GroupBillboards;
 import java.util.List;
 
 
-public interface GroupBillboardDao {
+public interface GroupBillboardRepositoryDao {
 
     GroupBillboards saveGroup(GroupBillboards group);
 

@@ -1,6 +1,6 @@
 package org.example.vladsin.adverboard.service.repository.impl;
 
-import org.example.vladsin.adverboard.dao.repository.AuthUserDao;
+import org.example.vladsin.adverboard.dao.repository.AuthUserRepositoryDao;
 import org.example.vladsin.adverboard.model.AuthUser;
 import org.example.vladsin.adverboard.service.repository.AuthUserService;
 import org.springframework.stereotype.Service;
@@ -10,33 +10,33 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AuthUserServiceImpl implements AuthUserService {
 
-    private final AuthUserDao authUserDao;
+    private final AuthUserRepositoryDao authUserRepositoryDao;
 
-    public AuthUserServiceImpl(AuthUserDao authUserDao) {
-        this.authUserDao = authUserDao;
+    public AuthUserServiceImpl(AuthUserRepositoryDao authUserRepositoryDao) {
+        this.authUserRepositoryDao = authUserRepositoryDao;
     }
 
     @Override
     @Transactional
     public AuthUser saveAuthUser(AuthUser authUser) {
-        return authUserDao.saveAuthUser(authUser);
+        return authUserRepositoryDao.saveAuthUser(authUser);
     }
 
     @Override
     @Transactional
     public boolean updateAuthUser(AuthUser authUser) {
-        return authUserDao.updateAuthUser(authUser);
+        return authUserRepositoryDao.updateAuthUser(authUser);
     }
 
     @Override
     @Transactional
     public boolean deleteAuthUser(long id) {
-        return authUserDao.deleteAuthUser(id);
+        return authUserRepositoryDao.deleteAuthUser(id);
     }
 
     @Override
     @Transactional
     public AuthUser getAuthUser(long id) {
-        return authUserDao.getAuthUser(id);
+        return authUserRepositoryDao.getAuthUser(id);
     }
 }

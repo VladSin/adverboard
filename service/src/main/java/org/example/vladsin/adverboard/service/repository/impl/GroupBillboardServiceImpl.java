@@ -1,6 +1,6 @@
 package org.example.vladsin.adverboard.service.repository.impl;
 
-import org.example.vladsin.adverboard.dao.repository.GroupBillboardDao;
+import org.example.vladsin.adverboard.dao.repository.GroupBillboardRepositoryDao;
 import org.example.vladsin.adverboard.model.GroupBillboards;
 import org.example.vladsin.adverboard.service.repository.GroupBillboardService;
 import org.springframework.stereotype.Service;
@@ -12,45 +12,45 @@ import java.util.List;
 @Transactional
 public class GroupBillboardServiceImpl implements GroupBillboardService {
 
-    private final GroupBillboardDao groupBillboardDao;
+    private final GroupBillboardRepositoryDao groupBillboardRepositoryDao;
 
-    public GroupBillboardServiceImpl(GroupBillboardDao groupBillboardDao) {
-        this.groupBillboardDao = groupBillboardDao;
+    public GroupBillboardServiceImpl(GroupBillboardRepositoryDao groupBillboardRepositoryDao) {
+        this.groupBillboardRepositoryDao = groupBillboardRepositoryDao;
     }
 
     @Override
     @Transactional
     public GroupBillboards saveGroup(GroupBillboards group) {
-        return groupBillboardDao.saveGroup(group);
+        return groupBillboardRepositoryDao.saveGroup(group);
     }
 
     @Override
     @Transactional
     public boolean updateGroup(GroupBillboards group) {
-        return groupBillboardDao.updateGroup(group);
+        return groupBillboardRepositoryDao.updateGroup(group);
     }
 
     @Override
     @Transactional
     public boolean deleteGroup(long id) {
-        return groupBillboardDao.deleteGroup(id);
+        return groupBillboardRepositoryDao.deleteGroup(id);
     }
 
     @Override
     @Transactional
     public GroupBillboards getGroupById(long id) {
-        return groupBillboardDao.getGroupById(id);
+        return groupBillboardRepositoryDao.getGroupById(id);
     }
 
     @Override
     @Transactional
     public GroupBillboards getGroupByUserId(long userId) {
-        return groupBillboardDao.getGroupByUserId(userId);
+        return groupBillboardRepositoryDao.getGroupByUserId(userId);
     }
 
     @Override
     @Transactional
     public List<GroupBillboards> getGroupsByUserId(long userId) {
-        return groupBillboardDao.getGroupsByUserId(userId);
+        return groupBillboardRepositoryDao.getGroupsByUserId(userId);
     }
 }

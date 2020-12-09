@@ -157,54 +157,7 @@
           <username>Vladsin</username>  
           <password>8080</password> 
         </configuration> 
-      </plugin>  
-      <plugin> 
-        <groupId>com.microsoft.azure</groupId>  
-        <artifactId>azure-webapp-maven-plugin</artifactId>  
-        <version>1.12.0</version>  
-        <configuration> 
-          <schemaVersion>v2</schemaVersion>  
-          <subscriptionId>a1bd7530-6046-4bb8-9af4-479e4e32c627</subscriptionId>  
-          <resourceGroup>myResourceGroup</resourceGroup>  
-          <appName>adverboard</appName>  
-          <pricingTier>B2</pricingTier>  
-          <region>westeurope</region>  
-          <runtime> 
-            <os>Windows</os>  
-            <javaVersion>Java 8</javaVersion>  
-            <webContainer>Tomcat 8.5</webContainer> 
-          </runtime>  
-          <deployment>
-            <resources>
-              <resource>
-                <directory>${project.basedir}/web/target</directory>
-                <includes>
-                  <include>*.war</include>
-                </includes>
-              </resource>
-              <resource>
-                <directory>${project.basedir}/model/target</directory>
-                <includes>
-                  <include>*.jar</include>
-                </includes>
-              </resource>
-              <resource>
-                <directory>${project.basedir}/service/target</directory>
-                <includes>
-                  <include>*.jar</include>
-                </includes>
-              </resource>
-              <resource>
-                <directory>${project.basedir}/dao/target</directory>
-                <includes>
-                  <include>*.jar</include>
-                </includes>
-              </resource>
-            </resources>
-          </deployment>
-        </configuration> 
       </plugin>
-
     </plugins> 
   </build> 
 </project>

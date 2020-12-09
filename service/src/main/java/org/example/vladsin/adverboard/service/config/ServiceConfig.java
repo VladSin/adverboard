@@ -17,38 +17,38 @@ public class ServiceConfig {
 
     @Bean
     public UserService userService(){
-        return new UserServiceImpl(daoConfig.userDao());
+        return new UserServiceImpl(daoConfig.userRepositoryDao());
     }
 
     @Bean
     public AuthUserService authUserService(){
-        return new AuthUserServiceImpl(daoConfig.authUserDao());
+        return new AuthUserServiceImpl(daoConfig.authUserRepositoryDao());
     }
 
     @Bean
     public AdService adService(){
-        return new AdServiceImpl(daoConfig.adDao());
+        return new AdServiceImpl(daoConfig.adRepositoryDao());
     }
 
     @Bean
     public LocationService locationService(){
-        return new LocationServiceImpl(daoConfig.locationDao());
+        return new LocationServiceImpl(daoConfig.locationRepositoryDao());
     }
 
     @Bean
     public BillboardService billboardService(){
-        return new BillboardServiceImpl(daoConfig.billboardDao());
+        return new BillboardServiceImpl(daoConfig.billboardRepositoryDao());
     }
 
     @Bean
     public GroupBillboardService groupBillboardService(){
-        return new GroupBillboardServiceImpl(daoConfig.groupBillboardDao());
+        return new GroupBillboardServiceImpl(daoConfig.groupBillboardRepositoryDao());
     }
 
     @Bean
     public SecurityService securityService(){
         return new SecurityServiceImpl(
-                daoConfig.securityDao(),
-                daoConfig.authUserDao());
+                daoConfig.securityRepositoryDao(),
+                daoConfig.authUserRepositoryDao());
     }
 }

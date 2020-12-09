@@ -2,7 +2,7 @@ package org.example.vladsin.adverboard.dao.repository.impl;
 
 import org.example.vladsin.adverboard.dao.converter.LocationConverter;
 import org.example.vladsin.adverboard.dao.entity.LocationEntity;
-import org.example.vladsin.adverboard.dao.repository.LocationDao;
+import org.example.vladsin.adverboard.dao.repository.LocationRepositoryDao;
 import org.example.vladsin.adverboard.model.Location;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
 
 
 @Repository
-public class LocationDaoImpl implements LocationDao {
+public class LocationRepositoryDaoImpl implements LocationRepositoryDao {
 
-    private static final Logger log = LoggerFactory.getLogger(LocationDaoImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(LocationRepositoryDaoImpl.class);
     private final SessionFactory factory;
 
-    public LocationDaoImpl(SessionFactory factory) {
+    public LocationRepositoryDaoImpl(SessionFactory factory) {
         this.factory = factory;
     }
 

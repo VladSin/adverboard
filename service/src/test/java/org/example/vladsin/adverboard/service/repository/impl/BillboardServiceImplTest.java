@@ -1,6 +1,6 @@
 package org.example.vladsin.adverboard.service.repository.impl;
 
-import org.example.vladsin.adverboard.dao.repository.BillboardDao;
+import org.example.vladsin.adverboard.dao.repository.BillboardRepositoryDao;
 import org.example.vladsin.adverboard.model.Ad;
 import org.example.vladsin.adverboard.model.Billboard;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 class BillboardServiceImplTest {
 
     @Mock
-    BillboardDao dao;
+    BillboardRepositoryDao dao;
 
     @InjectMocks
     BillboardServiceImpl service;

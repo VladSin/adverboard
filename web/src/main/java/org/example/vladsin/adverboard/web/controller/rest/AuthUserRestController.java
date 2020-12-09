@@ -35,7 +35,6 @@ public class AuthUserRestController {
         return new ResponseEntity<>(authUser, HttpStatus.OK);
     }
 
-
     @PutMapping(value = "/{id}")
     public ResponseEntity<AuthUser> updateAuthUser(
             @PathVariable("id") Long id,

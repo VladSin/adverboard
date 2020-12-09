@@ -4,7 +4,7 @@ import org.example.vladsin.adverboard.model.User;
 
 import java.util.List;
 
-public interface UserDao {
+public interface UserRepositoryDao {
 
     User saveUser(User user);
 

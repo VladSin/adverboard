@@ -20,37 +20,37 @@ public class DaoConfig {
     }
 
     @Bean
-    public UserDao userDao(){
-        return new UserDaoImpl(sessionFactory);
+    public UserRepositoryDao userRepositoryDao(){
+        return new UserRepositoryDaoImpl(sessionFactory);
     }
 
     @Bean
-    public AuthUserDao authUserDao(){
-        return new AuthUserDaoImpl(sessionFactory);
+    public AuthUserRepositoryDao authUserRepositoryDao(){
+        return new AuthUserRepositoryDaoImpl(sessionFactory);
     }
 
     @Bean
-    public SecurityDao securityDao(){
-        return new AuthUserDaoImpl(sessionFactory);
+    public SecurityRepositoryDao securityRepositoryDao(){
+        return new AuthUserRepositoryDaoImpl(sessionFactory);
     }
 
     @Bean
-    public AdDao adDao(){
-        return new AdDaoImpl(sessionFactory);
+    public AdRepositoryDao adRepositoryDao(){
+        return new AdRepositoryDaoImpl(sessionFactory);
     }
 
     @Bean
-    public LocationDao locationDao(){
-        return new LocationDaoImpl(sessionFactory);
+    public LocationRepositoryDao locationRepositoryDao(){
+        return new LocationRepositoryDaoImpl(sessionFactory);
     }
 
     @Bean
-    public BillboardDao billboardDao(){
-        return new BillboardDaoImpl(sessionFactory);
+    public BillboardRepositoryDao billboardRepositoryDao(){
+        return new BillboardRepositoryDaoImpl(sessionFactory);
     }
 
     @Bean
-    public GroupBillboardDao groupBillboardDao(){
-        return new GroupBillboardDaoImpl(sessionFactory);
+    public GroupBillboardRepositoryDao groupBillboardRepositoryDao(){
+        return new GroupBillboardRepositoryDaoImpl(sessionFactory);
     }
 }

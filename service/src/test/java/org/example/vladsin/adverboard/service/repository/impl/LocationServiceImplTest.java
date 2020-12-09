@@ -1,6 +1,6 @@
 package org.example.vladsin.adverboard.service.repository.impl;
 
-import org.example.vladsin.adverboard.dao.repository.LocationDao;
+import org.example.vladsin.adverboard.dao.repository.LocationRepositoryDao;
 import org.example.vladsin.adverboard.model.Location;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 class LocationServiceImplTest {
 
     @Mock
-    LocationDao dao;
+    LocationRepositoryDao dao;
 
     @InjectMocks
     LocationServiceImpl service;

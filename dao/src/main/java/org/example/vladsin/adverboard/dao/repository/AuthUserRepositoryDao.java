@@ -2,7 +2,7 @@ package org.example.vladsin.adverboard.dao.repository;
 
 import org.example.vladsin.adverboard.model.AuthUser;
 
-public interface AuthUserDao {
+public interface AuthUserRepositoryDao {
 
     AuthUser saveAuthUser(AuthUser authUser);
 

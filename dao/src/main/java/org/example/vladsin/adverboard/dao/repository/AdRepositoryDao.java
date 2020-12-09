@@ -4,7 +4,7 @@ import org.example.vladsin.adverboard.model.Ad;
 
 import java.util.List;
 
-public interface AdDao {
+public interface AdRepositoryDao {
 
     Ad saveAd(Ad ad);
 

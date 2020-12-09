@@ -1,6 +1,6 @@
 package org.example.vladsin.adverboard.service.repository.impl;
 
-import org.example.vladsin.adverboard.dao.repository.AuthUserDao;
+import org.example.vladsin.adverboard.dao.repository.AuthUserRepositoryDao;
 import org.example.vladsin.adverboard.model.AuthUser;
 import org.example.vladsin.adverboard.model.Role;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 class AuthUserServiceImplTest {
 
     @Mock
-    AuthUserDao dao;
+    AuthUserRepositoryDao dao;
 
     @InjectMocks
     AuthUserServiceImpl service;

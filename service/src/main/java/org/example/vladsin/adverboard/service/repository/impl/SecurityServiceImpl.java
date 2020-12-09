@@ -1,8 +1,8 @@
 package org.example.vladsin.adverboard.service.repository.impl;
 
 
-import org.example.vladsin.adverboard.dao.repository.AuthUserDao;
-import org.example.vladsin.adverboard.dao.repository.SecurityDao;
+import org.example.vladsin.adverboard.dao.repository.AuthUserRepositoryDao;
+import org.example.vladsin.adverboard.dao.repository.SecurityRepositoryDao;
 import org.example.vladsin.adverboard.model.AuthUser;
 import org.example.vladsin.adverboard.service.repository.SecurityService;
 import org.springframework.stereotype.Service;
@@ -12,17 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class SecurityServiceImpl implements SecurityService {
 
-    private final SecurityDao securityDao;
-    private final AuthUserDao authUserDao;
-    public SecurityServiceImpl(SecurityDao securityDao, AuthUserDao authUserDao) {
-        this.securityDao = securityDao;
-        this.authUserDao = authUserDao;
+    private final SecurityRepositoryDao securityRepositoryDao;
+    private final AuthUserRepositoryDao authUserRepositoryDao;
+    public SecurityServiceImpl(SecurityRepositoryDao securityRepositoryDao, AuthUserRepositoryDao authUserRepositoryDao) {
+        this.securityRepositoryDao = securityRepositoryDao;
+        this.authUserRepositoryDao = authUserRepositoryDao;
     }
 
     @Override
     @Transactional
     public AuthUser login(String login, String password) {
-        AuthUser user = securityDao.getByLogin(login);
+        AuthUser user = securityRepositoryDao.getByLogin(login);
         if (user == null){
             return null;
         } else if (user.getPassword().equals(password)){
@@ -34,14 +34,14 @@ public class SecurityServiceImpl implements SecurityService {
     @Override
     @Transactional
     public void updatePassword(Long userId, String newPassword) {
-        AuthUser user = securityDao.getByUserId(userId);
+        AuthUser user = securityRepositoryDao.getByUserId(userId);
         user.setPassword(newPassword);
-        authUserDao.updateAuthUser(user);
+        authUserRepositoryDao.updateAuthUser(user);
     }
 
     @Override
     public boolean checkUniqLogin(String login) {
-        AuthUser user = securityDao.getByLogin(login);
+        AuthUser user = securityRepositoryDao.getByLogin(login);
         if (user == null){
             return true;
         }else {

@@ -1,6 +1,6 @@
 package org.example.vladsin.adverboard.service.repository.impl;
 
-import org.example.vladsin.adverboard.dao.repository.LocationDao;
+import org.example.vladsin.adverboard.dao.repository.LocationRepositoryDao;
 import org.example.vladsin.adverboard.model.Location;
 import org.example.vladsin.adverboard.service.repository.LocationService;
 import org.springframework.stereotype.Service;
@@ -12,39 +12,39 @@ import java.util.List;
 @Transactional
 public class LocationServiceImpl implements LocationService {
 
-    private final LocationDao locationDao;
+    private final LocationRepositoryDao locationRepositoryDao;
 
-    public LocationServiceImpl(LocationDao locationDao) {
-        this.locationDao = locationDao;
+    public LocationServiceImpl(LocationRepositoryDao locationRepositoryDao) {
+        this.locationRepositoryDao = locationRepositoryDao;
     }
 
     @Override
     @Transactional
     public Location saveLocation(Location location) {
-        return locationDao.saveLocation(location);
+        return locationRepositoryDao.saveLocation(location);
     }
 
     @Override
     @Transactional
     public boolean updateLocation(Location location) {
-        return locationDao.updateLocation(location);
+        return locationRepositoryDao.updateLocation(location);
     }
 
     @Override
     @Transactional
     public boolean deleteLocation(long id) {
-        return locationDao.deleteLocation(id);
+        return locationRepositoryDao.deleteLocation(id);
     }
 
     @Override
     @Transactional
     public Location getLocation(long id) {
-        return locationDao.getLocation(id);
+        return locationRepositoryDao.getLocation(id);
     }
 
     @Override
     @Transactional
     public List<Location> getLocation() {
-        return locationDao.getLocation();
+        return locationRepositoryDao.getLocation();
     }
 }

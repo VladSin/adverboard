@@ -4,7 +4,7 @@ import org.example.vladsin.adverboard.model.Location;
 
 import java.util.List;
 
-public interface LocationDao {
+public interface LocationRepositoryDao {
     Location saveLocation(Location location);
 
     boolean updateLocation(Location location);

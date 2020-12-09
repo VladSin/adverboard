@@ -2,7 +2,7 @@ package org.example.vladsin.adverboard.dao.repository.impl;
 
 import org.example.vladsin.adverboard.dao.converter.AdConverter;
 import org.example.vladsin.adverboard.dao.entity.AdEntity;
-import org.example.vladsin.adverboard.dao.repository.AdDao;
+import org.example.vladsin.adverboard.dao.repository.AdRepositoryDao;
 import org.example.vladsin.adverboard.model.Ad;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-public class AdDaoImpl implements AdDao {
+public class AdRepositoryDaoImpl implements AdRepositoryDao {
 
-    private static final Logger log = LoggerFactory.getLogger(AdDaoImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(AdRepositoryDaoImpl.class);
     private final SessionFactory factory;
 
-    public AdDaoImpl(SessionFactory factory) {
+    public AdRepositoryDaoImpl(SessionFactory factory) {
         this.factory = factory;
     }
 
