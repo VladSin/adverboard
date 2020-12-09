@@ -1,0 +1,12 @@
+org\example\vladsin\adverboard\web\config\WebApplicationInitialization.class
+org\example\vladsin\adverboard\web\controller\FirstPageController.class
+org\example\vladsin\adverboard\web\controller\rest\GroupBillboardsRestController.class
+org\example\vladsin\adverboard\web\config\WebConfig.class
+org\example\vladsin\adverboard\web\controller\UserOperatingController$1.class
+org\example\vladsin\adverboard\web\controller\rest\BillboardRestController.class
+org\example\vladsin\adverboard\web\controller\rest\UserRestController.class
+org\example\vladsin\adverboard\web\controller\UserOperatingController.class
+org\example\vladsin\adverboard\web\controller\RegistrationController.class
+org\example\vladsin\adverboard\web\config\RootConfig.class
+org\example\vladsin\adverboard\web\controller\LoginController.class
+org\example\vladsin\adverboard\web\controller\rest\AuthUserRestController.class

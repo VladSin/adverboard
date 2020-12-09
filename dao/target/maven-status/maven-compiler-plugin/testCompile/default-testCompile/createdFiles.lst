@@ -1,0 +1,12 @@
+org\example\vladsin\adverboard\dao\converter\BillboardConverterTest.class
+org\example\vladsin\adverboard\dao\converter\GroupBillboardsConverterTest.class
+org\example\vladsin\adverboard\dao\repository\impl\GroupBillboardRepositoryDaoImplTest.class
+org\example\vladsin\adverboard\dao\converter\LocationConverterTest.class
+org\example\vladsin\adverboard\dao\repository\impl\AuthUserRepositoryDaoImplTest.class
+org\example\vladsin\adverboard\dao\converter\UserConverterTest.class
+org\example\vladsin\adverboard\dao\converter\AdConverterTest.class
+org\example\vladsin\adverboard\dao\converter\AuthUserConverterTest.class
+org\example\vladsin\adverboard\dao\repository\impl\LocationRepositoryDaoImplTest.class
+org\example\vladsin\adverboard\dao\repository\impl\BillboardRepositoryDaoImplTest.class
+org\example\vladsin\adverboard\dao\repository\impl\UserRepositoryDaoImplTest.class
+org\example\vladsin\adverboard\dao\repository\impl\AdRepositoryDaoImplTest.class

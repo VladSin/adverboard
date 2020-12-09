@@ -1,0 +1,15 @@
+org\example\vladsin\adverboard\service\repository\AuthUserService.class
+org\example\vladsin\adverboard\service\repository\impl\BillboardServiceImpl.class
+org\example\vladsin\adverboard\service\repository\impl\GroupBillboardServiceImpl.class
+org\example\vladsin\adverboard\service\repository\SecurityService.class
+org\example\vladsin\adverboard\service\repository\impl\SecurityServiceImpl.class
+org\example\vladsin\adverboard\service\repository\impl\UserServiceImpl.class
+org\example\vladsin\adverboard\service\repository\GroupBillboardService.class
+org\example\vladsin\adverboard\service\repository\impl\AdServiceImpl.class
+org\example\vladsin\adverboard\service\repository\impl\LocationServiceImpl.class
+org\example\vladsin\adverboard\service\repository\AdService.class
+org\example\vladsin\adverboard\service\repository\LocationService.class
+org\example\vladsin\adverboard\service\config\ServiceConfig.class
+org\example\vladsin\adverboard\service\repository\impl\AuthUserServiceImpl.class
+org\example\vladsin\adverboard\service\repository\BillboardService.class
+org\example\vladsin\adverboard\service\repository\UserService.class
