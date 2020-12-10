@@ -1,6 +1,5 @@
 package org.example.vladsin.adverboard.dao.config;
 
-import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,14 +34,6 @@ public class HibernateConfig {
 
         return hikariDataSource;
     }
-
-//    @Bean
-//    public DataSource dataSource() {
-//        final DatabaseConfig databaseConfig = settingsConfig.databaseConfig();
-//        HikariConfig config = new HikariConfig();
-//        config.setJdbcUrl(databaseConfig.getDbUrl());
-//        return new HikariDataSource(config);
-//    }
 
     @Bean
     public LocalSessionFactoryBean sessionFactoryBean() {

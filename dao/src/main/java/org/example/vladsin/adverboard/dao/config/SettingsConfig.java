@@ -19,11 +19,6 @@ public class SettingsConfig {
         return new DatasourceSettings();
     }
 
-//    @Bean
-//    public DatabaseConfig databaseConfig(){
-//        return new DatabaseConfig();
-//    }
-
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
