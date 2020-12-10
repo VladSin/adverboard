@@ -99,6 +99,7 @@ public class WebConfig {
         resolver.setViewClass(JstlView.class);
         resolver.setPrefix("/WEB-INF/");
         resolver.setSuffix(".jsp");
+        resolver.setExposeContextBeansAsAttributes(true);
         return resolver;
     }
 
