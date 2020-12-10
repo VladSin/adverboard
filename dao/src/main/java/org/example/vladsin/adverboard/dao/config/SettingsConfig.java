@@ -11,12 +11,17 @@ import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:datasource.properties")
+@PropertySource("classpath:application.properties")
 public class SettingsConfig {
 
+//    @Bean
+//    public DatasourceSettings datasourceSettings(){
+//        return new DatasourceSettings();
+//    }
+
     @Bean
-    public DatasourceSettings datasourceSettings(){
-        return new DatasourceSettings();
+    public DatabaseConfig databaseConfig(){
+        return new DatabaseConfig();
     }
 
     @Bean

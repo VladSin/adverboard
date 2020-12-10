@@ -1,5 +1,6 @@
 package org.example.vladsin.adverboard.dao.config;
 
+import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,18 +22,26 @@ public class HibernateConfig {
         this.settingsConfig = settingsConfig;
     }
 
+//    @Bean
+//    public DataSource dataSource() {
+//        final DatasourceSettings datasourceSettings = settingsConfig.datasourceSettings();
+//
+//        final HikariDataSource hikariDataSource = new HikariDataSource();
+//        hikariDataSource.setJdbcUrl(datasourceSettings.getUrl());
+//        hikariDataSource.setUsername(datasourceSettings.getUser());
+//        hikariDataSource.setPassword(datasourceSettings.getPassword());
+//        hikariDataSource.setDriverClassName(datasourceSettings.getDriver());
+//        hikariDataSource.setMaximumPoolSize(50);
+//
+//        return hikariDataSource;
+//    }
+
     @Bean
     public DataSource dataSource() {
-        final DatasourceSettings datasourceSettings = settingsConfig.datasourceSettings();
-
-        final HikariDataSource hikariDataSource = new HikariDataSource();
-        hikariDataSource.setJdbcUrl(datasourceSettings.getUrl());
-        hikariDataSource.setUsername(datasourceSettings.getUser());
-        hikariDataSource.setPassword(datasourceSettings.getPassword());
-        hikariDataSource.setDriverClassName(datasourceSettings.getDriver());
-        hikariDataSource.setMaximumPoolSize(50);
-
-        return hikariDataSource;
+        final DatabaseConfig databaseConfig = settingsConfig.databaseConfig();
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(databaseConfig.getDbUrl());
+        return new HikariDataSource(config);
     }
 
     @Bean
