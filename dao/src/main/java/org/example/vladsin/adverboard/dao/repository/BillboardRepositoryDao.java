@@ -19,4 +19,6 @@ public interface BillboardRepositoryDao {
     List<Billboard> getBillboards();
 
     List<Billboard> getBillboardsByUserId(long userId);
+
+    List<Billboard> getBillboardsByGroupId(long userId);
 }

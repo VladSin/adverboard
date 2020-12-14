@@ -111,4 +111,21 @@ public class BillboardRepositoryDaoImpl implements BillboardRepositoryDao {
                 .map(BillboardConverter::fromEntity)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Billboard> getBillboardsByGroupId(long groupId) {
+        final Session session = factory.getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<BillboardEntity> criteria = cb.createQuery(BillboardEntity.class);
+        Root<BillboardEntity> entityRoot = criteria.from(BillboardEntity.class);
+        Predicate predicate = cb.and(
+                cb.equal(entityRoot.get("groupId"),  groupId)
+        );
+        criteria.select(entityRoot).where(predicate);
+
+        List<BillboardEntity> billboardEntities = session.createQuery(criteria).getResultList();
+        return billboardEntities.stream()
+                .map(BillboardConverter::fromEntity)
+                .collect(Collectors.toList());
+    }
 }

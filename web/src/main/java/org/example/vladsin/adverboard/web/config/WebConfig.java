@@ -78,18 +78,17 @@ public class WebConfig {
     @Bean
     public GroupBillboardsRestController groupBillboardsRestController(){
         return new GroupBillboardsRestController(
-                serviceConfig.groupBillboardService(),
-                serviceConfig.billboardService()
+                serviceConfig.groupBillboardService()
         );
     }
 
     @Bean
     public UserOperatingController userOperatingController(){
         return new UserOperatingController(
-                serviceConfig.userService(),
                 serviceConfig.billboardService(),
                 serviceConfig.groupBillboardService(),
-                serviceConfig.locationService()
+                serviceConfig.locationService(),
+                serviceConfig.adService()
         );
     }
 

@@ -34,7 +34,7 @@ class UserServiceImplTest {
 
         assertNotNull(user);
         assertEquals(userFromDb.getId(), user.getId());
-        assertEquals(userFromDb.getName(), user.getName());
+        assertEquals(userFromDb.getUsername(), user.getUsername());
         assertEquals(userFromDb.getEmail(), user.getEmail());
     }
 
@@ -69,7 +69,7 @@ class UserServiceImplTest {
         final User user = service.getUser(1);
         assertNotNull(user);
         assertEquals(userFromDb.getId(), user.getId());
-        assertEquals(userFromDb.getName(), user.getName());
+        assertEquals(userFromDb.getUsername(), user.getUsername());
         assertEquals(userFromDb.getEmail(), user.getEmail());
     }
 
@@ -84,7 +84,7 @@ class UserServiceImplTest {
         assertNotNull(userDao);
         for (int i = 0; i < userDao.size(); i++) {
             assertEquals(userDao.get(i).getId(), users.get(i).getId());
-            assertEquals(userDao.get(i).getName(), users.get(i).getName());
+            assertEquals(userDao.get(i).getUsername(), users.get(i).getUsername());
             assertEquals(userDao.get(i).getEmail(), users.get(i).getEmail());
         }
     }

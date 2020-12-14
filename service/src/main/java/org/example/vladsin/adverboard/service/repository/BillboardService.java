@@ -20,5 +20,7 @@ public interface BillboardService {
 
     List<Billboard> getBillboardsByUserId(long userId);
 
+    List<Billboard> getBillboardsByGroupId(long userId);
+
     List<Billboard> getListBillboardsByLocations(List<String> locations);
 }

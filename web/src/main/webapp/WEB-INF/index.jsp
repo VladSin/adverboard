@@ -7,11 +7,34 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8"
          language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Начальная страница</title>
+    <meta charset="UTF-8"/>
+    <title>Authorization</title>
 </head>
+
+<header>
+    <form action="${pageContext.request.contextPath}/login" method="get">
+        <input type="submit" value="For admin"/>
+    </form>
+    <form action="${pageContext.request.contextPath}/" method="get">
+        <input type="submit" value="For admin"/>
+    </form>
+</header>
+
 <body>
-    <h1 style="color: green">Welcome!!!</h1>
+<center>
+    <h1 style="color: green"> Welcome!!! </h1>
+    <form action="${pageContext.request.contextPath}/web" method="get">
+        <input type="submit" value="Watch ADS"/>
+    </form>
+    <p style="color: green">Do you want to post your advertisement on our website? Then download our application: Adverboard</p>
+</center>
 </body>
+
+<footer>
+    <h1 style="color: green">14.12.2020 time 20.50</h1>
+</footer>
+
 </html>

@@ -30,7 +30,7 @@ public class UserRestController {
         JsonObject jsonObject = reader.readObject();
 
         User user = new User();
-        user.setName(jsonObject.getString("name"));
+        user.setUsername(jsonObject.getString("name"));
         user.setEmail(jsonObject.getString("email"));
 
         User newUser = userService.saveUser(user);
@@ -66,7 +66,7 @@ public class UserRestController {
         if(user == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-        user.setName(newUser.getName());
+        user.setUsername(newUser.getUsername());
         user.setEmail(newUser.getEmail());
         userService.updateUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.OK);
@@ -80,7 +80,7 @@ public class UserRestController {
         if (user == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-        user.setName(name);
+        user.setUsername(name);
         userService.updateUser(user);
         user = userService.getUser(id);
         return new ResponseEntity<>(user, HttpStatus.OK);

@@ -34,7 +34,7 @@ class UserRepositoryDaoImplTest {
         final User userToSave = new User(null, "name", "email");
         final User savedUser = userRepositoryDao.saveUser(userToSave);
 
-        assertEquals(userToSave.getName(), savedUser.getName());
+        assertEquals(userToSave.getUsername(), savedUser.getUsername());
         assertEquals(userToSave.getEmail(), savedUser.getEmail());
     }
 
@@ -65,7 +65,7 @@ class UserRepositoryDaoImplTest {
 
         final User afterUpdate = userRepositoryDao.getUser(id);
 
-        assertEquals(toUpdate.getName(), afterUpdate.getName());
+        assertEquals(toUpdate.getUsername(), afterUpdate.getUsername());
         assertEquals(toUpdate.getEmail(), afterUpdate.getEmail());
     }
 
@@ -77,7 +77,7 @@ class UserRepositoryDaoImplTest {
 
         final User user = userRepositoryDao.getUser(id);
         assertNotNull(user);
-        assertEquals(userToSave.getName(), user.getName());
+        assertEquals(userToSave.getUsername(), user.getUsername());
         assertEquals(userToSave.getEmail(), user.getEmail());
 
         sessionFactory.getCurrentSession().clear();
@@ -96,7 +96,7 @@ class UserRepositoryDaoImplTest {
 //        List<User> getUserList = userDao.getUsers();
 //        assertNotNull(getUserList);
         for (int i = 0; i < userList.size(); i++) {
-            assertEquals(userList.get(i).getName(), users.get(i).getName());
+            assertEquals(userList.get(i).getUsername(), users.get(i).getUsername());
             assertEquals(userList.get(i).getEmail(), users.get(i).getEmail());
         }
     }

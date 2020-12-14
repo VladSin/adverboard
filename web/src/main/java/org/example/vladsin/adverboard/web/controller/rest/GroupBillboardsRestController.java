@@ -1,13 +1,14 @@
 package org.example.vladsin.adverboard.web.controller.rest;
 
+import org.example.vladsin.adverboard.model.Billboard;
 import org.example.vladsin.adverboard.model.GroupBillboards;
-import org.example.vladsin.adverboard.service.repository.BillboardService;
 import org.example.vladsin.adverboard.service.repository.GroupBillboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,19 +17,22 @@ import java.util.List;
 public class GroupBillboardsRestController {
 
     private final GroupBillboardService groupBillboardService;
-    private final BillboardService billboardService;
 
     @Autowired
-    public GroupBillboardsRestController(GroupBillboardService groupBillboardService, BillboardService billboardService) {
+    public GroupBillboardsRestController(GroupBillboardService groupBillboardService) {
         this.groupBillboardService = groupBillboardService;
-        this.billboardService = billboardService;
     }
 
-    // TODO change RequestBody
-    @PostMapping(value = "/create")
+    @PostMapping(value = "/create/{userId}/{name}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Long addGroupBillboards(@RequestBody GroupBillboards groupBillboards) {
-        GroupBillboards newGroup = groupBillboardService.saveGroup(groupBillboards);
+    public Long addGroupBillboards(@PathVariable("userId") Long userId,
+                                   @PathVariable("name") String name,
+                                   @RequestBody List<Billboard> billboards) {
+        List<Billboard> billboardList = new ArrayList<>();
+        for (Billboard b : billboards) {
+            billboardList.add(new Billboard(null, b.getLocation(), b.getPrice(), userId, null));
+        }
+        GroupBillboards newGroup = groupBillboardService.saveGroup(new GroupBillboards(null, name, userId, billboardList));
         return newGroup.getId();
     }
 

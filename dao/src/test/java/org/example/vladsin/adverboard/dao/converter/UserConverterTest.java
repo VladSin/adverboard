@@ -17,7 +17,7 @@ class UserConverterTest {
 
         User user = UserConverter.fromEntity(userEntity);
         assertNotNull(user);
-        assertEquals(user.getName(), userEntity.getName());
+        assertEquals(user.getUsername(), userEntity.getName());
         assertEquals(user.getEmail(), userEntity.getEmail());
     }
 
@@ -26,7 +26,7 @@ class UserConverterTest {
         User user = new User(null, "name", "email");
         UserEntity userEntity = UserConverter.toEntity(user);
         assertNotNull(userEntity);
-        assertEquals(user.getName(), userEntity.getName());
+        assertEquals(user.getUsername(), userEntity.getName());
         assertEquals(user.getEmail(), userEntity.getEmail());
     }
 }

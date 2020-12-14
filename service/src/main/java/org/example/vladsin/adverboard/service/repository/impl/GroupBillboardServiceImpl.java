@@ -1,6 +1,8 @@
 package org.example.vladsin.adverboard.service.repository.impl;
 
+import org.example.vladsin.adverboard.dao.repository.BillboardRepositoryDao;
 import org.example.vladsin.adverboard.dao.repository.GroupBillboardRepositoryDao;
+import org.example.vladsin.adverboard.model.Billboard;
 import org.example.vladsin.adverboard.model.GroupBillboards;
 import org.example.vladsin.adverboard.service.repository.GroupBillboardService;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,11 @@ import java.util.List;
 public class GroupBillboardServiceImpl implements GroupBillboardService {
 
     private final GroupBillboardRepositoryDao groupBillboardRepositoryDao;
+    private final BillboardRepositoryDao billboardRepositoryDao;
 
-    public GroupBillboardServiceImpl(GroupBillboardRepositoryDao groupBillboardRepositoryDao) {
+    public GroupBillboardServiceImpl(GroupBillboardRepositoryDao groupBillboardRepositoryDao, BillboardRepositoryDao billboardRepositoryDao) {
         this.groupBillboardRepositoryDao = groupBillboardRepositoryDao;
+        this.billboardRepositoryDao = billboardRepositoryDao;
     }
 
     @Override
@@ -52,5 +56,10 @@ public class GroupBillboardServiceImpl implements GroupBillboardService {
     @Transactional
     public List<GroupBillboards> getGroupsByUserId(long userId) {
         return groupBillboardRepositoryDao.getGroupsByUserId(userId);
+    }
+
+    @Override
+    public List<Billboard> getBillboardsByGroupId(long groupId) {
+        return billboardRepositoryDao.getBillboardsByGroupId(groupId);
     }
 }

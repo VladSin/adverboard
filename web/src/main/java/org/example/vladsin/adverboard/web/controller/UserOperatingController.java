@@ -4,40 +4,39 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.vladsin.adverboard.model.Ad;
 import org.example.vladsin.adverboard.model.Billboard;
+import org.example.vladsin.adverboard.model.GroupBillboards;
 import org.example.vladsin.adverboard.model.Location;
-import org.example.vladsin.adverboard.service.repository.BillboardService;
-import org.example.vladsin.adverboard.service.repository.GroupBillboardService;
-import org.example.vladsin.adverboard.service.repository.LocationService;
-import org.example.vladsin.adverboard.service.repository.UserService;
+import org.example.vladsin.adverboard.service.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/operating")
 public class UserOperatingController {
 
-    private final UserService userService;
     private final BillboardService billboardService;
     private final GroupBillboardService groupService;
     private final LocationService locationService;
+    private final AdService adService;
 
     @Autowired
-    public UserOperatingController(UserService userService,
-                                   BillboardService billboardService,
+    public UserOperatingController(BillboardService billboardService,
                                    GroupBillboardService groupService,
-                                   LocationService locationService) {
-        this.userService = userService;
+                                   LocationService locationService,
+                                   AdService adService) {
         this.billboardService = billboardService;
         this.groupService = groupService;
         this.locationService = locationService;
+        this.adService = adService;
     }
 
-    @GetMapping(value = "/billboards")
+    @PostMapping(value = "/billboards")
     public ResponseEntity<List<Billboard>> getBillboardsByLocation(@RequestBody String jsonString) throws IOException {
         final ObjectMapper objectMapper = new ObjectMapper();
         List<String> locations = objectMapper.readValue(jsonString, new TypeReference<List<String>>(){});
@@ -72,20 +71,43 @@ public class UserOperatingController {
         return new ResponseEntity<>(billboard, HttpStatus.OK);
     }
 
-    // TODO парсить лист "String jsonString" (links) в лист Ad
-    @PatchMapping(value = "/set/{id}")
+
+    @PatchMapping(value = "/set/billboard/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Billboard> setBillboardMedia(
+    public String setBillboardMedia(
             @PathVariable("id") Long id,
-            @RequestBody List<Ad> ads) {
+            @RequestBody String jsonString) throws IOException {
         Billboard billboard = billboardService.getBillboardById(id);
         if (billboard == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return "NOT_FOUND";
 
-        billboard.setAds(ads);
-        billboardService.updateBillboard(billboard);
-        return new ResponseEntity<>(billboard, HttpStatus.OK);
+        final ObjectMapper objectMapper = new ObjectMapper();
+        List<String> links = objectMapper.readValue(jsonString, new TypeReference<List<String>>(){});
+
+        List<Billboard> billboards = new ArrayList<>();
+        billboards.add(billboard);
+        for (String l: links) {
+            adService.saveAd(new Ad(null, l, billboards));
+        }
+        return "OK";
     }
 
-    // TODO verification
+    @PatchMapping(value = "/set/group/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public String setGroupMedia(
+            @PathVariable("id") Long id,
+            @RequestBody String jsonString) throws IOException {
+        GroupBillboards groupBillboards = groupService.getGroupById(id);
+        if (groupBillboards == null)
+            return "NOT_FOUND";
+
+        final ObjectMapper objectMapper = new ObjectMapper();
+        List<String> links = objectMapper.readValue(jsonString, new TypeReference<List<String>>(){});
+
+        List<Billboard> billboards = billboardService.getBillboardsByGroupId(id);
+        for (String l: links) {
+            adService.saveAd(new Ad(null, l, billboards));
+        }
+        return "OK";
+    }
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,16 +38,21 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @PostMapping(value = "")
+    @GetMapping("/")
+    public  String doGet(){
+        return "index";
+    }
+
+    @PostMapping(value = "/")
     public ResponseEntity<User> login(@RequestBody String jsonString) {
         JsonReader reader = Json.createReader(new StringReader(jsonString));
         JsonObject jsonObject = reader.readObject();
 
         LoginUser loginUser = new LoginUser();
-        loginUser.setLogin(jsonObject.getString("login"));
+        loginUser.setUsername(jsonObject.getString("username"));
         loginUser.setPassword(jsonObject.getString("password"));
 
-        AuthUser authUser = securityService.login(loginUser.getLogin(), loginUser.getPassword());
+        AuthUser authUser = securityService.login(loginUser.getUsername(), loginUser.getPassword());
         if (authUser == null)
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         return new ResponseEntity<>(userService.getUser(authUser.getUserId()), HttpStatus.OK);

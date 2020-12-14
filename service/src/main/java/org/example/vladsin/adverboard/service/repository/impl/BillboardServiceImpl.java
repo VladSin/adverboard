@@ -61,8 +61,14 @@ public class BillboardServiceImpl implements BillboardService{
         return billboardRepositoryDao.getBillboardsByUserId(userId);
     }
 
+    @Override
+    @Transactional
+    public List<Billboard> getBillboardsByGroupId(long groupId) {
+        return billboardRepositoryDao.getBillboardsByGroupId(groupId);
+    }
 
     @Override
+    @Transactional
     public List<Billboard> getListBillboardsByLocations(List<String> locations) {
         List<Billboard> billboards = new ArrayList<>();
         try{

@@ -22,7 +22,7 @@ public class UserConverter {
         }
         final UserEntity userEntity = new UserEntity();
         userEntity.setId(user.getId());
-        userEntity.setName(user.getName());
+        userEntity.setName(user.getUsername());
         userEntity.setEmail(user.getEmail());
         return userEntity;
     }

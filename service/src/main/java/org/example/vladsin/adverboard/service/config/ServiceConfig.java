@@ -42,7 +42,9 @@ public class ServiceConfig {
 
     @Bean
     public GroupBillboardService groupBillboardService(){
-        return new GroupBillboardServiceImpl(daoConfig.groupBillboardRepositoryDao());
+        return new GroupBillboardServiceImpl(
+                daoConfig.groupBillboardRepositoryDao(),
+                daoConfig.billboardRepositoryDao());
     }
 
     @Bean
