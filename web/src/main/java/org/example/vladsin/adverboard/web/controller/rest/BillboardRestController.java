@@ -2,7 +2,7 @@ package org.example.vladsin.adverboard.web.controller.rest;
 
 import org.example.vladsin.adverboard.model.Ad;
 import org.example.vladsin.adverboard.model.Billboard;
-import org.example.vladsin.adverboard.service.repository.BillboardService;
+import org.example.vladsin.adverboard.service.repository.BillboardRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,22 +14,22 @@ import java.util.List;
 @RequestMapping("/billboard")
 public class BillboardRestController {
 
-    private final BillboardService billboardService;
+    private final BillboardRepositoryService billboardRepositoryService;
     @Autowired
-    public BillboardRestController(BillboardService billboardService) {
-        this.billboardService = billboardService;
+    public BillboardRestController(BillboardRepositoryService billboardRepositoryService) {
+        this.billboardRepositoryService = billboardRepositoryService;
     }
 
     @PostMapping(value = "/buy")
     @ResponseStatus(HttpStatus.CREATED)
     public Long addBillboard(@RequestBody Billboard billboard){
-        Billboard newBillboard = billboardService.saveBillboard(billboard);
+        Billboard newBillboard = billboardRepositoryService.saveBillboard(billboard);
         return newBillboard.getId();
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Billboard> getBillboard(@PathVariable("id") Long id) {
-        Billboard billboard = billboardService.getBillboardById(id);
+        Billboard billboard = billboardRepositoryService.getBillboardById(id);
 
         if (billboard == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -39,7 +39,7 @@ public class BillboardRestController {
 
     @GetMapping(value = "/{location}")
     public ResponseEntity<Billboard> getBillboard(@PathVariable("location") String location) {
-        Billboard billboard = billboardService.getBillboardByLocation(location);
+        Billboard billboard = billboardRepositoryService.getBillboardByLocation(location);
 
         if (billboard == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -49,7 +49,7 @@ public class BillboardRestController {
 
     @GetMapping(value = "")
     public ResponseEntity<List<Billboard>> getBillboards() {
-        List<Billboard> billboards = billboardService.getBillboards();
+        List<Billboard> billboards = billboardRepositoryService.getBillboards();
 
         if (billboards.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -59,7 +59,7 @@ public class BillboardRestController {
 
     @GetMapping(value = "/user/{userId}")
     public ResponseEntity<List<Billboard>> getBillboardsByUserId(@PathVariable("userId") Long userId) {
-        List<Billboard> billboards = billboardService.getBillboardsByUserId(userId);
+        List<Billboard> billboards = billboardRepositoryService.getBillboardsByUserId(userId);
 
         if (billboards.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -71,7 +71,7 @@ public class BillboardRestController {
     public ResponseEntity<Billboard> updateBillboard(
             @PathVariable("id") Long id,
             @RequestBody Billboard newBillboard){
-        Billboard billboard = billboardService.getBillboardById(id);
+        Billboard billboard = billboardRepositoryService.getBillboardById(id);
 
         if(billboard == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -80,7 +80,7 @@ public class BillboardRestController {
         billboard.setPrice(newBillboard.getPrice());
         billboard.setUserId(newBillboard.getUserId());
         billboard.setAds(newBillboard.getAds());
-        billboardService.updateBillboard(billboard);
+        billboardRepositoryService.updateBillboard(billboard);
         return new ResponseEntity<>(newBillboard, HttpStatus.OK);
     }
 
@@ -89,12 +89,12 @@ public class BillboardRestController {
     public ResponseEntity<Billboard> updateUserId(
             @PathVariable("id") Long id,
             @RequestBody Long userId) {
-        Billboard billboard = billboardService.getBillboardById(id);
+        Billboard billboard = billboardRepositoryService.getBillboardById(id);
         if (billboard == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         billboard.setUserId(userId);
-        billboardService.updateBillboard(billboard);
+        billboardRepositoryService.updateBillboard(billboard);
         return new ResponseEntity<>(billboard, HttpStatus.OK);
     }
 
@@ -103,19 +103,19 @@ public class BillboardRestController {
     public ResponseEntity<Billboard> updateAds(
             @PathVariable("id") Long id,
             @RequestBody List<Ad> ads) {
-        Billboard billboard = billboardService.getBillboardById(id);
+        Billboard billboard = billboardRepositoryService.getBillboardById(id);
         if (billboard == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         billboard.setAds(ads);
-        billboardService.updateBillboard(billboard);
+        billboardRepositoryService.updateBillboard(billboard);
         return new ResponseEntity<>(billboard, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public String deleteBillboard(@PathVariable("id") Long id){
-        billboardService.deleteBillboard(id);
+        billboardRepositoryService.deleteBillboard(id);
         return "OK";
     }
 }

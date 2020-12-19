@@ -16,40 +16,40 @@ public class ServiceConfig {
     }
 
     @Bean
-    public UserService userService(){
-        return new UserServiceImpl(daoConfig.userRepositoryDao());
+    public UserRepositoryService userService(){
+        return new UserRepositoryServiceImpl(daoConfig.userRepositoryDao());
     }
 
     @Bean
-    public AuthUserService authUserService(){
-        return new AuthUserServiceImpl(daoConfig.authUserRepositoryDao());
+    public AuthUserRepositoryService authUserService(){
+        return new AuthUserRepositoryServiceImpl(daoConfig.authUserRepositoryDao());
     }
 
     @Bean
-    public AdService adService(){
-        return new AdServiceImpl(daoConfig.adRepositoryDao());
+    public AdRepositoryService adService(){
+        return new AdRepositoryServiceImpl(daoConfig.adRepositoryDao());
     }
 
     @Bean
-    public LocationService locationService(){
-        return new LocationServiceImpl(daoConfig.locationRepositoryDao());
+    public LocationRepositoryService locationService(){
+        return new LocationRepositoryServiceImpl(daoConfig.locationRepositoryDao());
     }
 
     @Bean
-    public BillboardService billboardService(){
-        return new BillboardServiceImpl(daoConfig.billboardRepositoryDao());
+    public BillboardRepositoryService billboardService(){
+        return new BillboardRepositoryServiceImpl(daoConfig.billboardRepositoryDao());
     }
 
     @Bean
-    public GroupBillboardService groupBillboardService(){
-        return new GroupBillboardServiceImpl(
+    public GroupBillboardRepositoryService groupBillboardService(){
+        return new GroupBillboardRepositoryServiceImpl(
                 daoConfig.groupBillboardRepositoryDao(),
                 daoConfig.billboardRepositoryDao());
     }
 
     @Bean
-    public SecurityService securityService(){
-        return new SecurityServiceImpl(
+    public SecurityRepositoryService securityService(){
+        return new SecurityRepositoryServiceImpl(
                 daoConfig.securityRepositoryDao(),
                 daoConfig.authUserRepositoryDao());
     }

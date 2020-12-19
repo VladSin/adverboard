@@ -20,20 +20,20 @@ import java.util.List;
 @RequestMapping("/operating")
 public class UserOperatingController {
 
-    private final BillboardService billboardService;
-    private final GroupBillboardService groupService;
-    private final LocationService locationService;
-    private final AdService adService;
+    private final BillboardRepositoryService billboardRepositoryService;
+    private final GroupBillboardRepositoryService groupService;
+    private final LocationRepositoryService locationRepositoryService;
+    private final AdRepositoryService adRepositoryService;
 
     @Autowired
-    public UserOperatingController(BillboardService billboardService,
-                                   GroupBillboardService groupService,
-                                   LocationService locationService,
-                                   AdService adService) {
-        this.billboardService = billboardService;
+    public UserOperatingController(BillboardRepositoryService billboardRepositoryService,
+                                   GroupBillboardRepositoryService groupService,
+                                   LocationRepositoryService locationRepositoryService,
+                                   AdRepositoryService adRepositoryService) {
+        this.billboardRepositoryService = billboardRepositoryService;
         this.groupService = groupService;
-        this.locationService = locationService;
-        this.adService = adService;
+        this.locationRepositoryService = locationRepositoryService;
+        this.adRepositoryService = adRepositoryService;
     }
 
     @PostMapping(value = "/billboards")
@@ -41,7 +41,7 @@ public class UserOperatingController {
         final ObjectMapper objectMapper = new ObjectMapper();
         List<String> locations = objectMapper.readValue(jsonString, new TypeReference<List<String>>(){});
 
-        List<Billboard> billboards = billboardService.getListBillboardsByLocations(locations);
+        List<Billboard> billboards = billboardRepositoryService.getListBillboardsByLocations(locations);
         if (billboards.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -50,7 +50,7 @@ public class UserOperatingController {
     
     @GetMapping(value = "/locations")
     public ResponseEntity<List<Location>> getAllLocations() {
-        List<Location> locations = locationService.getLocation();
+        List<Location> locations = locationRepositoryService.getLocation();
         if (locations.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -62,12 +62,12 @@ public class UserOperatingController {
     public ResponseEntity<Billboard> buyBillboard(
             @PathVariable("id") Long id,
             @RequestBody Long userId) {
-        Billboard billboard = billboardService.getBillboardById(id);
+        Billboard billboard = billboardRepositoryService.getBillboardById(id);
         if (billboard == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         billboard.setUserId(userId);
-        billboardService.updateBillboard(billboard);
+        billboardRepositoryService.updateBillboard(billboard);
         return new ResponseEntity<>(billboard, HttpStatus.OK);
     }
 
@@ -77,7 +77,7 @@ public class UserOperatingController {
     public String setBillboardMedia(
             @PathVariable("id") Long id,
             @RequestBody String jsonString) throws IOException {
-        Billboard billboard = billboardService.getBillboardById(id);
+        Billboard billboard = billboardRepositoryService.getBillboardById(id);
         if (billboard == null)
             return "NOT_FOUND";
 
@@ -87,7 +87,7 @@ public class UserOperatingController {
         List<Billboard> billboards = new ArrayList<>();
         billboards.add(billboard);
         for (String l: links) {
-            adService.saveAd(new Ad(null, l, billboards));
+            adRepositoryService.saveAd(new Ad(null, l, billboards));
         }
         return "OK";
     }
@@ -104,9 +104,9 @@ public class UserOperatingController {
         final ObjectMapper objectMapper = new ObjectMapper();
         List<String> links = objectMapper.readValue(jsonString, new TypeReference<List<String>>(){});
 
-        List<Billboard> billboards = billboardService.getBillboardsByGroupId(id);
+        List<Billboard> billboards = billboardRepositoryService.getBillboardsByGroupId(id);
         for (String l: links) {
-            adService.saveAd(new Ad(null, l, billboards));
+            adRepositoryService.saveAd(new Ad(null, l, billboards));
         }
         return "OK";
     }

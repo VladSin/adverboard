@@ -2,7 +2,7 @@ package org.example.vladsin.adverboard.web.controller.rest;
 
 import org.example.vladsin.adverboard.model.Billboard;
 import org.example.vladsin.adverboard.model.GroupBillboards;
-import org.example.vladsin.adverboard.service.repository.GroupBillboardService;
+import org.example.vladsin.adverboard.service.repository.GroupBillboardRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +16,11 @@ import java.util.List;
 @RequestMapping("/group")
 public class GroupBillboardsRestController {
 
-    private final GroupBillboardService groupBillboardService;
+    private final GroupBillboardRepositoryService groupBillboardRepositoryService;
 
     @Autowired
-    public GroupBillboardsRestController(GroupBillboardService groupBillboardService) {
-        this.groupBillboardService = groupBillboardService;
+    public GroupBillboardsRestController(GroupBillboardRepositoryService groupBillboardRepositoryService) {
+        this.groupBillboardRepositoryService = groupBillboardRepositoryService;
     }
 
     @PostMapping(value = "/create/{userId}/{name}")
@@ -32,13 +32,13 @@ public class GroupBillboardsRestController {
         for (Billboard b : billboards) {
             billboardList.add(new Billboard(null, b.getLocation(), b.getPrice(), userId, null));
         }
-        GroupBillboards newGroup = groupBillboardService.saveGroup(new GroupBillboards(null, name, userId, billboardList));
+        GroupBillboards newGroup = groupBillboardRepositoryService.saveGroup(new GroupBillboards(null, name, userId, billboardList));
         return newGroup.getId();
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<GroupBillboards> getGroupBillboards(@PathVariable("id") Long id) {
-        GroupBillboards group = groupBillboardService.getGroupById(id);
+        GroupBillboards group = groupBillboardRepositoryService.getGroupById(id);
 
         if (group == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -48,7 +48,7 @@ public class GroupBillboardsRestController {
 
     @GetMapping(value = "/user/{userId}")
     public ResponseEntity<GroupBillboards> getGroupByUserId(@PathVariable("userId") Long userId) {
-        GroupBillboards group = groupBillboardService.getGroupByUserId(userId);
+        GroupBillboards group = groupBillboardRepositoryService.getGroupByUserId(userId);
 
         if (group == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -60,7 +60,7 @@ public class GroupBillboardsRestController {
     public ResponseEntity<GroupBillboards> updateBillboard(
             @PathVariable("id") Long id,
             @RequestBody GroupBillboards newGroup) {
-        GroupBillboards group = groupBillboardService.getGroupById(id);
+        GroupBillboards group = groupBillboardRepositoryService.getGroupById(id);
 
         if (group == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -68,13 +68,13 @@ public class GroupBillboardsRestController {
         group.setGroupName(newGroup.getGroupName());
         group.setUserId(newGroup.getUserId());
         group.setBillboards(newGroup.getBillboards());
-        groupBillboardService.updateGroup(group);
+        groupBillboardRepositoryService.updateGroup(group);
         return new ResponseEntity<>(newGroup, HttpStatus.OK);
     }
 
     @GetMapping(value = "/groups/{userId}")
     public ResponseEntity<List<GroupBillboards>> getBillboardsByUserId(@PathVariable("userId") Long userId) {
-        List<GroupBillboards> groupBillboards = groupBillboardService.getGroupsByUserId(userId);
+        List<GroupBillboards> groupBillboards = groupBillboardRepositoryService.getGroupsByUserId(userId);
 
         if (groupBillboards.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -85,7 +85,7 @@ public class GroupBillboardsRestController {
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public String deleteGroupBillboards(@PathVariable("id") Long id) {
-        groupBillboardService.deleteGroup(id);
+        groupBillboardRepositoryService.deleteGroup(id);
         return "OK";
     }
 }

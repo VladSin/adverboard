@@ -4,8 +4,8 @@ import org.example.vladsin.adverboard.model.AuthUser;
 import org.example.vladsin.adverboard.model.User;
 import org.example.vladsin.adverboard.model.controller.LoginUser;
 import org.example.vladsin.adverboard.model.controller.UpdatePass;
-import org.example.vladsin.adverboard.service.repository.SecurityService;
-import org.example.vladsin.adverboard.service.repository.UserService;
+import org.example.vladsin.adverboard.service.repository.SecurityRepositoryService;
+import org.example.vladsin.adverboard.service.repository.UserRepositoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +28,14 @@ public class LoginController {
 
     private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
-    private final SecurityService securityService;
-    private final UserService userService;
+    private final SecurityRepositoryService securityRepositoryService;
+    private final UserRepositoryService userRepositoryService;
 
 
     @Autowired
-    public LoginController(SecurityService securityService, UserService userService) {
-        this.securityService = securityService;
-        this.userService = userService;
+    public LoginController(SecurityRepositoryService securityRepositoryService, UserRepositoryService userRepositoryService) {
+        this.securityRepositoryService = securityRepositoryService;
+        this.userRepositoryService = userRepositoryService;
     }
 
     @GetMapping("/")
@@ -52,17 +52,17 @@ public class LoginController {
         loginUser.setUsername(jsonObject.getString("username"));
         loginUser.setPassword(jsonObject.getString("password"));
 
-        AuthUser authUser = securityService.login(loginUser.getUsername(), loginUser.getPassword());
+        AuthUser authUser = securityRepositoryService.login(loginUser.getUsername(), loginUser.getPassword());
         if (authUser == null)
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        return new ResponseEntity<>(userService.getUser(authUser.getUserId()), HttpStatus.OK);
+        return new ResponseEntity<>(userRepositoryService.getUser(authUser.getUserId()), HttpStatus.OK);
     }
 
     // TODO прокастить userId (long) через стринг
     @PostMapping(value = "/update")
     public ResponseEntity<Long> updatePassword(@RequestBody UpdatePass updatePass) {
 
-        securityService.updatePassword(updatePass.getUserId(), updatePass.getPassword());
+        securityRepositoryService.updatePassword(updatePass.getUserId(), updatePass.getPassword());
         return new ResponseEntity<>(updatePass.getUserId(), HttpStatus.OK);
     }
 }

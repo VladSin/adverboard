@@ -9,6 +9,7 @@ import org.example.vladsin.adverboard.web.controller.rest.AuthUserRestController
 import org.example.vladsin.adverboard.web.controller.rest.BillboardRestController;
 import org.example.vladsin.adverboard.web.controller.rest.GroupBillboardsRestController;
 import org.example.vladsin.adverboard.web.controller.rest.UserRestController;
+import org.example.vladsin.adverboard.web.controller.view.WebController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +36,14 @@ public class WebConfig {
     @Bean
     public FirstPageController firstPageController(){
         return new FirstPageController();
+    }
+
+    @Bean
+    public WebController webController(){
+        return new WebController(
+                serviceConfig.billboardService(),
+                serviceConfig.locationService()
+        );
     }
 
     @Bean

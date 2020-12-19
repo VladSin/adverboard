@@ -11,30 +11,36 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>Authorization</title>
+    <title>Main page</title>
+    <link rel="stylesheet" type="text/css" href="assests/css/backgroundStyle.css"/>
 </head>
 
 <header>
-    <form action="${pageContext.request.contextPath}/login" method="get">
-        <input type="submit" value="For admin"/>
-    </form>
-    <form action="${pageContext.request.contextPath}/" method="get">
-        <input type="submit" value="For admin"/>
-    </form>
+    <center>
+        <h1 style="color: #000385"> Welcome!!! </h1>
+        <h3 style="color: #000385">On our site you can see a huge number amazing exciting and beautiful advertisements!</h3>
+        <form action="${pageContext.request.contextPath}/web" method="get">
+            <input type="submit" value="Watch ADS"/>
+        </form>
+    </center>
 </header>
 
 <body>
 <center>
-    <h1 style="color: green"> Welcome!!! </h1>
-    <form action="${pageContext.request.contextPath}/web" method="get">
-        <input type="submit" value="Watch ADS"/>
+    <h3 style="color: #000385">Login for administrator only.</h3>
+    <form action="${pageContext.request.contextPath}/web/login/" method="get">
+        <input type="submit" value="Log in"/>
     </form>
-    <p style="color: green">Do you want to post your advertisement on our website? Then download our application: Adverboard</p>
+    <form action="${pageContext.request.contextPath}/web/register/" method="get">
+        <input type="submit" value="Sign in"/>
+    </form>
 </center>
 </body>
 
 <footer>
-    <h1 style="color: green">14.12.2020 time 20.50</h1>
+    <center>
+        <p style="color: #000385">Do you want to post your advertisement on our website? Download our application: Adverboard</p>
+    </center>
 </footer>
 
 </html>
