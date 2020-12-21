@@ -1,17 +1,15 @@
 package org.example.vladsin.adverboard.model;
 
-import java.util.List;
-
 public class Ad {
 
     private Long id;
     private String link;
-    private List<Billboard> billboards;
+    private Long billboardId;
 
-    public Ad(Long id, String link, List<Billboard> billboards) {
+    public Ad(Long id, String link, Long billboardId) {
         this.id = id;
         this.link = link;
-        this.billboards = billboards;
+        this.billboardId = billboardId;
     }
 
     public Long getId() {
@@ -28,10 +26,10 @@ public class Ad {
         this.link = link;
     }
 
-    public List<Billboard> getBillboards() {
-        return billboards;
+    public Long getBillboardId() {
+        return billboardId;
     }
-    public void setBillboards(List<Billboard> billboards) {
-        this.billboards = billboards;
+    public void setBillboardId(Long billboardId) {
+        this.billboardId = billboardId;
     }
 }

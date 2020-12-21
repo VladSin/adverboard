@@ -3,8 +3,6 @@ package org.example.vladsin.adverboard.dao.converter;
 import org.example.vladsin.adverboard.dao.entity.AdEntity;
 import org.example.vladsin.adverboard.model.Ad;
 
-import java.util.stream.Collectors;
-
 public class AdConverter {
 
     public static Ad fromEntity(AdEntity adEntity){
@@ -14,9 +12,7 @@ public class AdConverter {
         return new Ad(
                 adEntity.getAdId(),
                 adEntity.getLink(),
-                adEntity.getBillboards().stream()
-                        .map(BillboardConverter::fromEntity)
-                        .collect(Collectors.toList())
+                adEntity.getBillboardId()
         );
     }
 
@@ -27,9 +23,7 @@ public class AdConverter {
         final AdEntity adEntity = new AdEntity();
         adEntity.setAdId(ad.getId());
         adEntity.setLink(ad.getLink());
-        adEntity.setBillboards(ad.getBillboards().stream()
-                .map(BillboardConverter::toEntity)
-                .collect(Collectors.toList()));
+        adEntity.setBillboardId(ad.getBillboardId());
         return adEntity;
     }
 }

@@ -15,4 +15,6 @@ public interface AdRepositoryDao {
     Ad getAd(long id);
 
     List<Ad> getAd();
+
+    List<Ad> getAdByBillboardId(long billboardId);
 }

@@ -26,7 +26,7 @@
 <body>
 <center>
     <h3 style="color: #000385">Login for administrator only.</h3>
-    <form action="${pageContext.request.contextPath}/login" method="post">
+    <form action="${pageContext.request.contextPath}/admin/register" method="post">
         <label for="login"></label>
         <input id="login" type="text" name="login" placeholder="User name"/><br/>
 
@@ -37,7 +37,6 @@
         <input id="password" type="password" name="password" placeholder="Password"/><br/>
 
         <input type="submit" value="Log in"/>
-    </form>
     </form>
 </center>
 </body>

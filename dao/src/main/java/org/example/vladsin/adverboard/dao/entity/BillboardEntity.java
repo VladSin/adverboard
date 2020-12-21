@@ -25,31 +25,18 @@ public class BillboardEntity {
     @Column(name = "user_id")
     private Long userId;
 
-    @ManyToMany(mappedBy = "billboards", cascade = CascadeType.ALL)
-    private List<AdEntity> ads = new ArrayList<>();
-
-    @ManyToOne
-    @JoinColumn(name = "group_id")
-    private GroupBillboardsEntity groupBillboardsEntity;
+    @Column(name = "group_id")
+    private Long groupId;
 
     public BillboardEntity() {
     }
 
-    public BillboardEntity(Long billboardId, String location, Double price, Long userId, List<AdEntity> ads) {
+    public BillboardEntity(Long billboardId, String location, Double price, Long userId, Long groupId) {
         this.billboardId = billboardId;
         this.location = location;
         this.price = price;
         this.userId = userId;
-        this.ads = ads;
-    }
-
-    public BillboardEntity(Long billboardId, String location, Double price, Long userId, List<AdEntity> ads, GroupBillboardsEntity groupBillboardsEntity) {
-        this.billboardId = billboardId;
-        this.location = location;
-        this.price = price;
-        this.userId = userId;
-        this.ads = ads;
-        this.groupBillboardsEntity = groupBillboardsEntity;
+        this.groupId = groupId;
     }
 
     public Long getBillboardId() {
@@ -80,17 +67,10 @@ public class BillboardEntity {
         this.userId = userId;
     }
 
-    public List<AdEntity> getAds() {
-        return ads;
+    public Long getGroupId() {
+        return groupId;
     }
-    public void setAds(List<AdEntity> ads) {
-        this.ads = ads;
-    }
-
-    public GroupBillboardsEntity getGroupBillboardsEntity() {
-        return groupBillboardsEntity;
-    }
-    public void setGroupBillboardsEntity(GroupBillboardsEntity groupBillboardsEntity) {
-        this.groupBillboardsEntity = groupBillboardsEntity;
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
     }
 }

@@ -7,6 +7,8 @@ import org.example.vladsin.adverboard.model.controller.RegistrationUser;
 import org.example.vladsin.adverboard.service.repository.AuthUserRepositoryService;
 import org.example.vladsin.adverboard.service.repository.SecurityRepositoryService;
 import org.example.vladsin.adverboard.service.repository.UserRepositoryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +21,13 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.io.StringReader;
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/register")
 public class RegistrationController {
+
+    private static final Logger log = LoggerFactory.getLogger(RegistrationController.class);
 
     private final UserRepositoryService userRepositoryService;
     private final AuthUserRepositoryService authUserRepositoryService;
@@ -50,8 +55,11 @@ public class RegistrationController {
             newUser = userRepositoryService.saveUser(newUser);
             AuthUser newAuth = new AuthUser(null, user.getUsername(), user.getPassword(), Role.USER, newUser.getId());
             authUserRepositoryService.saveAuthUser(newAuth);
+
+            log.info("user created {} logged at {}", newAuth.getLogin(), LocalDateTime.now());
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         } else {
+            log.info("BAD REQUEST logged at {}", LocalDateTime.now());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

@@ -1,6 +1,7 @@
 package org.example.vladsin.adverboard.dao.converter;
 
 import org.example.vladsin.adverboard.dao.entity.BillboardEntity;
+import org.example.vladsin.adverboard.dao.repository.AdRepositoryDao;
 import org.example.vladsin.adverboard.model.Billboard;
 
 import java.util.stream.Collectors;
@@ -16,9 +17,8 @@ public class BillboardConverter {
                 billboardEntity.getLocation(),
                 billboardEntity.getPrice(),
                 billboardEntity.getUserId(),
-                billboardEntity.getAds().stream()
-                        .map(AdConverter::fromEntity)
-                        .collect(Collectors.toList())
+                billboardEntity.getGroupId(),
+                null
         );
     }
 
@@ -31,9 +31,7 @@ public class BillboardConverter {
         billboardEntity.setLocation(billboard.getLocation());
         billboardEntity.setPrice(billboard.getPrice());
         billboardEntity.setUserId(billboard.getUserId());
-        billboardEntity.setAds(billboard.getAds().stream()
-                .map(AdConverter::toEntity)
-                .collect(Collectors.toList()));
+        billboardEntity.setGroupId(billboard.getGroupId());
         return billboardEntity;
     }
 }

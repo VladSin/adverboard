@@ -17,7 +17,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="control_project" level="debug" additivity="true">
+        <Logger name="org.example.vladsin.adverboard" level="debug" additivity="true">
             <appender-ref ref="fileLogger" level="debug" />
         </Logger>
         <Logger name="org.springframework" level="debug" additivity="true">

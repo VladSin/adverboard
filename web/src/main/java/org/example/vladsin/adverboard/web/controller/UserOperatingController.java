@@ -7,18 +7,23 @@ import org.example.vladsin.adverboard.model.Billboard;
 import org.example.vladsin.adverboard.model.GroupBillboards;
 import org.example.vladsin.adverboard.model.Location;
 import org.example.vladsin.adverboard.service.repository.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/operating")
 public class UserOperatingController {
+
+    private static final Logger log = LoggerFactory.getLogger(UserOperatingController.class);
 
     private final BillboardRepositoryService billboardRepositoryService;
     private final GroupBillboardRepositoryService groupService;
@@ -42,9 +47,10 @@ public class UserOperatingController {
         List<String> locations = objectMapper.readValue(jsonString, new TypeReference<List<String>>(){});
 
         List<Billboard> billboards = billboardRepositoryService.getListBillboardsByLocations(locations);
-        if (billboards.isEmpty())
+        if (billboards.isEmpty()){
+            log.info("NO_CONTENT logged at {}", LocalDateTime.now());
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
+        }
         return new ResponseEntity<>(billboards, HttpStatus.OK);
     }
     
@@ -52,8 +58,10 @@ public class UserOperatingController {
     public ResponseEntity<List<Location>> getAllLocations() {
         List<Location> locations = locationRepositoryService.getLocation();
         if (locations.isEmpty())
+        {
+            log.info("NO_CONTENT logged at {}", LocalDateTime.now());
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
+        }
         return new ResponseEntity<>(locations, HttpStatus.OK);
     }
 
@@ -63,51 +71,68 @@ public class UserOperatingController {
             @PathVariable("id") Long id,
             @RequestBody Long userId) {
         Billboard billboard = billboardRepositoryService.getBillboardById(id);
-        if (billboard == null)
+
+        if (billboard == null){
+            log.info("BAD REQUEST logged at {}", LocalDateTime.now());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
         billboard.setUserId(userId);
         billboardRepositoryService.updateBillboard(billboard);
+        log.info("billboard bought{} logged at {}", billboard.getId(), LocalDateTime.now());
         return new ResponseEntity<>(billboard, HttpStatus.OK);
     }
 
-
     @PatchMapping(value = "/set/billboard/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public String setBillboardMedia(
+    public ResponseEntity<Billboard> setBillboardMedia(
             @PathVariable("id") Long id,
             @RequestBody String jsonString) throws IOException {
         Billboard billboard = billboardRepositoryService.getBillboardById(id);
-        if (billboard == null)
-            return "NOT_FOUND";
+
+        if (billboard == null){
+            log.info("NO_CONTENT logged at {}", LocalDateTime.now());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
         final ObjectMapper objectMapper = new ObjectMapper();
         List<String> links = objectMapper.readValue(jsonString, new TypeReference<List<String>>(){});
 
-        List<Billboard> billboards = new ArrayList<>();
-        billboards.add(billboard);
+        List<Ad> ads = new ArrayList<>();
         for (String l: links) {
-            adRepositoryService.saveAd(new Ad(null, l, billboards));
+            ads.add(adRepositoryService.saveAd(new Ad(null, l, billboard.getId())));
         }
-        return "OK";
+
+        billboard.setAds(ads);
+
+        log.info("set ads on billboard {} logged at {}", billboard.getId(), LocalDateTime.now());
+        return new ResponseEntity<>(billboard, HttpStatus.OK);
     }
 
     @PatchMapping(value = "/set/group/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public String setGroupMedia(
+    public ResponseEntity<GroupBillboards> setGroupMedia(
             @PathVariable("id") Long id,
             @RequestBody String jsonString) throws IOException {
         GroupBillboards groupBillboards = groupService.getGroupById(id);
-        if (groupBillboards == null)
-            return "NOT_FOUND";
+
+        if (groupBillboards == null){
+            log.info("NO_CONTENT logged at {}", LocalDateTime.now());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
         final ObjectMapper objectMapper = new ObjectMapper();
         List<String> links = objectMapper.readValue(jsonString, new TypeReference<List<String>>(){});
 
         List<Billboard> billboards = billboardRepositoryService.getBillboardsByGroupId(id);
-        for (String l: links) {
-            adRepositoryService.saveAd(new Ad(null, l, billboards));
+        for (Billboard b: billboards) {
+            for (String l: links) {
+                b.addAd(adRepositoryService.saveAd(new Ad(null, l, b.getId())));
+            }
         }
-        return "OK";
+        groupBillboards.setBillboards(billboards);
+
+        log.info("group billboards updated {} logged at {}", groupBillboards.getGroupName(), LocalDateTime.now());
+        return new ResponseEntity<>(groupBillboards, HttpStatus.OK);
     }
 }

@@ -11,6 +11,8 @@ org\example\vladsin\adverboard\web\controller\UserOperatingController.class
 org\example\vladsin\adverboard\web\controller\RegistrationController.class
 org\example\vladsin\adverboard\web\controller\UserOperatingController$2.class
 org\example\vladsin\adverboard\web\config\RootConfig.class
+org\example\vladsin\adverboard\web\controller\rest\GroupBillboardsRestController$1.class
 org\example\vladsin\adverboard\web\controller\LoginController.class
+org\example\vladsin\adverboard\web\controller\LoginController$1.class
 org\example\vladsin\adverboard\web\controller\rest\AuthUserRestController.class
 org\example\vladsin\adverboard\web\controller\UserOperatingController$3.class

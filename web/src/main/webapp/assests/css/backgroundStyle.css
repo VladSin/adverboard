@@ -1,0 +1,27 @@
+body {background: url(https://html5book.ru/wp-content/uploads/2015/07/background46.png);}
+a, input, select, option{
+    text-decoration: none;
+    outline: none;
+    display: inline-block;
+    width: 160px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 45px;
+    margin: 10px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: #524f4e;
+    background: white;
+    box-shadow: 0 8px 15px rgba(0,0,0,.1);
+    transition: .3s;
+}
+a, input, select, option:hover {
+    background: rgba(114, 148, 229, 0.87);
+    box-shadow: 0 15px 20px rgba(93, 92, 229, 0.35);
+    color: white;
+    transform: translateY(-7px);
+}

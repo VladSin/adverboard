@@ -15,9 +15,7 @@ public class GroupBillboardsConverter {
                 groupBillboardsEntity.getId(),
                 groupBillboardsEntity.getGroupName(),
                 groupBillboardsEntity.getUserId(),
-                groupBillboardsEntity.getBillboards().stream()
-                        .map(BillboardConverter::fromEntity)
-                        .collect(Collectors.toList())
+                null
         );
     }
 
@@ -29,9 +27,6 @@ public class GroupBillboardsConverter {
         groupBillboardsEntity.setId(groupBillboards.getId());
         groupBillboardsEntity.setGroupName(groupBillboards.getGroupName());
         groupBillboardsEntity.setUserId(groupBillboards.getUserId());
-        groupBillboardsEntity.setBillboards(groupBillboards.getBillboards().stream()
-                .map(BillboardConverter::toEntity)
-                .collect(Collectors.toList()));
         return groupBillboardsEntity;
     }
 }

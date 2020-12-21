@@ -48,4 +48,10 @@ public class AdRepositoryServiceImpl implements AdRepositoryService {
     public List<Ad> getAd() {
         return adRepositoryDao.getAd();
     }
+
+    @Override
+    @Transactional
+    public List<Ad> getAdByBillboardId(long billboardId) {
+        return adRepositoryDao.getAdByBillboardId(billboardId);
+    }
 }

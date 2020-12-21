@@ -32,8 +32,7 @@ class AdRepositoryDaoImplTest {
 
     @Test
     void saveAd() {
-        List<Billboard> billboards = new ArrayList<>();
-        final Ad adToSave = new Ad(null, "link", billboards);
+        final Ad adToSave = new Ad(null, "link", 1L);
         final Ad savedAd = adRepositoryDao.saveAd(adToSave);
 
         assertNotNull(savedAd);
@@ -42,25 +41,22 @@ class AdRepositoryDaoImplTest {
 
     @Test
     void updateAd() {
-        List<Billboard> billboards = new ArrayList<>();
-        final Ad adToSave = new Ad(null, "link2", billboards);
+        final Ad adToSave = new Ad(null, "link2", 2L);
         final Ad savedAd = adRepositoryDao.saveAd(adToSave);
         final Long id = savedAd.getId();
         sessionFactory.getCurrentSession().clear();
 
-        final Ad toUpdate = new Ad(id, "link3", billboards);
+        final Ad toUpdate = new Ad(id, "link3", 3L);
         final boolean update = adRepositoryDao.updateAd(toUpdate);
         assertTrue(update);
 
         final Ad afterUpdate = adRepositoryDao.getAd(id);
-
         assertEquals(toUpdate.getLink(), afterUpdate.getLink());
     }
 
     @Test
     void deleteAd() {
-        List<Billboard> billboards = new ArrayList<>();
-        final Ad adToSave = new Ad(null, "link", billboards);
+        final Ad adToSave = new Ad(null, "link", 4L);
         final Ad savedAd = adRepositoryDao.saveAd(adToSave);
         final Long id = savedAd.getId();
         sessionFactory.getCurrentSession().clear();
@@ -74,8 +70,7 @@ class AdRepositoryDaoImplTest {
 
     @Test
     void getAd() {
-        List<Billboard> billboards = new ArrayList<>();
-        final Ad adToSave = new Ad(null, "link", billboards);
+        final Ad adToSave = new Ad(null, "link", 5L);
         final Ad savedAd = adRepositoryDao.saveAd(adToSave);
         final Long id = savedAd.getId();
 
@@ -87,10 +82,9 @@ class AdRepositoryDaoImplTest {
 
     @Test
     void testGetAd() {
-        List<Billboard> billboards = new ArrayList<>();
         List<Ad> ads = new ArrayList<>();
-        ads.add(new Ad(null, "link1", billboards));
-        ads.add(new Ad(null, "link2", billboards));
+        ads.add(new Ad(null, "link1", 6L));
+        ads.add(new Ad(null, "link2", 7L));
 
         List<Ad> adList = new ArrayList<>();
         for (Ad a: ads) {

@@ -15,39 +15,25 @@ class AdConverterTest {
 
     @Test
     void fromEntity() {
-        List<AdEntity> adEntities = new ArrayList<>();
-
-        BillboardEntity billboardEntity = new BillboardEntity();
-        billboardEntity.setBillboardId(null);
-        billboardEntity.setLocation("location");
-        billboardEntity.setPrice(20.2);
-        billboardEntity.setUserId(1L);
-        billboardEntity.setAds(adEntities);
-
-        List<BillboardEntity> billboardEntities= new ArrayList<>();
-        billboardEntities.add(billboardEntity);
-
         AdEntity adEntity = new AdEntity();
         adEntity.setAdId(null);
         adEntity.setLink("link");
-        adEntity.setBillboards(billboardEntities);
+        adEntity.setBillboardId(1L);
+
 
         Ad ad = AdConverter.fromEntity(adEntity);
         assertNotNull(ad);
         assertEquals(ad.getId(), adEntity.getAdId());
         assertEquals(ad.getLink(), adEntity.getLink());
+        assertEquals(ad.getBillboardId(), adEntity.getBillboardId());
     }
 
     @Test
     void toEntity() {
-        List<Ad> ads = new ArrayList<>();
-        Billboard billboard = new Billboard(null, "location", 20.5, 1L, ads);
-        List<Billboard> billboards= new ArrayList<>();
-        billboards.add(billboard);
-
-        Ad ad = new Ad(null, "link", billboards);
+        Ad ad = new Ad(null, "link", 1L);
         AdEntity adEntity = AdConverter.toEntity(ad);
         assertNotNull(adEntity);
         assertEquals(ad.getLink(), adEntity.getLink());
+        assertEquals(ad.getBillboardId(), adEntity.getBillboardId());
     }
 }

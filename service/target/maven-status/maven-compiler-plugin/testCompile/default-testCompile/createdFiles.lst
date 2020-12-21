@@ -1,6 +1,6 @@
-org\example\vladsin\adverboard\service\repository\impl\AdServiceImplTest.class
-org\example\vladsin\adverboard\service\repository\impl\GroupBillboardServiceImplTest.class
-org\example\vladsin\adverboard\service\repository\impl\AuthUserServiceImplTest.class
-org\example\vladsin\adverboard\service\repository\impl\LocationServiceImplTest.class
-org\example\vladsin\adverboard\service\repository\impl\UserServiceImplTest.class
-org\example\vladsin\adverboard\service\repository\impl\BillboardServiceImplTest.class
+org\example\vladsin\adverboard\service\repository\impl\LocationRepositoryServiceImplTest.class
+org\example\vladsin\adverboard\service\repository\impl\BillboardRepositoryServiceImplTest.class
+org\example\vladsin\adverboard\service\repository\impl\GroupBillboardRepositoryServiceImplTest.class
+org\example\vladsin\adverboard\service\repository\impl\UserRepositoryServiceImplTest.class
+org\example\vladsin\adverboard\service\repository\impl\AuthUserRepositoryServiceImplTest.class
+org\example\vladsin\adverboard\service\repository\impl\AdRepositoryServiceImplTest.class

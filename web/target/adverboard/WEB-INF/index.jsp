@@ -19,7 +19,7 @@
     <center>
         <h1 style="color: #000385"> Welcome!!! </h1>
         <h3 style="color: #000385">On our site you can see a huge number amazing exciting and beautiful advertisements!</h3>
-        <form action="${pageContext.request.contextPath}/web" method="get">
+        <form action="${pageContext.request.contextPath}/web/locations" method="get">
             <input type="submit" value="Watch ADS"/>
         </form>
     </center>
@@ -28,10 +28,10 @@
 <body>
 <center>
     <h3 style="color: #000385">Login for administrator only.</h3>
-    <form action="${pageContext.request.contextPath}/web/login/" method="get">
+    <form action="${pageContext.request.contextPath}/admin/login" method="get">
         <input type="submit" value="Log in"/>
     </form>
-    <form action="${pageContext.request.contextPath}/web/register/" method="get">
+    <form action="${pageContext.request.contextPath}/admin/register" method="get">
         <input type="submit" value="Sign in"/>
     </form>
 </center>

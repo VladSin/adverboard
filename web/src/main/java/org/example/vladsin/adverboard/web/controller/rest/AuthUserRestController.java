@@ -2,14 +2,20 @@ package org.example.vladsin.adverboard.web.controller.rest;
 
 import org.example.vladsin.adverboard.model.AuthUser;
 import org.example.vladsin.adverboard.service.repository.AuthUserRepositoryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthUserRestController {
+
+    private static final Logger log = LoggerFactory.getLogger(AuthUserRestController.class);
 
     private final AuthUserRepositoryService authUserRepositoryService;
 
@@ -22,6 +28,7 @@ public class AuthUserRestController {
     @ResponseStatus(HttpStatus.CREATED)
     public String addAuthUser(@RequestBody AuthUser authUser) {
         AuthUser newUser = authUserRepositoryService.saveAuthUser(authUser);
+        log.info("user created {} logged at {}", newUser.getId(), LocalDateTime.now());
         return newUser.getLogin();
     }
 
@@ -48,6 +55,7 @@ public class AuthUserRestController {
         authUser.setPassword(newUser.getPassword());
 
         authUserRepositoryService.updateAuthUser(authUser);
+        log.info("user updated {} logged at {}", id, LocalDateTime.now());
         return new ResponseEntity<>(newUser, HttpStatus.OK);
     }
 
@@ -61,6 +69,7 @@ public class AuthUserRestController {
 
         authUser.setLogin(login);
         authUserRepositoryService.updateAuthUser(authUser);
+        log.info("user updated {} logged at {}", id, LocalDateTime.now());
         return new ResponseEntity<>(authUser, HttpStatus.OK);
     }
 
@@ -74,6 +83,7 @@ public class AuthUserRestController {
 
         authUser.setPassword(password);
         authUserRepositoryService.updateAuthUser(authUser);
+        log.info("user updated {} logged at {}", id, LocalDateTime.now());
         return new ResponseEntity<>(authUser, HttpStatus.OK);
     }
 
@@ -81,6 +91,7 @@ public class AuthUserRestController {
     @ResponseStatus(HttpStatus.OK)
     public String deleteAuthUser(@PathVariable("id") Long id) {
         authUserRepositoryService.deleteAuthUser(id);
+        log.info("user deleted {} logged at {}", id, LocalDateTime.now());
         return "OK";
     }
 }

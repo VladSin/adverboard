@@ -15,4 +15,6 @@ public interface AdRepositoryService {
     Ad getAd(long id);
 
     List<Ad> getAd();
+
+    List<Ad> getAdByBillboardId(long billboardId);
 }

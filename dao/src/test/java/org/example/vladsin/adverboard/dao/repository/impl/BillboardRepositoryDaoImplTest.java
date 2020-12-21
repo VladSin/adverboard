@@ -33,7 +33,7 @@ class BillboardRepositoryDaoImplTest {
     @Test
     void saveBillboard() {
         List<Ad> ads = new ArrayList<>();
-        final Billboard billboardToSave = new Billboard(null, "location",25.5, 1L, ads);
+        final Billboard billboardToSave = new Billboard(null, "location",25.5, 1L,1L, ads);
         final Billboard savedBillboard = billboardRepositoryDao.saveBillboard(billboardToSave);
 
         assertNotNull(savedBillboard);
@@ -45,12 +45,12 @@ class BillboardRepositoryDaoImplTest {
     @Test
     void updateBillboard() {
         List<Ad> ads = new ArrayList<>();
-        final Billboard billboardToSave = new Billboard(null, "location2",25.5, 1L, ads);
+        final Billboard billboardToSave = new Billboard(null, "location2",25.5, 1L, 1L, ads);
         final Billboard savedBillboard = billboardRepositoryDao.saveBillboard(billboardToSave);
         final Long id = savedBillboard.getId();
         sessionFactory.getCurrentSession().clear();
 
-        final Billboard toUpdate = new Billboard(id, "location3",25.6, 2L, ads);
+        final Billboard toUpdate = new Billboard(id, "location3",25.6, 2L, 2L, ads);
         final boolean update = billboardRepositoryDao.updateBillboard(toUpdate);
         assertTrue(update);
 
@@ -64,7 +64,7 @@ class BillboardRepositoryDaoImplTest {
     @Test
     void deleteBillboard() {
         List<Ad> ads = new ArrayList<>();
-        final Billboard billboardToSave = new Billboard(null, "location",25.5, 1L, ads);
+        final Billboard billboardToSave = new Billboard(null, "location",25.5, 1L, 2L, ads);
         final Billboard savedBillboard = billboardRepositoryDao.saveBillboard(billboardToSave);
         final Long id = savedBillboard.getId();
         sessionFactory.getCurrentSession().clear();
@@ -79,7 +79,7 @@ class BillboardRepositoryDaoImplTest {
     @Test
     void getBillboardById() {
         List<Ad> ads = new ArrayList<>();
-        final Billboard billboardToSave = new Billboard(null, "location",25.5, 1L, ads);
+        final Billboard billboardToSave = new Billboard(null, "location",25.5, 1L, 2L, ads);
         final Billboard savedBillboard = billboardRepositoryDao.saveBillboard(billboardToSave);
         final Long id = savedBillboard.getId();
 
@@ -94,7 +94,7 @@ class BillboardRepositoryDaoImplTest {
     @Test
     void getBillboardByLocation() {
         List<Ad> ads = new ArrayList<>();
-        final Billboard billboardToSave = new Billboard(null, "location5",25.5, 1L, ads);
+        final Billboard billboardToSave = new Billboard(null, "location5",25.5, 1L, 2L, ads);
         final Billboard savedBillboard = billboardRepositoryDao.saveBillboard(billboardToSave);
 
         final Billboard billboard = billboardRepositoryDao.getBillboardByLocation(savedBillboard.getLocation());
@@ -109,8 +109,8 @@ class BillboardRepositoryDaoImplTest {
     void getBillboards() {
         List<Billboard> billboards = new ArrayList<>();
         List<Ad> ads = new ArrayList<>();
-        billboards.add(new Billboard(null, "location10",10.5, 1L, ads));
-        billboards.add(new Billboard(null, "location11",11.5, 2L, ads));
+        billboards.add(new Billboard(null, "location10",10.5, 1L, 2L, ads));
+        billboards.add(new Billboard(null, "location11",11.5, 2L, 2L, ads));
 
         List<Billboard> billboardList = new ArrayList<>();
         for (Billboard b: billboards) {
@@ -130,8 +130,8 @@ class BillboardRepositoryDaoImplTest {
     void getBillboardsByUserId() {
         List<Billboard> billboards = new ArrayList<>();
         List<Ad> ads = new ArrayList<>();
-        billboards.add(new Billboard(null, "location10",10.5, 1L, ads));
-        billboards.add(new Billboard(null, "location11",11.5, 1L, ads));
+        billboards.add(new Billboard(null, "location10",10.5, 1L, 2L, ads));
+        billboards.add(new Billboard(null, "location11",11.5, 1L, 2L, ads));
 
         List<Billboard> billboardList = new ArrayList<>();
         for (Billboard b: billboards) {

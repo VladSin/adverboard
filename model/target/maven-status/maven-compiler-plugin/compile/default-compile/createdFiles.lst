@@ -5,6 +5,7 @@ org\example\vladsin\adverboard\model\controller\UpdatePass.class
 org\example\vladsin\adverboard\model\Billboard.class
 org\example\vladsin\adverboard\model\GroupBillboards.class
 org\example\vladsin\adverboard\model\Ad.class
+org\example\vladsin\adverboard\model\controller\BillboardJson.class
 org\example\vladsin\adverboard\model\Role.class
 org\example\vladsin\adverboard\model\AuthUser.class
 org\example\vladsin\adverboard\model\controller\RegistrationUser.class

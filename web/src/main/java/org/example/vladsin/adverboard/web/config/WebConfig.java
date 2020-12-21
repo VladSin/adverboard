@@ -9,6 +9,7 @@ import org.example.vladsin.adverboard.web.controller.rest.AuthUserRestController
 import org.example.vladsin.adverboard.web.controller.rest.BillboardRestController;
 import org.example.vladsin.adverboard.web.controller.rest.GroupBillboardsRestController;
 import org.example.vladsin.adverboard.web.controller.rest.UserRestController;
+import org.example.vladsin.adverboard.web.controller.view.AdminController;
 import org.example.vladsin.adverboard.web.controller.view.WebController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -36,14 +37,6 @@ public class WebConfig {
     @Bean
     public FirstPageController firstPageController(){
         return new FirstPageController();
-    }
-
-    @Bean
-    public WebController webController(){
-        return new WebController(
-                serviceConfig.billboardService(),
-                serviceConfig.locationService()
-        );
     }
 
     @Bean
@@ -87,7 +80,9 @@ public class WebConfig {
     @Bean
     public GroupBillboardsRestController groupBillboardsRestController(){
         return new GroupBillboardsRestController(
-                serviceConfig.groupBillboardService()
+                serviceConfig.groupBillboardService(),
+                serviceConfig.billboardService(),
+                serviceConfig.adService()
         );
     }
 
@@ -100,6 +95,29 @@ public class WebConfig {
                 serviceConfig.adService()
         );
     }
+
+    @Bean
+    public WebController webController(){
+        return new WebController(
+                serviceConfig.billboardService(),
+                serviceConfig.locationService(),
+                serviceConfig.adService()
+        );
+    }
+
+    @Bean
+    public AdminController adminController(){
+        return new AdminController(
+                serviceConfig.userService(),
+                serviceConfig.securityService(),
+                serviceConfig.authUserService(),
+                serviceConfig.billboardService(),
+                serviceConfig.locationService(),
+                serviceConfig.groupBillboardService()
+        );
+    }
+
+
 
     @Bean
     public ViewResolver viewResolver(){

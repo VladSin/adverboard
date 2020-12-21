@@ -26,7 +26,7 @@ class BillboardRepositoryServiceImplTest {
 
     @Test
     void saveBillboard() {
-        when(dao.getBillboardById(1L)).thenReturn(new Billboard(1L, "Location", 20.0, 1L, new ArrayList<Ad>()));
+        when(dao.getBillboardById(1L)).thenReturn(new Billboard(1L, "Location", 20.0, 1L, 1L, new ArrayList<Ad>()));
         final Billboard billboardFromDb = service.getBillboardById(1L);
         assertNotNull(billboardFromDb);
 
@@ -42,7 +42,7 @@ class BillboardRepositoryServiceImplTest {
 
     @Test
     void updateBillboard() {
-        when(dao.getBillboardById(1L)).thenReturn(new Billboard(1L, "Location", 20.0, 1L, new ArrayList<Ad>()));
+        when(dao.getBillboardById(1L)).thenReturn(new Billboard(1L, "Location", 20.0, 1L, 1L, new ArrayList<Ad>()));
         final Billboard billboardFromDb = service.getBillboardById(1L);
         assertNotNull(billboardFromDb);
 
@@ -53,7 +53,7 @@ class BillboardRepositoryServiceImplTest {
 
     @Test
     void deleteBillboard() {
-        when(dao.getBillboardById(1L)).thenReturn(new Billboard(1L, "Location", 20.0, 1L, new ArrayList<Ad>()));
+        when(dao.getBillboardById(1L)).thenReturn(new Billboard(1L, "Location", 20.0, 1L, 1L, new ArrayList<Ad>()));
         final Billboard billboardFromDb = service.getBillboardById(1L);
         assertNotNull(billboardFromDb);
 
@@ -64,7 +64,7 @@ class BillboardRepositoryServiceImplTest {
 
     @Test
     void getBillboardById() {
-        when(dao.getBillboardById(1L)).thenReturn(new Billboard(1L, "Location", 20.0, 1L, new ArrayList<Ad>()));
+        when(dao.getBillboardById(1L)).thenReturn(new Billboard(1L, "Location", 20.0, 1L, 1L, new ArrayList<Ad>()));
         final Billboard billboardFromDb = service.getBillboardById(1L);
         assertNotNull(billboardFromDb);
 
@@ -79,7 +79,7 @@ class BillboardRepositoryServiceImplTest {
 
     @Test
     void getBillboardByLocation() {
-        when(dao.getBillboardByLocation("Location")).thenReturn(new Billboard(1L, "Location", 20.0, 1L, new ArrayList<Ad>()));
+        when(dao.getBillboardByLocation("Location")).thenReturn(new Billboard(1L, "Location", 20.0, 1L, 1L, new ArrayList<Ad>()));
         final Billboard billboardFromDb = service.getBillboardByLocation("Location");
         assertNotNull(billboardFromDb);
 
@@ -95,8 +95,8 @@ class BillboardRepositoryServiceImplTest {
     @Test
     void getBillboards() {
         List<Billboard> billboards = new ArrayList<>();
-        billboards.add(new Billboard(1L, "Location1", 20.0, 1L, new ArrayList<Ad>()));
-        billboards.add(new Billboard(2L, "Location2", 30.0, 2L, new ArrayList<Ad>()));
+        billboards.add(new Billboard(1L, "Location1", 20.0, 1L, 1L, new ArrayList<Ad>()));
+        billboards.add(new Billboard(2L, "Location2", 30.0, 2L, 1L, new ArrayList<Ad>()));
         when(dao.getBillboards()).thenReturn(billboards);
 
         List<Billboard> billboardList = dao.getBillboards();
@@ -112,8 +112,8 @@ class BillboardRepositoryServiceImplTest {
     @Test
     void getBillboardsByUserId() {
         List<Billboard> billboards = new ArrayList<>();
-        billboards.add(new Billboard(1L, "Location1", 20.0, 1L, new ArrayList<Ad>()));
-        billboards.add(new Billboard(2L, "Location2", 30.0, 1L, new ArrayList<Ad>()));
+        billboards.add(new Billboard(1L, "Location1", 20.0, 1L, 1L, new ArrayList<Ad>()));
+        billboards.add(new Billboard(2L, "Location2", 30.0, 1L, 1L, new ArrayList<Ad>()));
         when(dao.getBillboardsByUserId(1L)).thenReturn(billboards);
 
         List<Billboard> billboardList = service.getBillboardsByUserId(1L);

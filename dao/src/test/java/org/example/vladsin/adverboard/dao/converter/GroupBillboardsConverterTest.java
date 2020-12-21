@@ -21,7 +21,6 @@ class GroupBillboardsConverterTest {
         groupBillboardsEntity.setId(null);
         groupBillboardsEntity.setGroupName("name");
         groupBillboardsEntity.setUserId(1L);
-        groupBillboardsEntity.setBillboards(billboardEntities);
 
         GroupBillboards groupBillboards = GroupBillboardsConverter.fromEntity(groupBillboardsEntity);
         assertNotNull(groupBillboards);

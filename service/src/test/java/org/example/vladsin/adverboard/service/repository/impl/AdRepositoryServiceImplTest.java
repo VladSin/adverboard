@@ -26,7 +26,7 @@ class AdRepositoryServiceImplTest {
 
     @Test
     void saveAd() {
-        when(dao.getAd(1)).thenReturn(new Ad(1L, "Link1", new ArrayList<Billboard>()));
+        when(dao.getAd(1)).thenReturn(new Ad(1L, "Link1", 1L));
         final Ad adFromDb = service.getAd(1);
         assertNotNull(adFromDb);
 
@@ -36,12 +36,11 @@ class AdRepositoryServiceImplTest {
 
         assertEquals(adFromDb.getId(), ad.getId());
         assertEquals(adFromDb.getLink(), ad.getLink());
-        assertEquals(adFromDb.getBillboards(), ad.getBillboards());
     }
 
     @Test
     void updateAd() {
-        when(dao.getAd(1)).thenReturn(new Ad(1L, "Link1", new ArrayList<Billboard>()));
+        when(dao.getAd(1)).thenReturn(new Ad(1L, "Link1", 1L));
         final Ad adFromDb = service.getAd(1);
         assertNotNull(adFromDb);
 
@@ -52,7 +51,7 @@ class AdRepositoryServiceImplTest {
 
     @Test
     void deleteAd() {
-        when(dao.getAd(1)).thenReturn(new Ad(1L, "Link1", new ArrayList<Billboard>()));
+        when(dao.getAd(1)).thenReturn(new Ad(1L, "Link1", 1L));
         final Ad adFromDb = service.getAd(1);
         assertNotNull(adFromDb);
 
@@ -63,7 +62,7 @@ class AdRepositoryServiceImplTest {
 
     @Test
     void getAd() {
-        when(dao.getAd(1)).thenReturn(new Ad(1L, "Link1", new ArrayList<Billboard>()));
+        when(dao.getAd(1)).thenReturn(new Ad(1L, "Link1", 1L));
         final Ad adFromDb = service.getAd(1);
         assertNotNull(adFromDb);
 
@@ -71,14 +70,13 @@ class AdRepositoryServiceImplTest {
         assertNotNull(ad);
         assertEquals(adFromDb.getId(), ad.getId());
         assertEquals(adFromDb.getLink(), ad.getLink());
-        assertEquals(adFromDb.getBillboards(), ad.getBillboards());
     }
 
     @Test
     void testGetAd() {
         List<Ad> ads = new ArrayList<>();
-        ads.add(new Ad(1L, "Link1", new ArrayList<Billboard>()));
-        ads.add(new Ad(1L, "Link1", new ArrayList<Billboard>()));
+        ads.add(new Ad(1L, "Link1", 1L));
+        ads.add(new Ad(1L, "Link1", 1L));
         when(dao.getAd()).thenReturn(ads);
 
         List<Ad> adDao = service.getAd();
@@ -86,7 +84,6 @@ class AdRepositoryServiceImplTest {
         for (int i = 0; i < adDao.size(); i++) {
             assertEquals(adDao.get(i).getId(), ads.get(i).getId());
             assertEquals(adDao.get(i).getLink(), ads.get(i).getLink());
-            assertEquals(adDao.get(i).getBillboards(), ads.get(i).getBillboards());
         }
     }
 }

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.example.vladsin.adverboard.dao.repository.impl.AdRepositoryDaoImplTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.555 s - in org.example.vladsin.adverboard.dao.repository.impl.AdRepositoryDaoImplTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.223 s - in org.example.vladsin.adverboard.dao.repository.impl.AdRepositoryDaoImplTest

@@ -22,17 +22,13 @@ public class GroupBillboardsEntity {
     @Column(name = "user_id")
     private Long userId;
 
-    @OneToMany(mappedBy = "groupBillboardsEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BillboardEntity> billboards = new ArrayList<>();
-
     public GroupBillboardsEntity() {
     }
 
-    public GroupBillboardsEntity(Long id, String groupName, Long userId, List<BillboardEntity> billboards) {
+    public GroupBillboardsEntity(Long id, String groupName, Long userId) {
         this.id = id;
         this.groupName = groupName;
         this.userId = userId;
-        this.billboards = billboards;
     }
 
     public Long getId() {
@@ -54,12 +50,5 @@ public class GroupBillboardsEntity {
     }
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public List<BillboardEntity> getBillboards() {
-        return billboards;
-    }
-    public void setBillboards(List<BillboardEntity> billboards) {
-        this.billboards = billboards;
     }
 }

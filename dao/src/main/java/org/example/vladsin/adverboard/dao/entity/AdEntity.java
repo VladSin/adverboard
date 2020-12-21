@@ -19,19 +19,16 @@ public class AdEntity {
     @Column(name = "link")
     private String link;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "ad_billboard",
-            joinColumns = {@JoinColumn(name = "ad_id")},
-            inverseJoinColumns = {@JoinColumn(name = "billboard_id")})
-    private List<BillboardEntity> billboards = new ArrayList<>();
+    @Column(name = "billboard_id")
+    private Long billboardId;
 
     public AdEntity() {
     }
 
-    public AdEntity(Long adId, String link, List<BillboardEntity> billboards) {
+    public AdEntity(Long adId, String link, Long billboardId) {
         this.adId = adId;
         this.link = link;
-        this.billboards = billboards;
+        this.billboardId = billboardId;
     }
 
     public Long getAdId() {
@@ -48,10 +45,10 @@ public class AdEntity {
         this.link = link;
     }
 
-    public List<BillboardEntity> getBillboards() {
-        return billboards;
+    public Long getBillboardId() {
+        return billboardId;
     }
-    public void setBillboards(List<BillboardEntity> billboards) {
-        this.billboards = billboards;
+    public void setBillboardId(Long billboardId) {
+        this.billboardId = billboardId;
     }
 }

@@ -1,0 +1,8 @@
+form:nth-child(3):before{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    height: 10px;
+    width: 100%;
+    background: repeating-linear-gradient(45deg, turquoise, turquoise 10px, #D7DFED 10px, #D7DFED 20px);
+}

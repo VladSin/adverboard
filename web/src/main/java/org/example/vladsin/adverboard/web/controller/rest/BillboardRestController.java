@@ -3,27 +3,34 @@ package org.example.vladsin.adverboard.web.controller.rest;
 import org.example.vladsin.adverboard.model.Ad;
 import org.example.vladsin.adverboard.model.Billboard;
 import org.example.vladsin.adverboard.service.repository.BillboardRepositoryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
 @RequestMapping("/billboard")
 public class BillboardRestController {
 
+    private static final Logger log = LoggerFactory.getLogger(BillboardRestController.class);
+
     private final BillboardRepositoryService billboardRepositoryService;
+
     @Autowired
     public BillboardRestController(BillboardRepositoryService billboardRepositoryService) {
         this.billboardRepositoryService = billboardRepositoryService;
     }
 
-    @PostMapping(value = "/buy")
+    @PostMapping(value = "")
     @ResponseStatus(HttpStatus.CREATED)
     public Long addBillboard(@RequestBody Billboard billboard){
         Billboard newBillboard = billboardRepositoryService.saveBillboard(billboard);
+        log.info("billboard created {} logged at {}", newBillboard.getId(), LocalDateTime.now());
         return newBillboard.getId();
     }
 
@@ -81,6 +88,7 @@ public class BillboardRestController {
         billboard.setUserId(newBillboard.getUserId());
         billboard.setAds(newBillboard.getAds());
         billboardRepositoryService.updateBillboard(billboard);
+        log.info("billboard updated {} logged at {}", newBillboard.getId(), LocalDateTime.now());
         return new ResponseEntity<>(newBillboard, HttpStatus.OK);
     }
 
@@ -95,6 +103,7 @@ public class BillboardRestController {
 
         billboard.setUserId(userId);
         billboardRepositoryService.updateBillboard(billboard);
+        log.info("billboard updated {} logged at {}", id, LocalDateTime.now());
         return new ResponseEntity<>(billboard, HttpStatus.OK);
     }
 
@@ -109,6 +118,7 @@ public class BillboardRestController {
 
         billboard.setAds(ads);
         billboardRepositoryService.updateBillboard(billboard);
+        log.info("billboard updated {} logged at {}", id, LocalDateTime.now());
         return new ResponseEntity<>(billboard, HttpStatus.OK);
     }
 
@@ -116,6 +126,7 @@ public class BillboardRestController {
     @ResponseStatus(HttpStatus.OK)
     public String deleteBillboard(@PathVariable("id") Long id){
         billboardRepositoryService.deleteBillboard(id);
+        log.info("billboard deleted {} logged at {}", id, LocalDateTime.now());
         return "OK";
     }
 }
