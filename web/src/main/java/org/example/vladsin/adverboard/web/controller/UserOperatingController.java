@@ -6,6 +6,8 @@ import org.example.vladsin.adverboard.model.Ad;
 import org.example.vladsin.adverboard.model.Billboard;
 import org.example.vladsin.adverboard.model.GroupBillboards;
 import org.example.vladsin.adverboard.model.Location;
+import org.example.vladsin.adverboard.model.controller.BillboardJson;
+import org.example.vladsin.adverboard.model.controller.GroupBillboardsJson;
 import org.example.vladsin.adverboard.service.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/operating")
@@ -41,8 +44,9 @@ public class UserOperatingController {
         this.adRepositoryService = adRepositoryService;
     }
 
+    // Теперь отдаю не List<Billboard>, а List<BillboardJson>
     @PostMapping(value = "/billboards")
-    public ResponseEntity<List<Billboard>> getBillboardsByLocation(@RequestBody String jsonString) throws IOException {
+    public ResponseEntity<List<BillboardJson>> getBillboardsByLocation(@RequestBody String jsonString) throws IOException {
         final ObjectMapper objectMapper = new ObjectMapper();
         List<String> locations = objectMapper.readValue(jsonString, new TypeReference<List<String>>(){});
 
@@ -51,7 +55,17 @@ public class UserOperatingController {
             log.info("NO_CONTENT logged at {}", LocalDateTime.now());
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(billboards, HttpStatus.OK);
+
+        List<BillboardJson> billboardJsons = new ArrayList<>();
+        for (Billboard b: billboards) {
+            List<Ad> ads = adRepositoryService.getAdByBillboardId(b.getId());
+            billboardJsons.add(new BillboardJson(b.getLocation(), null, null,
+                    b.getId(),
+                    b.getUserId(),
+                    b.getPrice(),
+                    ads.stream().map(Ad::getLink).collect(Collectors.toList()), null));
+        }
+        return new ResponseEntity<>(billboardJsons, HttpStatus.OK);
     }
     
     @GetMapping(value = "/locations")
@@ -65,9 +79,10 @@ public class UserOperatingController {
         return new ResponseEntity<>(locations, HttpStatus.OK);
     }
 
+    // Теперь отдаю не Billboard.class, а BillboardJson.class
     @PatchMapping(value = "/buy/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Billboard> buyBillboard(
+    public ResponseEntity<BillboardJson> buyBillboard(
             @PathVariable("id") Long id,
             @RequestBody Long userId) {
         Billboard billboard = billboardRepositoryService.getBillboardById(id);
@@ -80,12 +95,21 @@ public class UserOperatingController {
         billboard.setUserId(userId);
         billboardRepositoryService.updateBillboard(billboard);
         log.info("billboard bought{} logged at {}", billboard.getId(), LocalDateTime.now());
-        return new ResponseEntity<>(billboard, HttpStatus.OK);
+
+        List<Ad> ads = adRepositoryService.getAdByBillboardId(billboard.getId());
+        BillboardJson billboardJson = new BillboardJson(billboard.getLocation(), null, null,
+                billboard.getId(),
+                billboard.getUserId(),
+                billboard.getPrice(),
+                ads.stream().map(Ad::getLink).collect(Collectors.toList()), null);
+
+        return new ResponseEntity<>(billboardJson, HttpStatus.OK);
     }
 
+    // Теперь отдаю не Billboard.class, а BillboardJson.class
     @PatchMapping(value = "/set/billboard/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Billboard> setBillboardMedia(
+    public ResponseEntity<BillboardJson> setBillboardMedia(
             @PathVariable("id") Long id,
             @RequestBody String jsonString) throws IOException {
         Billboard billboard = billboardRepositoryService.getBillboardById(id);
@@ -104,18 +128,23 @@ public class UserOperatingController {
         }
 
         billboard.setAds(ads);
-
         log.info("set ads on billboard {} logged at {}", billboard.getId(), LocalDateTime.now());
-        return new ResponseEntity<>(billboard, HttpStatus.OK);
+
+        BillboardJson billboardJson = new BillboardJson(billboard.getLocation(), null, null,
+                billboard.getId(),
+                billboard.getUserId(),
+                billboard.getPrice(),
+                ads.stream().map(Ad::getLink).collect(Collectors.toList()), null);
+        return new ResponseEntity<>(billboardJson, HttpStatus.OK);
     }
 
+    // Теперь отдаю не GroupBillboards.class, а GroupBillboardsJson.class
     @PatchMapping(value = "/set/group/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<GroupBillboards> setGroupMedia(
+    public ResponseEntity<GroupBillboardsJson> setGroupMedia(
             @PathVariable("id") Long id,
             @RequestBody String jsonString) throws IOException {
         GroupBillboards groupBillboards = groupService.getGroupById(id);
-
         if (groupBillboards == null){
             log.info("NO_CONTENT logged at {}", LocalDateTime.now());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -132,7 +161,19 @@ public class UserOperatingController {
         }
         groupBillboards.setBillboards(billboards);
 
+        List<BillboardJson> billboardJsons = new ArrayList<>();
+        for (Billboard b: billboards) {
+            List<Ad> ads = adRepositoryService.getAdByBillboardId(b.getId());
+            billboardJsons.add(new BillboardJson(b.getLocation(), null, null,
+                    b.getId(),
+                    b.getUserId(),
+                    b.getPrice(),
+                    ads.stream().map(Ad::getLink).collect(Collectors.toList()), null));
+        }
+
+        GroupBillboardsJson groupJson = new GroupBillboardsJson(groupBillboards.getId(), null, null,
+                groupBillboards.getGroupName(), groupBillboards.getUserId(), billboardJsons, links);
         log.info("group billboards updated {} logged at {}", groupBillboards.getGroupName(), LocalDateTime.now());
-        return new ResponseEntity<>(groupBillboards, HttpStatus.OK);
+        return new ResponseEntity<>(groupJson, HttpStatus.OK);
     }
 }

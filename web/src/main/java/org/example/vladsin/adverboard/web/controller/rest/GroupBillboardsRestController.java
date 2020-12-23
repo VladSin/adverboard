@@ -6,6 +6,7 @@ import org.example.vladsin.adverboard.model.Ad;
 import org.example.vladsin.adverboard.model.Billboard;
 import org.example.vladsin.adverboard.model.GroupBillboards;
 import org.example.vladsin.adverboard.model.controller.BillboardJson;
+import org.example.vladsin.adverboard.model.controller.GroupBillboardsJson;
 import org.example.vladsin.adverboard.service.repository.AdRepositoryService;
 import org.example.vladsin.adverboard.service.repository.BillboardRepositoryService;
 import org.example.vladsin.adverboard.service.repository.GroupBillboardRepositoryService;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -59,23 +62,64 @@ public class GroupBillboardsRestController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<GroupBillboards> getGroupBillboards(@PathVariable("id") Long id) {
+    public ResponseEntity<GroupBillboardsJson> getGroupBillboards(@PathVariable("id") Long id) {
         GroupBillboards group = groupBillboardRepositoryService.getGroupById(id);
-
         if (group == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        List<Billboard> billboards = billboardRepositoryService.getBillboardsByGroupId(id);
 
-        return new ResponseEntity<>(group, HttpStatus.OK);
+        List<BillboardJson> billboardJsons = new ArrayList<>();
+        for (Billboard b: billboards) {
+            List<Ad> ads = adRepositoryService.getAdByBillboardId(b.getId());
+            billboardJsons.add(new BillboardJson(b.getLocation(), null, null,
+                    b.getId(),
+                    b.getUserId(),
+                    b.getPrice(),
+                    ads.stream().map(Ad::getLink).collect(Collectors.toList()), null));
+        }
+
+        List<String> links = new ArrayList<>();
+        try {
+            links = billboardJsons.get(0).getAds();
+        } catch (RuntimeException e){
+            log.info("billboards do not have advertising from the group {} logged at {}", id, LocalDateTime.now());
+        }
+
+        GroupBillboardsJson groupJson = new GroupBillboardsJson(group.getId(), null, null,
+                group.getGroupName(), group.getUserId(), billboardJsons, links);
+        return new ResponseEntity<>(groupJson, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/user/{userId}")
-    public ResponseEntity<GroupBillboards> getGroupByUserId(@PathVariable("userId") Long userId) {
-        GroupBillboards group = groupBillboardRepositoryService.getGroupByUserId(userId);
+    @GetMapping(value = "/get/{userId}")
+    public ResponseEntity<List<GroupBillboardsJson>> getGroupsBillboardsByUserId(@PathVariable("userId") Long userId) {
+        List<GroupBillboards> group = groupBillboardRepositoryService.getGroupsByUserId(userId);
+        if (group.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-        if (group == null)
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        List<GroupBillboardsJson> groupBillboardsJsons = new ArrayList<>();
+        for (GroupBillboards g: group) {
 
-        return new ResponseEntity<>(group, HttpStatus.OK);
+            List<BillboardJson> billboardJsons = new ArrayList<>();
+            for (Billboard b: billboardRepositoryService.getBillboardsByGroupId(g.getId())) {
+                List<Ad> ads = adRepositoryService.getAdByBillboardId(b.getId());
+                billboardJsons.add(new BillboardJson(b.getLocation(), null, null,
+                        b.getId(),
+                        b.getUserId(),
+                        b.getPrice(),
+                        ads.stream().map(Ad::getLink).collect(Collectors.toList()), null));
+            }
+
+            List<String> links = new ArrayList<>();
+            try {
+                links = billboardJsons.get(0).getAds();
+            } catch (RuntimeException e){
+                log.info("billboards do not have advertising from the user {} logged at {}", userId, LocalDateTime.now());
+            }
+            groupBillboardsJsons.add(new GroupBillboardsJson(g.getId(), null, null,
+                    g.getGroupName(), g.getUserId(), billboardJsons, links));
+        }
+
+        return new ResponseEntity<>(groupBillboardsJsons, HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}")
@@ -93,16 +137,6 @@ public class GroupBillboardsRestController {
         groupBillboardRepositoryService.updateGroup(group);
         log.info("group updated {} logged at {}", id, LocalDateTime.now());
         return new ResponseEntity<>(newGroup, HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/groups/{userId}")
-    public ResponseEntity<List<GroupBillboards>> getBillboardsByUserId(@PathVariable("userId") Long userId) {
-        List<GroupBillboards> groupBillboards = groupBillboardRepositoryService.getGroupsByUserId(userId);
-
-        if (groupBillboards.isEmpty())
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
-        return new ResponseEntity<>(groupBillboards, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")

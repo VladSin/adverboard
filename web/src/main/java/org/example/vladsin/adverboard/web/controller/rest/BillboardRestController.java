@@ -2,6 +2,8 @@ package org.example.vladsin.adverboard.web.controller.rest;
 
 import org.example.vladsin.adverboard.model.Ad;
 import org.example.vladsin.adverboard.model.Billboard;
+import org.example.vladsin.adverboard.model.controller.BillboardJson;
+import org.example.vladsin.adverboard.service.repository.AdRepositoryService;
 import org.example.vladsin.adverboard.service.repository.BillboardRepositoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/billboard")
@@ -20,10 +24,12 @@ public class BillboardRestController {
     private static final Logger log = LoggerFactory.getLogger(BillboardRestController.class);
 
     private final BillboardRepositoryService billboardRepositoryService;
+    private final AdRepositoryService adRepositoryService;
 
     @Autowired
-    public BillboardRestController(BillboardRepositoryService billboardRepositoryService) {
+    public BillboardRestController(BillboardRepositoryService billboardRepositoryService, AdRepositoryService adRepositoryService) {
         this.billboardRepositoryService = billboardRepositoryService;
+        this.adRepositoryService = adRepositoryService;
     }
 
     @PostMapping(value = "")
@@ -65,13 +71,22 @@ public class BillboardRestController {
     }
 
     @GetMapping(value = "/user/{userId}")
-    public ResponseEntity<List<Billboard>> getBillboardsByUserId(@PathVariable("userId") Long userId) {
+    public ResponseEntity<List<BillboardJson>> getBillboardsByUserId(@PathVariable("userId") Long userId) {
         List<Billboard> billboards = billboardRepositoryService.getBillboardsByUserId(userId);
 
         if (billboards.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-        return new ResponseEntity<>(billboards, HttpStatus.OK);
+        List<BillboardJson> billboardJsons = new ArrayList<>();
+        for (Billboard b: billboards) {
+            List<Ad> ads = adRepositoryService.getAdByBillboardId(b.getId());
+            billboardJsons.add(new BillboardJson(b.getLocation(), null, null,
+                    b.getId(),
+                    b.getUserId(),
+                    b.getPrice(),
+                    ads.stream().map(Ad::getLink).collect(Collectors.toList()), null));
+        }
+        return new ResponseEntity<>(billboardJsons, HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}")

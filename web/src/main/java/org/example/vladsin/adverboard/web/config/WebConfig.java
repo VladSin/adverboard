@@ -73,7 +73,8 @@ public class WebConfig {
     @Bean
     public BillboardRestController billboardRestController(){
         return new BillboardRestController(
-                serviceConfig.billboardService()
+                serviceConfig.billboardService(),
+                serviceConfig.adService()
         );
     }
 
