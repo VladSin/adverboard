@@ -7,10 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8"/>
     <title>Locations</title>
+    <link rel="stylesheet" type="text/css" href="assests/css/backgroundStyle.css"/>
 </head>
 <body>
 <center>
@@ -28,6 +30,7 @@
         </select>
         <input type="submit" name="location" value="Choose" />
     </form>
+
 </center>
 </body>
 </html>

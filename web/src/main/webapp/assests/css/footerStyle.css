@@ -3,7 +3,7 @@ body{height: 900px;}
 footer {
     background: url('http://www.autodatz.com/wp-content/uploads/2017/05/Old-Car-Wallpapers-Hd-36-with-Old-Car-Wallpapers-Hd.jpg');
     text-align: center;
-    width: 100%;
+    width: 70%;
     height: auto;
     background-size: cover;
     background-attachment: fixed;
@@ -12,8 +12,8 @@ footer {
     border-radius: 0 0 85% 85% / 30%;
 }
 footer .overlay{
-    width: 100%;
-    height: 100%;
+    width: 70%;
+    height: 70%;
     padding: 50px;
     color: #FFF;
     text-shadow: 1px 1px 1px #333;

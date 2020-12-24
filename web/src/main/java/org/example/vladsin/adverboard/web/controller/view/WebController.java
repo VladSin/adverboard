@@ -47,7 +47,7 @@ public class WebController {
     @PostMapping(value = "/stream")
     public String getAds(HttpServletRequest request) {
         Billboard billboard = billboardRepositoryService.getBillboardByLocation(request.getParameter("location"));
-        List<Ad> ads = billboard.getAds();
+        List<Ad> ads = adRepositoryService.getAdByBillboardId(billboard.getId());
         request.setAttribute("ads", ads);
         return "stream";
     }

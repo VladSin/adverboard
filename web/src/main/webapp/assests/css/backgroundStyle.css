@@ -1,4 +1,4 @@
-body {background: url(https://html5book.ru/wp-content/uploads/2015/07/background46.png);}
+body {background: url(https://html5book.ru/wp-content/uploads/2015/07/background39.png);}
 a, input, select, option{
     text-decoration: none;
     outline: none;
@@ -20,8 +20,8 @@ a, input, select, option{
     transition: .3s;
 }
 a, input, select, option:hover {
-    background: rgba(114, 148, 229, 0.87);
-    box-shadow: 0 15px 20px rgba(93, 92, 229, 0.35);
+    background: #2EE59D;
+    box-shadow: 0 15px 20px rgba(46,229,157,.4);
     color: white;
     transform: translateY(-7px);
 }

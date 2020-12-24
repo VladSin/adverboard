@@ -1,7 +1,7 @@
 package org.example.vladsin.adverboard.web.config;
 
 import org.example.vladsin.adverboard.service.config.ServiceConfig;
-import org.example.vladsin.adverboard.web.controller.FirstPageController;
+import org.example.vladsin.adverboard.web.controller.view.FirstPageController;
 import org.example.vladsin.adverboard.web.controller.LoginController;
 import org.example.vladsin.adverboard.web.controller.RegistrationController;
 import org.example.vladsin.adverboard.web.controller.UserOperatingController;
@@ -12,13 +12,10 @@ import org.example.vladsin.adverboard.web.controller.rest.UserRestController;
 import org.example.vladsin.adverboard.web.controller.view.AdminController;
 import org.example.vladsin.adverboard.web.controller.view.WebController;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
-import org.springframework.web.servlet.mvc.method.annotation.AbstractMappingJacksonResponseBodyAdvice;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
@@ -113,12 +110,9 @@ public class WebConfig {
                 serviceConfig.securityService(),
                 serviceConfig.authUserService(),
                 serviceConfig.billboardService(),
-                serviceConfig.locationService(),
-                serviceConfig.groupBillboardService()
+                serviceConfig.adService()
         );
     }
-
-
 
     @Bean
     public ViewResolver viewResolver(){

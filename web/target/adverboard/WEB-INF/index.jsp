@@ -5,8 +5,7 @@
   Time: 10:59
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8"
-         language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,9 +29,6 @@
     <h3 style="color: #000385">Login for administrator only.</h3>
     <form action="${pageContext.request.contextPath}/admin/login" method="get">
         <input type="submit" value="Log in"/>
-    </form>
-    <form action="${pageContext.request.contextPath}/admin/register" method="get">
-        <input type="submit" value="Sign in"/>
     </form>
 </center>
 </body>

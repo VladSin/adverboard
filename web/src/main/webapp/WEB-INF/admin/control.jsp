@@ -6,37 +6,53 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>Adverboards account</title>
+    <title>Monitoring Users</title>
     <link rel="stylesheet" type="text/css" href="assests/css/backgroundStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="assests/css/tableStyle.css"/>
 </head>
 
 <header>
-    <center>
-        <h1 style="color: #000385"> Nice to see you! </h1>
-        <h3 style="color: #000385">On our site you can see a huge number amazing exciting and beautiful advertisements!</h3>
-        <form action="${pageContext.request.contextPath}/web" method="get">
-            <input type="submit" value="Watch ADS"/>
-        </form>
-    </center>
+    <form action="${pageContext.request.contextPath}/" method="get">
+        <input type="submit" value="Let's GO back!"/>
+    </form>
+    <form action="${pageContext.request.contextPath}/admin/register" method="get">
+        <input type="submit" value="Sign in"/>
+    </form>
 </header>
 
 <body>
 <center>
-    <h2 style="color: #000385" >System management.</h2>
-    <form action="${pageContext.request.contextPath}/web" method="get">
-        <input type="submit" value="Billboard list"/>
-    </form>
-    <form action="${pageContext.request.contextPath}/web" method="get">
-        <input type="submit" value="User list"/>
-    </form>
+    <h2 style="color: #000385" >Monitoring Users</h2>
+    <table>
+        <tr><th>Id</th><th>Username</th><th>Email</th><th>Action</th></tr>
+        <c:if test="${users != null}">
+            <c:forEach items="${users}" var="user">
+                <tr>
+                    <td style="color: green">${user.id}</td>
+                    <td style="color: green">${user.username}</td>
+                    <td style="color: green">${user.email}</td>
+                    <td style="color: green">
+                        <form action="${pageContext.request.contextPath}/admin/user/${user.id}" method="get">
+                            <input type="submit" value="More Detail"/>
+                        </form>
+                        <form action="${pageContext.request.contextPath}/admin/delete/user/${user.id}" method="get">
+                            <input type="submit" value="Delete"/>
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+        </c:if>
+    </table>
 </center>
 </body>
 
 <footer>
+    <link rel="stylesheet" type="text/css" href="assests/css/footerStyle.css"/>
     <center>
         <p style="color: #000385">Do you want to post your advertisement on our website? Download our application: Adverboard</p>
     </center>
