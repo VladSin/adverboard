@@ -1,17 +1,13 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Vlads
-  Date: 15.12.2020
-  Time: 13:49
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8"/>
     <title>Authorization</title>
-    <link rel="stylesheet" type="text/css" href="assests/css/backgroundStyle.css"/>
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/css/backgroundStyle.css" />" rel="stylesheet">
 </head>
 
 <header>

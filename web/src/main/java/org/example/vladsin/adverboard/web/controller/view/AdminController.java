@@ -49,7 +49,7 @@ public class AdminController {
 
     @GetMapping("/login")
     public  String doGetAdminLogin(){
-        return "admin/login";
+        return "admin/loginTop";
     }
 
     @GetMapping("/register")
@@ -89,7 +89,7 @@ public class AdminController {
         AuthUser authUser = securityRepositoryService.login(loginUser.getUsername(), loginUser.getPassword());
         if (authUser == null){
             request.setAttribute("error", "login or password invalid");
-            return "admin/login";
+            return "admin/loginTop";
         }
         return "redirect:/admin/users";
     }

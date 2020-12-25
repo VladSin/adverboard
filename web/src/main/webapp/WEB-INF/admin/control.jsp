@@ -1,19 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Vlads
-  Date: 15.12.2020
-  Time: 13:48
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8"/>
     <title>Monitoring Users</title>
-    <link rel="stylesheet" type="text/css" href="assests/css/backgroundStyle.css"/>
-    <link rel="stylesheet" type="text/css" href="assests/css/tableStyle.css"/>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link href="<c:url value="/resources/css/backgroundStyle.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/css/tableStyle.css" />" rel="stylesheet">
 </head>
 
 <header>
@@ -57,5 +52,4 @@
         <p style="color: #000385">Do you want to post your advertisement on our website? Download our application: Adverboard</p>
     </center>
 </footer>
-
 </html>

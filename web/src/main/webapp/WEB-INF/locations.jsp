@@ -1,19 +1,21 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Vlads
-  Date: 15.12.2020
-  Time: 13:47
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8"/>
     <title>Locations</title>
-    <link rel="stylesheet" type="text/css" href="assests/css/backgroundStyle.css"/>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link href="<c:url value="/resources/css/backgroundStyle.css" />" rel="stylesheet">
 </head>
+
+<header>
+    <form action="${pageContext.request.contextPath}/" method="get">
+        <input type="submit" value="Let's GO back!"/>
+    </form>
+</header>
+
 <body>
 <center>
     <h1 style="color: darkslateblue">Locations</h1>
@@ -33,5 +35,11 @@
 
 </center>
 </body>
+
+<footer>
+    <center>
+        <p style="color: #000385">Do you want to post your advertisement on our website? Download our application: Adverboard</p>
+    </center>
+</footer>
 </html>
 
