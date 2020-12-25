@@ -119,6 +119,10 @@ public class UserOperatingController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
+        for (Ad a: adRepositoryService.getAdByBillboardId(billboard.getId())) {
+            adRepositoryService.deleteAd(a.getId());
+        }
+
         final ObjectMapper objectMapper = new ObjectMapper();
         List<String> links = objectMapper.readValue(jsonString, new TypeReference<List<String>>(){});
 
@@ -145,6 +149,7 @@ public class UserOperatingController {
             @PathVariable("id") Long id,
             @RequestBody String jsonString) throws IOException {
         GroupBillboards groupBillboards = groupService.getGroupById(id);
+
         if (groupBillboards == null){
             log.info("NO_CONTENT logged at {}", LocalDateTime.now());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -155,6 +160,9 @@ public class UserOperatingController {
 
         List<Billboard> billboards = billboardRepositoryService.getBillboardsByGroupId(id);
         for (Billboard b: billboards) {
+            for (Ad a: adRepositoryService.getAdByBillboardId(b.getId())) {
+                adRepositoryService.deleteAd(a.getId());
+            }
             for (String l: links) {
                 b.addAd(adRepositoryService.saveAd(new Ad(null, l, b.getId())));
             }

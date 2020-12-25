@@ -24,11 +24,14 @@
     <c:forEach items="${ads}" var="ad">
     <!-- Full-width images with number and caption text -->
     <div class="mySlides fade">
+        <div class="numbertext">#${ad.id}</div>
         <img src="${ad.link}" style="width:100%">
-        <div class="text">Caption Text</div>
     </div>
     </c:forEach>
 </c:if>
+    <!-- Next and previous buttons -->
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
 </div>
 <br>
 
@@ -38,9 +41,14 @@
     <span class="dot" onclick="currentSlide(2)"></span>
     <span class="dot" onclick="currentSlide(3)"></span>
 </div>
-
 <script src="<c:url value="/resources/js/showSlides.js" />"></script>
 
 </body>
+
+<footer>
+    <center>
+        <p style="color: #000385">Do you want to post your advertisement on our website? Download our application: Adverboard</p>
+    </center>
+</footer>
 
 </html>

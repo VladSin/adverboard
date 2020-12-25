@@ -45,11 +45,4 @@
     </table>
 </center>
 </body>
-
-<footer>
-    <link rel="stylesheet" type="text/css" href="assests/css/footerStyle.css"/>
-    <center>
-        <p style="color: #000385">Do you want to post your advertisement on our website? Download our application: Adverboard</p>
-    </center>
-</footer>
 </html>

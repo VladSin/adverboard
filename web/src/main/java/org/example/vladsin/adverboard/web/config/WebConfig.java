@@ -33,7 +33,7 @@ public class WebConfig {
 
     @Bean
     public FirstPageController firstPageController(){
-        return new FirstPageController();
+        return new FirstPageController(serviceConfig.adService());
     }
 
     @Bean

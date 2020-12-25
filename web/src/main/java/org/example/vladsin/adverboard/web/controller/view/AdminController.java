@@ -1,13 +1,11 @@
 package org.example.vladsin.adverboard.web.controller.view;
 
 import org.example.vladsin.adverboard.model.*;
-import org.example.vladsin.adverboard.model.controller.BillboardJson;
 import org.example.vladsin.adverboard.model.controller.LoginUser;
 import org.example.vladsin.adverboard.model.controller.RegistrationUser;
 import org.example.vladsin.adverboard.service.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,7 +47,7 @@ public class AdminController {
 
     @GetMapping("/login")
     public  String doGetAdminLogin(){
-        return "admin/loginTop";
+        return "admin/login";
     }
 
     @GetMapping("/register")
@@ -73,7 +71,7 @@ public class AdminController {
             newUser = userRepositoryService.saveUser(newUser);
             AuthUser newAuth = new AuthUser(null, user.getUsername(), user.getPassword(), Role.ADMIN, newUser.getId());
             authUserRepositoryService.saveAuthUser(newAuth);
-            return "admin/control";
+            return "admin/login";
         } else {
             return "admin/register";
         }
@@ -89,11 +87,10 @@ public class AdminController {
         AuthUser authUser = securityRepositoryService.login(loginUser.getUsername(), loginUser.getPassword());
         if (authUser == null){
             request.setAttribute("error", "login or password invalid");
-            return "admin/loginTop";
+            return "login";
         }
         return "redirect:/admin/users";
     }
-
 
 
 

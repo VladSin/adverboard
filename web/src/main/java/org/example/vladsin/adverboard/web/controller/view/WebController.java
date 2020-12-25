@@ -22,8 +22,6 @@ import java.util.List;
 @RequestMapping("/web")
 public class WebController {
 
-    private static final Logger log = LoggerFactory.getLogger(WebController.class);
-
     private final BillboardRepositoryService billboardRepositoryService;
     private final LocationRepositoryService locationRepositoryService;
     private final AdRepositoryService adRepositoryService;

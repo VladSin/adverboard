@@ -45,10 +45,4 @@
     </table>
 </center>
 </body>
-
-<footer>
-    <center>
-        <p style="color: #000385">Do you want to post your advertisement on our website? Download our application: Adverboard</p>
-    </center>
-</footer>
 </html>

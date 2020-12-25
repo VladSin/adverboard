@@ -10,12 +10,6 @@
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
 
-<header>
-    <center>
-        <h1 style="color: #000385"> Login for administrator only</h1>
-        <h3 style="color: #000385">On our site you can see a huge number amazing exciting and beautiful advertisements!</h3>
-    </center>
-</header>
 <body>
 <div class="overlay">
     <form action="${pageContext.request.contextPath}/admin/register" method="post">
@@ -29,7 +23,6 @@
 
             <br>
             <div class="field-set">
-
                 <span class="input-item"><i class="fa fa-user-circle"></i></span>
                 <input class="form-input" id="login" name="login" type="text" placeholder="@UserName" required>
                 <br>
@@ -50,9 +43,4 @@
 <script src="<c:url value="/resources/js/index.js" />"></script>
 </body>
 
-<footer>
-    <center>
-        <p style="color: #000385">Do you want to post your advertisement on our website? Then download our application: Adverboard</p>
-    </center>
-</footer>
 </html>

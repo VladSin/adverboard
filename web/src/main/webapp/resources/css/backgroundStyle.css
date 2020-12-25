@@ -13,7 +13,7 @@ body {
     /* background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%); */
 }
 
-a, input, select, option{
+input, select, option{
     text-decoration: none;
     outline: none;
     display: inline-block;
@@ -33,9 +33,12 @@ a, input, select, option{
     box-shadow: 0 8px 15px rgba(0,0,0,.1);
     transition: .3s;
 }
-a, input, select, option:hover {
+input, select, option:hover {
     background: #2EE59D;
     box-shadow: 0 15px 20px rgba(46,229,157,.4);
     color: white;
     transform: translateY(-7px);
+}
+a{
+
 }
