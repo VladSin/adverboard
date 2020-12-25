@@ -142,6 +142,8 @@ public class AdminController {
     @GetMapping(value = "/verify/ad/{id}")
     public void verifyAd(@PathVariable("id") Long id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         Ad ad = adRepositoryService.getAd(id);
+        ad.setVerification("verified");
+        adRepositoryService.updateAd(ad);
         log.info("ad verify {} logged at {}", id, LocalDateTime.now());
         response.sendRedirect("redirect:/admin/billboard/" + ad.getBillboardId());
     }

@@ -25,7 +25,7 @@
               <div class="field-set">
 
                   <span class="input-item"><i class="fa fa-user-circle"></i></span>
-                  <input class="form-input" id="login" name="login" type="text" placeholder="@UserName" required>
+                  <input class="form-input" id="login" name="login" type="text" placeholder="@AdminName" required>
                   <br>
 
                   <span class="input-item"><i class="fa fa-key"></i></span>

@@ -26,7 +26,7 @@ class AdRepositoryServiceImplTest {
 
     @Test
     void saveAd() {
-        when(dao.getAd(1)).thenReturn(new Ad(1L, "Link1", 1L));
+        when(dao.getAd(1)).thenReturn(new Ad(1L, "Link1", 1L, "verified"));
         final Ad adFromDb = service.getAd(1);
         assertNotNull(adFromDb);
 
@@ -40,7 +40,7 @@ class AdRepositoryServiceImplTest {
 
     @Test
     void updateAd() {
-        when(dao.getAd(1)).thenReturn(new Ad(1L, "Link1", 1L));
+        when(dao.getAd(1)).thenReturn(new Ad(1L, "Link1", 1L, "verified"));
         final Ad adFromDb = service.getAd(1);
         assertNotNull(adFromDb);
 
@@ -51,7 +51,7 @@ class AdRepositoryServiceImplTest {
 
     @Test
     void deleteAd() {
-        when(dao.getAd(1)).thenReturn(new Ad(1L, "Link1", 1L));
+        when(dao.getAd(1)).thenReturn(new Ad(1L, "Link1", 1L, "verified"));
         final Ad adFromDb = service.getAd(1);
         assertNotNull(adFromDb);
 
@@ -62,7 +62,7 @@ class AdRepositoryServiceImplTest {
 
     @Test
     void getAd() {
-        when(dao.getAd(1)).thenReturn(new Ad(1L, "Link1", 1L));
+        when(dao.getAd(1)).thenReturn(new Ad(1L, "Link1", 1L, "verified"));
         final Ad adFromDb = service.getAd(1);
         assertNotNull(adFromDb);
 
@@ -75,8 +75,8 @@ class AdRepositoryServiceImplTest {
     @Test
     void testGetAd() {
         List<Ad> ads = new ArrayList<>();
-        ads.add(new Ad(1L, "Link1", 1L));
-        ads.add(new Ad(1L, "Link1", 1L));
+        ads.add(new Ad(1L, "Link1", 1L, "verified"));
+        ads.add(new Ad(1L, "Link1", 1L, "verified"));
         when(dao.getAd()).thenReturn(ads);
 
         List<Ad> adDao = service.getAd();

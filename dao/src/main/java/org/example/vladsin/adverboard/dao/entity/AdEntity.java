@@ -22,13 +22,17 @@ public class AdEntity {
     @Column(name = "billboard_id")
     private Long billboardId;
 
+    @Column(name = "verification")
+    private  String verification;
+
     public AdEntity() {
     }
 
-    public AdEntity(Long adId, String link, Long billboardId) {
+    public AdEntity(Long adId, String link, Long billboardId, String verification) {
         this.adId = adId;
         this.link = link;
         this.billboardId = billboardId;
+        this.verification = verification;
     }
 
     public Long getAdId() {
@@ -50,5 +54,12 @@ public class AdEntity {
     }
     public void setBillboardId(Long billboardId) {
         this.billboardId = billboardId;
+    }
+
+    public String getVerification() {
+        return verification;
+    }
+    public void setVerification(String verification) {
+        this.verification = verification;
     }
 }

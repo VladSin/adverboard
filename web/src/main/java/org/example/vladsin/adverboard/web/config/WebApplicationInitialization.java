@@ -11,7 +11,8 @@ public class WebApplicationInitialization extends AbstractAnnotationConfigDispat
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[]{
-                RootConfig.class
+                RootConfig.class,
+                WebSecurityConfig.class
         };
     }
 
@@ -31,9 +32,9 @@ public class WebApplicationInitialization extends AbstractAnnotationConfigDispat
 
     @Override
     protected Filter[] getServletFilters() {
-//        DelegatingFilterProxy delegateFilterProxy = new DelegatingFilterProxy();
-//        delegateFilterProxy.setTargetBeanName("springSecurityFilterChain");
-//        return new Filter[]{delegateFilterProxy};
-        return super.getServletFilters();
+        DelegatingFilterProxy delegateFilterProxy = new DelegatingFilterProxy();
+        delegateFilterProxy.setTargetBeanName("springSecurityFilterChain");
+        return new Filter[]{delegateFilterProxy};
+//        return super.getServletFilters();
     }
 }

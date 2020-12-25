@@ -5,11 +5,13 @@ public class Ad {
     private Long id;
     private String link;
     private Long billboardId;
+    private String verification;
 
-    public Ad(Long id, String link, Long billboardId) {
+    public Ad(Long id, String link, Long billboardId, String verification) {
         this.id = id;
         this.link = link;
         this.billboardId = billboardId;
+        this.verification = verification;
     }
 
     public Long getId() {
@@ -31,5 +33,12 @@ public class Ad {
     }
     public void setBillboardId(Long billboardId) {
         this.billboardId = billboardId;
+    }
+
+    public String getVerification() {
+        return verification;
+    }
+    public void setVerification(String verification) {
+        this.verification = verification;
     }
 }

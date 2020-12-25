@@ -44,7 +44,6 @@ public class UserOperatingController {
         this.adRepositoryService = adRepositoryService;
     }
 
-    // Теперь отдаю не List<Billboard>, а List<BillboardJson>
     @PostMapping(value = "/billboards")
     public ResponseEntity<List<BillboardJson>> getBillboardsByLocation(@RequestBody String jsonString) throws IOException {
         final ObjectMapper objectMapper = new ObjectMapper();
@@ -59,11 +58,24 @@ public class UserOperatingController {
         List<BillboardJson> billboardJsons = new ArrayList<>();
         for (Billboard b: billboards) {
             List<Ad> ads = adRepositoryService.getAdByBillboardId(b.getId());
+
+            String verification;
+            int goodAds = 0;
+            for (Ad a: ads) {
+                if(a.getVerification().equals("verified"))
+                    goodAds++;
+            }
+            if (ads.size() > goodAds){
+                verification = "unverified";
+            } else {
+                verification = "verified";
+            }
+
             billboardJsons.add(new BillboardJson(b.getLocation(), null, null,
                     b.getId(),
                     b.getUserId(),
                     b.getPrice(),
-                    ads.stream().map(Ad::getLink).collect(Collectors.toList()), null));
+                    ads.stream().map(Ad::getLink).collect(Collectors.toList()), verification));
         }
         return new ResponseEntity<>(billboardJsons, HttpStatus.OK);
     }
@@ -79,7 +91,6 @@ public class UserOperatingController {
         return new ResponseEntity<>(locations, HttpStatus.OK);
     }
 
-    // Теперь отдаю не Billboard.class, а BillboardJson.class
     @PatchMapping(value = "/buy/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<BillboardJson> buyBillboard(
@@ -97,16 +108,28 @@ public class UserOperatingController {
         log.info("billboard bought{} logged at {}", billboard.getId(), LocalDateTime.now());
 
         List<Ad> ads = adRepositoryService.getAdByBillboardId(billboard.getId());
+
+        String verification;
+        int goodAds = 0;
+        for (Ad a: ads) {
+            if(a.getVerification().equals("verified"))
+                goodAds++;
+        }
+        if (ads.size() > goodAds){
+            verification = "unverified";
+        } else {
+            verification = "verified";
+        }
+
         BillboardJson billboardJson = new BillboardJson(billboard.getLocation(), null, null,
                 billboard.getId(),
                 billboard.getUserId(),
                 billboard.getPrice(),
-                ads.stream().map(Ad::getLink).collect(Collectors.toList()), null);
+                ads.stream().map(Ad::getLink).collect(Collectors.toList()), verification);
 
         return new ResponseEntity<>(billboardJson, HttpStatus.OK);
     }
 
-    // Теперь отдаю не Billboard.class, а BillboardJson.class
     @PatchMapping(value = "/set/billboard/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<BillboardJson> setBillboardMedia(
@@ -128,7 +151,7 @@ public class UserOperatingController {
 
         List<Ad> ads = new ArrayList<>();
         for (String l: links) {
-            ads.add(adRepositoryService.saveAd(new Ad(null, l, billboard.getId())));
+            ads.add(adRepositoryService.saveAd(new Ad(null, l, billboard.getId(), "unverified")));
         }
 
         billboard.setAds(ads);
@@ -138,11 +161,10 @@ public class UserOperatingController {
                 billboard.getId(),
                 billboard.getUserId(),
                 billboard.getPrice(),
-                ads.stream().map(Ad::getLink).collect(Collectors.toList()), null);
+                ads.stream().map(Ad::getLink).collect(Collectors.toList()), "unverified");
         return new ResponseEntity<>(billboardJson, HttpStatus.OK);
     }
 
-    // Теперь отдаю не GroupBillboards.class, а GroupBillboardsJson.class
     @PatchMapping(value = "/set/group/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<GroupBillboardsJson> setGroupMedia(
@@ -164,7 +186,7 @@ public class UserOperatingController {
                 adRepositoryService.deleteAd(a.getId());
             }
             for (String l: links) {
-                b.addAd(adRepositoryService.saveAd(new Ad(null, l, b.getId())));
+                b.addAd(adRepositoryService.saveAd(new Ad(null, l, b.getId(), "unverified")));
             }
         }
         groupBillboards.setBillboards(billboards);
@@ -176,7 +198,7 @@ public class UserOperatingController {
                     b.getId(),
                     b.getUserId(),
                     b.getPrice(),
-                    ads.stream().map(Ad::getLink).collect(Collectors.toList()), null));
+                    ads.stream().map(Ad::getLink).collect(Collectors.toList()), "unverified"));
         }
 
         GroupBillboardsJson groupJson = new GroupBillboardsJson(groupBillboards.getId(), null, null,

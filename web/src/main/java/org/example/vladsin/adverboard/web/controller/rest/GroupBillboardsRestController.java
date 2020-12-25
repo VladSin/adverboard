@@ -53,7 +53,7 @@ public class GroupBillboardsRestController {
             billboardRepositoryService.updateBillboard(new Billboard(b.getId(), b.getLocation(), b.getPrice(), b.getUserId(), newGroup.getId(), null));
             if(b.getAds() != null){
                 for (String l: b.getAds()) {
-                    adRepositoryService.saveAd(new Ad(null, l, b.getId()));
+                    adRepositoryService.saveAd(new Ad(null, l, b.getId(), null));
                 }
             }
         }
@@ -71,11 +71,24 @@ public class GroupBillboardsRestController {
         List<BillboardJson> billboardJsons = new ArrayList<>();
         for (Billboard b: billboards) {
             List<Ad> ads = adRepositoryService.getAdByBillboardId(b.getId());
+
+            String verification;
+            int goodAds = 0;
+            for (Ad a: ads) {
+                if(a.getVerification().equals("verified"))
+                    goodAds++;
+            }
+            if (ads.size() > goodAds){
+                verification = "unverified";
+            } else {
+                verification = "verified";
+            }
+
             billboardJsons.add(new BillboardJson(b.getLocation(), null, null,
                     b.getId(),
                     b.getUserId(),
                     b.getPrice(),
-                    ads.stream().map(Ad::getLink).collect(Collectors.toList()), null));
+                    ads.stream().map(Ad::getLink).collect(Collectors.toList()), verification));
         }
 
         List<String> links = new ArrayList<>();
@@ -102,11 +115,24 @@ public class GroupBillboardsRestController {
             List<BillboardJson> billboardJsons = new ArrayList<>();
             for (Billboard b: billboardRepositoryService.getBillboardsByGroupId(g.getId())) {
                 List<Ad> ads = adRepositoryService.getAdByBillboardId(b.getId());
+
+                String verification;
+                int goodAds = 0;
+                for (Ad a: ads) {
+                    if(a.getVerification().equals("verified"))
+                        goodAds++;
+                }
+                if (ads.size() > goodAds){
+                    verification = "unverified";
+                } else {
+                    verification = "verified";
+                }
+
                 billboardJsons.add(new BillboardJson(b.getLocation(), null, null,
                         b.getId(),
                         b.getUserId(),
                         b.getPrice(),
-                        ads.stream().map(Ad::getLink).collect(Collectors.toList()), null));
+                        ads.stream().map(Ad::getLink).collect(Collectors.toList()), verification));
             }
 
             List<String> links = new ArrayList<>();

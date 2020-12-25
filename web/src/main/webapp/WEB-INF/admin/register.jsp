@@ -17,14 +17,14 @@
         <div class="con">
 
             <header class="head-form">
-                <h2>Log In</h2>
+                <h2>Log Up</h2>
                 <p>login here using your username and password</p>
             </header>
 
             <br>
             <div class="field-set">
                 <span class="input-item"><i class="fa fa-user-circle"></i></span>
-                <input class="form-input" id="login" name="login" type="text" placeholder="@UserName" required>
+                <input class="form-input" id="login" name="login" type="text" placeholder="@AdminName" required>
                 <br>
 
                 <span class="input-item"><i class="fa fa-user-circle"></i></span>
@@ -34,7 +34,7 @@
                 <span class="input-item"><i class="fa fa-key"></i></span>
                 <input class="form-input" id="password" name="password" type="password" placeholder="Password" required>
 
-                <button class="log-in"> Sign Up </button>
+                <button class="log-in"> Log Up </button>
             </div>
         </div>
         </center>

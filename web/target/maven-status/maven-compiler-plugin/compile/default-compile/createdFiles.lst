@@ -5,6 +5,7 @@ org\example\vladsin\adverboard\web\filter\EncodingFilter.class
 org\example\vladsin\adverboard\web\config\WebApplicationInitialization.class
 org\example\vladsin\adverboard\web\controller\rest\GroupBillboardsRestController.class
 org\example\vladsin\adverboard\web\config\WebConfig.class
+org\example\vladsin\adverboard\web\config\WebSecurityConfig.class
 org\example\vladsin\adverboard\web\controller\UserOperatingController$1.class
 org\example\vladsin\adverboard\web\controller\rest\BillboardRestController.class
 org\example\vladsin\adverboard\web\controller\rest\UserRestController.class

@@ -31,7 +31,7 @@ class BillboardConverterTest {
     @Test
     void toEntity() {
         List<Billboard> billboards = new ArrayList<>();
-        Ad ad = new Ad(null, "link", 2L);
+        Ad ad = new Ad(null, "link", 2L, "verified");
         List<Ad> ads= new ArrayList<>();
         ads.add(ad);
 

@@ -19,6 +19,7 @@ class AdConverterTest {
         adEntity.setAdId(null);
         adEntity.setLink("link");
         adEntity.setBillboardId(1L);
+        adEntity.setVerification("verified");
 
 
         Ad ad = AdConverter.fromEntity(adEntity);
@@ -30,7 +31,7 @@ class AdConverterTest {
 
     @Test
     void toEntity() {
-        Ad ad = new Ad(null, "link", 1L);
+        Ad ad = new Ad(null, "link", 1L, "verified");
         AdEntity adEntity = AdConverter.toEntity(ad);
         assertNotNull(adEntity);
         assertEquals(ad.getLink(), adEntity.getLink());

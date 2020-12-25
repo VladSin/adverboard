@@ -970,244 +970,248 @@ SELECT|sys.sys_config
       <Position>3</Position>
       <DataType>bigint|0s</DataType>
     </column>
-    <key id="302" parent="287" name="PRIMARY">
+    <column id="302" parent="287" name="verification">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+    </column>
+    <key id="303" parent="287" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ad_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="303" parent="288" name="id">
+    <column id="304" parent="288" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="304" parent="288" name="login">
+    <column id="305" parent="288" name="login">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="305" parent="288" name="password">
+    <column id="306" parent="288" name="password">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="306" parent="288" name="role">
+    <column id="307" parent="288" name="role">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="307" parent="288" name="user_id">
+    <column id="308" parent="288" name="user_id">
       <Position>5</Position>
       <DataType>bigint|0s</DataType>
     </column>
-    <key id="308" parent="288" name="PRIMARY">
+    <key id="309" parent="288" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="309" parent="289" name="billboard_id">
+    <column id="310" parent="289" name="billboard_id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="310" parent="289" name="location">
+    <column id="311" parent="289" name="location">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="311" parent="289" name="price">
+    <column id="312" parent="289" name="price">
       <Position>3</Position>
       <DataType>double|0s</DataType>
     </column>
-    <column id="312" parent="289" name="user_id">
+    <column id="313" parent="289" name="user_id">
       <Position>4</Position>
       <DataType>bigint|0s</DataType>
     </column>
-    <column id="313" parent="289" name="group_id">
+    <column id="314" parent="289" name="group_id">
       <Position>5</Position>
       <DataType>bigint|0s</DataType>
     </column>
-    <key id="314" parent="289" name="PRIMARY">
+    <key id="315" parent="289" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>billboard_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="315" parent="290" name="id">
+    <column id="316" parent="290" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="316" parent="290" name="group_name">
+    <column id="317" parent="290" name="group_name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="317" parent="290" name="user_id">
+    <column id="318" parent="290" name="user_id">
       <Position>3</Position>
       <DataType>bigint|0s</DataType>
     </column>
-    <key id="318" parent="290" name="PRIMARY">
+    <key id="319" parent="290" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="319" parent="291" name="id">
+    <column id="320" parent="291" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="320" parent="291" name="location">
+    <column id="321" parent="291" name="location">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <key id="321" parent="291" name="PRIMARY">
+    <key id="322" parent="291" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="322" parent="292" name="id">
+    <column id="323" parent="292" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="323" parent="292" name="email">
+    <column id="324" parent="292" name="email">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="324" parent="292" name="name">
+    <column id="325" parent="292" name="name">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <key id="325" parent="292" name="PRIMARY">
+    <key id="326" parent="292" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="326" parent="293" name="ad_id">
+    <column id="327" parent="293" name="ad_id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="327" parent="293" name="billboard_id">
+    <column id="328" parent="293" name="billboard_id">
       <Position>2</Position>
       <DataType>bigint|0s</DataType>
     </column>
-    <column id="328" parent="293" name="link">
+    <column id="329" parent="293" name="link">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <key id="329" parent="293" name="PRIMARY">
+    <key id="330" parent="293" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ad_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="330" parent="294" name="id">
+    <column id="331" parent="294" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="331" parent="294" name="login">
+    <column id="332" parent="294" name="login">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="332" parent="294" name="password">
+    <column id="333" parent="294" name="password">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="333" parent="294" name="role">
+    <column id="334" parent="294" name="role">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="334" parent="294" name="user_id">
+    <column id="335" parent="294" name="user_id">
       <Position>5</Position>
       <DataType>bigint|0s</DataType>
     </column>
-    <key id="335" parent="294" name="PRIMARY">
+    <key id="336" parent="294" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="336" parent="295" name="billboard_id">
+    <column id="337" parent="295" name="billboard_id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="337" parent="295" name="location">
+    <column id="338" parent="295" name="location">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="338" parent="295" name="price">
+    <column id="339" parent="295" name="price">
       <Position>3</Position>
       <DataType>double|0s</DataType>
     </column>
-    <column id="339" parent="295" name="user_id">
+    <column id="340" parent="295" name="user_id">
       <Position>4</Position>
       <DataType>bigint|0s</DataType>
     </column>
-    <column id="340" parent="295" name="group_id">
+    <column id="341" parent="295" name="group_id">
       <Position>5</Position>
       <DataType>bigint|0s</DataType>
     </column>
-    <index id="341" parent="295" name="FKvk827f5j1xulii9n945ibi0">
+    <index id="342" parent="295" name="FKvk827f5j1xulii9n945ibi0">
       <ColNames>group_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="342" parent="295" name="PRIMARY">
+    <key id="343" parent="295" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>billboard_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="343" parent="296" name="id">
+    <column id="344" parent="296" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="344" parent="296" name="group_name">
+    <column id="345" parent="296" name="group_name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="345" parent="296" name="user_id">
+    <column id="346" parent="296" name="user_id">
       <Position>3</Position>
       <DataType>bigint|0s</DataType>
     </column>
-    <key id="346" parent="296" name="PRIMARY">
+    <key id="347" parent="296" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="347" parent="297" name="id">
+    <column id="348" parent="297" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="348" parent="297" name="location">
+    <column id="349" parent="297" name="location">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <key id="349" parent="297" name="PRIMARY">
+    <key id="350" parent="297" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="350" parent="298" name="id">
+    <column id="351" parent="298" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="351" parent="298" name="email">
+    <column id="352" parent="298" name="email">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="352" parent="298" name="name">
+    <column id="353" parent="298" name="name">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <key id="353" parent="298" name="PRIMARY">
+    <key id="354" parent="298" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

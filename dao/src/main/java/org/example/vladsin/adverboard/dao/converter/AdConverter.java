@@ -12,7 +12,8 @@ public class AdConverter {
         return new Ad(
                 adEntity.getAdId(),
                 adEntity.getLink(),
-                adEntity.getBillboardId()
+                adEntity.getBillboardId(),
+                adEntity.getVerification()
         );
     }
 
@@ -24,6 +25,7 @@ public class AdConverter {
         adEntity.setAdId(ad.getId());
         adEntity.setLink(ad.getLink());
         adEntity.setBillboardId(ad.getBillboardId());
+        adEntity.setVerification(ad.getVerification());
         return adEntity;
     }
 }

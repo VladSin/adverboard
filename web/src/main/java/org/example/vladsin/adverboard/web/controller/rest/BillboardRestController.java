@@ -80,11 +80,22 @@ public class BillboardRestController {
         List<BillboardJson> billboardJsons = new ArrayList<>();
         for (Billboard b: billboards) {
             List<Ad> ads = adRepositoryService.getAdByBillboardId(b.getId());
+
+            String verification= "unverified";
+            int goodAds = 0;
+            for (Ad a: ads) {
+                if(a != null && a.getVerification().equals("verified"))
+                    goodAds++;
+            }
+            if (ads.size() == goodAds){
+                verification = "verified";
+            }
+
             billboardJsons.add(new BillboardJson(b.getLocation(), null, null,
                     b.getId(),
                     b.getUserId(),
                     b.getPrice(),
-                    ads.stream().map(Ad::getLink).collect(Collectors.toList()), null));
+                    ads.stream().map(Ad::getLink).collect(Collectors.toList()), verification));
         }
         return new ResponseEntity<>(billboardJsons, HttpStatus.OK);
     }

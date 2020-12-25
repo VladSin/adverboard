@@ -32,7 +32,7 @@ class AdRepositoryDaoImplTest {
 
     @Test
     void saveAd() {
-        final Ad adToSave = new Ad(null, "link", 1L);
+        final Ad adToSave = new Ad(null, "link", 1L, "verified");
         final Ad savedAd = adRepositoryDao.saveAd(adToSave);
 
         assertNotNull(savedAd);
@@ -41,12 +41,12 @@ class AdRepositoryDaoImplTest {
 
     @Test
     void updateAd() {
-        final Ad adToSave = new Ad(null, "link2", 2L);
+        final Ad adToSave = new Ad(null, "link2", 2L, "verified");
         final Ad savedAd = adRepositoryDao.saveAd(adToSave);
         final Long id = savedAd.getId();
         sessionFactory.getCurrentSession().clear();
 
-        final Ad toUpdate = new Ad(id, "link3", 3L);
+        final Ad toUpdate = new Ad(id, "link3", 3L, "verified");
         final boolean update = adRepositoryDao.updateAd(toUpdate);
         assertTrue(update);
 
@@ -56,7 +56,7 @@ class AdRepositoryDaoImplTest {
 
     @Test
     void deleteAd() {
-        final Ad adToSave = new Ad(null, "link", 4L);
+        final Ad adToSave = new Ad(null, "link", 4L, "verified");
         final Ad savedAd = adRepositoryDao.saveAd(adToSave);
         final Long id = savedAd.getId();
         sessionFactory.getCurrentSession().clear();
@@ -70,7 +70,7 @@ class AdRepositoryDaoImplTest {
 
     @Test
     void getAd() {
-        final Ad adToSave = new Ad(null, "link", 5L);
+        final Ad adToSave = new Ad(null, "link", 5L, "verified");
         final Ad savedAd = adRepositoryDao.saveAd(adToSave);
         final Long id = savedAd.getId();
 
@@ -83,8 +83,8 @@ class AdRepositoryDaoImplTest {
     @Test
     void testGetAd() {
         List<Ad> ads = new ArrayList<>();
-        ads.add(new Ad(null, "link1", 6L));
-        ads.add(new Ad(null, "link2", 7L));
+        ads.add(new Ad(null, "link1", 6L, "verified"));
+        ads.add(new Ad(null, "link2", 7L, "verified"));
 
         List<Ad> adList = new ArrayList<>();
         for (Ad a: ads) {
