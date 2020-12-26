@@ -5,13 +5,10 @@
 <html >
 <head>
   <meta charset="UTF-8">
-  <title>Log In Form CSS  2017</title>
+  <title>Log In </title>
   <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
   <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
-<header>
-    <a href="${pageContext.request.contextPath}/">Go Back</a>
-</header>
 <body>
   <div class="overlay">
       <form action="${pageContext.request.contextPath}/adminAuth/login" method="post">

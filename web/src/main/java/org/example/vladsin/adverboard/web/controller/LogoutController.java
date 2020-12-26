@@ -43,6 +43,6 @@ public class LogoutController {
             log.info("invalidate data at {}", LocalDateTime.now());
             throw new RuntimeException();
         }
-        response.sendRedirect("redirect:/adminAuth/login");
+        response.sendRedirect("redirect:/adminAuth/login/");
     }
 }

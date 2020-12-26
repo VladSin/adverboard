@@ -15,6 +15,7 @@
 <header>
     <a href="${pageContext.request.contextPath}/adminAuth/register">Sign In</a>
     <a href="${pageContext.request.contextPath}/logout/admin">Logout</a>
+    <a href="${pageContext.request.contextPath}/">Go Back</a>
 </header>
 
 <body>
