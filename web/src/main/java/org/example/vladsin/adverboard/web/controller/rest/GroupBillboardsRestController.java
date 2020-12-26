@@ -98,8 +98,20 @@ public class GroupBillboardsRestController {
             log.info("billboards do not have advertising from the group {} logged at {}", id, LocalDateTime.now());
         }
 
+        String verification;
+        int goodAds = 0;
+        for (BillboardJson a: billboardJsons) {
+            if(a.getVerification().equals("verified"))
+                goodAds++;
+        }
+        if (billboardJsons.size() > goodAds){
+            verification = "unverified";
+        } else {
+            verification = "verified";
+        }
+
         GroupBillboardsJson groupJson = new GroupBillboardsJson(group.getId(), null, null,
-                group.getGroupName(), group.getUserId(), billboardJsons, links);
+                group.getGroupName(), group.getUserId(), billboardJsons, links, verification);
         return new ResponseEntity<>(groupJson, HttpStatus.OK);
     }
 
@@ -141,8 +153,21 @@ public class GroupBillboardsRestController {
             } catch (RuntimeException e){
                 log.info("billboards do not have advertising from the user {} logged at {}", userId, LocalDateTime.now());
             }
+
+            String verification;
+            int goodAds = 0;
+            for (BillboardJson a: billboardJsons) {
+                if(a.getVerification().equals("verified"))
+                    goodAds++;
+            }
+            if (billboardJsons.size() > goodAds){
+                verification = "unverified";
+            } else {
+                verification = "verified";
+            }
+
             groupBillboardsJsons.add(new GroupBillboardsJson(g.getId(), null, null,
-                    g.getGroupName(), g.getUserId(), billboardJsons, links));
+                    g.getGroupName(), g.getUserId(), billboardJsons, links, verification));
         }
 
         return new ResponseEntity<>(groupBillboardsJsons, HttpStatus.OK);

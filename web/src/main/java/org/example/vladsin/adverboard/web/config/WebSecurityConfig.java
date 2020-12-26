@@ -18,15 +18,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/",
-                        "/login",
+                        "/login/**",
+                        "/logout/**",
+                        "/register/**",
+                        "/adminAuth/**",
                         "/web/**",
-                        "/admin/**",
                         "/user/**",
                         "/billboard/**",
                         "/group/**",
                         "/auth/**",
-                        "/logout").permitAll()
-//                .antMatchers("/admin/**").hasRole("Admin")
+                        "/error.html").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/operating/**").hasRole("USER")
                 .anyRequest().authenticated();
     }
 

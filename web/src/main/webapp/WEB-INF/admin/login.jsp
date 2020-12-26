@@ -9,10 +9,12 @@
   <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
   <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
-
+<header>
+    <a href="${pageContext.request.contextPath}/">Go Back</a>
+</header>
 <body>
   <div class="overlay">
-      <form action="${pageContext.request.contextPath}/admin/login" method="post">
+      <form action="${pageContext.request.contextPath}/adminAuth/login" method="post">
           <center>
           <div class="con">
 
@@ -32,6 +34,7 @@
                   <input class="form-input" id="password" name="password" type="password" placeholder="Password" required>
 
                   <button class="log-in"> Log In </button>
+                  <p style="color: red">${error}</p>
               </div>
           </div>
           </center>

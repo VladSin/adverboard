@@ -12,8 +12,9 @@ public class GroupBillboardsJson {
     private Long userId;
     private List<BillboardJson> billboards;
     private List<String> ads;
+    private String verification;
 
-    public GroupBillboardsJson(Long id, String status, String available, String groupName, Long userId, List<BillboardJson> billboards, List<String> ads) {
+    public GroupBillboardsJson(Long id, String status, String available, String groupName, Long userId, List<BillboardJson> billboards, List<String> ads, String verification) {
         this.id = id;
         this.status = status;
         this.available = available;
@@ -21,6 +22,7 @@ public class GroupBillboardsJson {
         this.userId = userId;
         this.billboards = billboards;
         this.ads = ads;
+        this.verification = verification;
     }
 
     public Long getId() {
@@ -70,5 +72,12 @@ public class GroupBillboardsJson {
     }
     public void setAds(List<String> ads) {
         this.ads = ads;
+    }
+
+    public String getVerification() {
+        return verification;
+    }
+    public void setVerification(String verification) {
+        this.verification = verification;
     }
 }

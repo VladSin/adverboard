@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -45,6 +46,7 @@ public class UserOperatingController {
     }
 
     @PostMapping(value = "/billboards")
+    @Secured("ROLE_USER")
     public ResponseEntity<List<BillboardJson>> getBillboardsByLocation(@RequestBody String jsonString) throws IOException {
         final ObjectMapper objectMapper = new ObjectMapper();
         List<String> locations = objectMapper.readValue(jsonString, new TypeReference<List<String>>(){});
@@ -81,6 +83,7 @@ public class UserOperatingController {
     }
     
     @GetMapping(value = "/locations")
+    @Secured("ROLE_USER")
     public ResponseEntity<List<Location>> getAllLocations() {
         List<Location> locations = locationRepositoryService.getLocation();
         if (locations.isEmpty())
@@ -92,6 +95,7 @@ public class UserOperatingController {
     }
 
     @PatchMapping(value = "/buy/{id}")
+    @Secured("ROLE_USER")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<BillboardJson> buyBillboard(
             @PathVariable("id") Long id,
@@ -131,6 +135,7 @@ public class UserOperatingController {
     }
 
     @PatchMapping(value = "/set/billboard/{id}")
+    @Secured("ROLE_USER")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<BillboardJson> setBillboardMedia(
             @PathVariable("id") Long id,
@@ -166,6 +171,7 @@ public class UserOperatingController {
     }
 
     @PatchMapping(value = "/set/group/{id}")
+    @Secured("ROLE_USER")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<GroupBillboardsJson> setGroupMedia(
             @PathVariable("id") Long id,
@@ -202,7 +208,7 @@ public class UserOperatingController {
         }
 
         GroupBillboardsJson groupJson = new GroupBillboardsJson(groupBillboards.getId(), null, null,
-                groupBillboards.getGroupName(), groupBillboards.getUserId(), billboardJsons, links);
+                groupBillboards.getGroupName(), groupBillboards.getUserId(), billboardJsons, links, "unverified");
         log.info("group billboards updated {} logged at {}", groupBillboards.getGroupName(), LocalDateTime.now());
         return new ResponseEntity<>(groupJson, HttpStatus.OK);
     }

@@ -9,15 +9,12 @@
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
     <link href="<c:url value="/resources/css/backgroundStyle.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/css/tableStyle.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/css/aStyle.css" />" rel="stylesheet">
 </head>
 
 <header>
-    <form action="${pageContext.request.contextPath}/" method="get">
-        <input type="submit" value="Let's GO back!"/>
-    </form>
-    <form action="${pageContext.request.contextPath}/admin/register" method="get">
-        <input type="submit" value="Sign in"/>
-    </form>
+    <a href="${pageContext.request.contextPath}/adminAuth/register">Sign In</a>
+    <a href="${pageContext.request.contextPath}/logout/admin">Logout</a>
 </header>
 
 <body>

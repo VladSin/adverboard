@@ -1,4 +1,5 @@
 org\example\vladsin\adverboard\web\controller\view\AdminController.class
+org\example\vladsin\adverboard\web\controller\view\AdminAuthController.class
 org\example\vladsin\adverboard\web\controller\view\FirstPageController.class
 org\example\vladsin\adverboard\web\controller\view\WebController.class
 org\example\vladsin\adverboard\web\filter\EncodingFilter.class
@@ -11,6 +12,7 @@ org\example\vladsin\adverboard\web\controller\rest\BillboardRestController.class
 org\example\vladsin\adverboard\web\controller\rest\UserRestController.class
 org\example\vladsin\adverboard\web\controller\UserOperatingController.class
 org\example\vladsin\adverboard\web\controller\RegistrationController.class
+org\example\vladsin\adverboard\web\controller\LogoutController.class
 org\example\vladsin\adverboard\web\controller\UserOperatingController$2.class
 org\example\vladsin\adverboard\web\config\RootConfig.class
 org\example\vladsin\adverboard\web\controller\rest\GroupBillboardsRestController$1.class

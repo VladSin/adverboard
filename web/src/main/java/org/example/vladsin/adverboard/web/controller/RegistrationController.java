@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+import javax.servlet.http.HttpServletRequest;
 import java.io.StringReader;
 import java.time.LocalDateTime;
 
@@ -41,7 +42,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<User> registrationUser(@RequestBody String jsonString) {
+    public ResponseEntity<User> registrationUser(@RequestBody String jsonString, HttpServletRequest request) {
         JsonReader reader = Json.createReader(new StringReader(jsonString));
         JsonObject jsonObject = reader.readObject();
 
@@ -59,6 +60,7 @@ public class RegistrationController {
             log.info("user created {} logged at {}", newAuth.getLogin(), LocalDateTime.now());
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         } else {
+            request.setAttribute("error", "Username or email is invalid or already exists");
             log.info("BAD REQUEST logged at {}", LocalDateTime.now());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

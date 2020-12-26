@@ -12,7 +12,7 @@
 
 <body>
 <div class="overlay">
-    <form action="${pageContext.request.contextPath}/admin/register" method="post">
+    <form action="${pageContext.request.contextPath}/adminAuth/register" method="post">
         <center>
         <div class="con">
 
@@ -35,6 +35,7 @@
                 <input class="form-input" id="password" name="password" type="password" placeholder="Password" required>
 
                 <button class="log-in"> Log Up </button>
+                <p style="color: red">${error}</p>
             </div>
         </div>
         </center>

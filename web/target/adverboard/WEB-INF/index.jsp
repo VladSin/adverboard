@@ -20,7 +20,7 @@
             <input type="submit" value="Watch ADS"/>
         </form>
 <%--        <h3 style="color: #000385">Login for administrator only.</h3>--%>
-        <form action="${pageContext.request.contextPath}/admin/login" method="get">
+        <form action="${pageContext.request.contextPath}/adminAuth/login" method="get">
             <input class="form-input" type="submit" value="Log in"/>
         </form>
     </center>

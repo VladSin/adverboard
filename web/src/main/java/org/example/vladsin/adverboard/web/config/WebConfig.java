@@ -1,6 +1,8 @@
 package org.example.vladsin.adverboard.web.config;
 
 import org.example.vladsin.adverboard.service.config.ServiceConfig;
+import org.example.vladsin.adverboard.web.controller.LogoutController;
+import org.example.vladsin.adverboard.web.controller.view.AdminAuthController;
 import org.example.vladsin.adverboard.web.controller.view.FirstPageController;
 import org.example.vladsin.adverboard.web.controller.LoginController;
 import org.example.vladsin.adverboard.web.controller.RegistrationController;
@@ -49,8 +51,23 @@ public class WebConfig {
     public LoginController loginController(){
         return new LoginController(
                 serviceConfig.securityService(),
-                serviceConfig.userService()
+                serviceConfig.userService(),
+                serviceConfig.authUserService()
         );
+    }
+
+    @Bean
+    public AdminAuthController adminAuthController(){
+        return new AdminAuthController(
+                serviceConfig.userService(),
+                serviceConfig.securityService(),
+                serviceConfig.authUserService()
+        );
+    }
+
+    @Bean
+    public LogoutController logoutController(){
+        return new LogoutController();
     }
 
     @Bean

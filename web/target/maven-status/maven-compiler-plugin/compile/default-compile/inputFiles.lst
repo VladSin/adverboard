@@ -1,3 +1,4 @@
+D:\5 семестр\(Э) Programming Technologies\Adverboard\web\src\main\java\org\example\vladsin\adverboard\web\controller\view\AdminAuthController.java
 D:\5 семестр\(Э) Programming Technologies\Adverboard\web\src\main\java\org\example\vladsin\adverboard\web\config\WebConfig.java
 D:\5 семестр\(Э) Programming Technologies\Adverboard\web\src\main\java\org\example\vladsin\adverboard\web\config\WebApplicationInitialization.java
 D:\5 семестр\(Э) Programming Technologies\Adverboard\web\src\main\java\org\example\vladsin\adverboard\web\controller\view\WebController.java
@@ -6,6 +7,7 @@ D:\5 семестр\(Э) Programming Technologies\Adverboard\web\src\main\java\org\examp
 D:\5 семестр\(Э) Programming Technologies\Adverboard\web\src\main\java\org\example\vladsin\adverboard\web\controller\rest\BillboardRestController.java
 D:\5 семестр\(Э) Programming Technologies\Adverboard\web\src\main\java\org\example\vladsin\adverboard\web\controller\rest\UserRestController.java
 D:\5 семестр\(Э) Programming Technologies\Adverboard\web\src\main\java\org\example\vladsin\adverboard\web\controller\rest\AuthUserRestController.java
+D:\5 семестр\(Э) Programming Technologies\Adverboard\web\src\main\java\org\example\vladsin\adverboard\web\controller\LogoutController.java
 D:\5 семестр\(Э) Programming Technologies\Adverboard\web\src\main\java\org\example\vladsin\adverboard\web\filter\EncodingFilter.java
 D:\5 семестр\(Э) Programming Technologies\Adverboard\web\src\main\java\org\example\vladsin\adverboard\web\config\WebSecurityConfig.java
 D:\5 семестр\(Э) Programming Technologies\Adverboard\web\src\main\java\org\example\vladsin\adverboard\web\controller\view\FirstPageController.java
